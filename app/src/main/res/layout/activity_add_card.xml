@@ -41,6 +41,7 @@
         tools:layout_editor_absoluteY="56dp"
         tools:ignore="MissingConstraints" />
 
+
             <Button
                 android:id="@+id/btnAdd"
                 android:layout_width="match_parent"
@@ -54,8 +55,8 @@
                 android:textSize="16sp"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="91dp" />
+                tools:layout_editor_absoluteY="131dp" />
         </LinearLayout>
-        </ScrollView>
-    </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
 </android.support.constraint.ConstraintLayout>
