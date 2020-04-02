@@ -4,11 +4,14 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import kotlinx.android.synthetic.main.activity_add_card.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 import org.wit.rightcard.main.MainApp
 
-class AddCardActivity : AppCompatActivity() {
+class AddCardActivity : AppCompatActivity(), AnkoLogger {
 
   //  lateinit var app : MainApp
 
@@ -16,8 +19,11 @@ class AddCardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_card)
      //   app = application as MainApp
-
         setSupportActionBar(findViewById(R.id.toolbar))
+
+        btnAddCard.setOnClickListener(){
+            info("Card added")
+        }
 
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
