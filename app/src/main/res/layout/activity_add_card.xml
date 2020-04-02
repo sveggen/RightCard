@@ -26,18 +26,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/placemarkTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:hint="@string/hint_creditcard"
-                    android:inputType="text"
-                    android:maxLength="25"
-                    android:maxLines="1"
-                    android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="14sp"/>
+                <Spinner
+                    android:id="@+id/planets_spinner"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
 
                 <Button
                     android:id="@+id/btnAddCard"
@@ -51,8 +43,14 @@
                     android:text="@string/button_addCard"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="vertical"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
             </LinearLayout>
-        </ScrollView>
 
+        </ScrollView>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

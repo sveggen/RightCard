@@ -9,22 +9,18 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
-import org.wit.rightcard.main.MainApp
 
 class AddCardActivity : AppCompatActivity(), AnkoLogger {
-
-  //  lateinit var app : MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_card)
-     //   app = application as MainApp
+        //Init toolbar
         setSupportActionBar(findViewById(R.id.toolbar))
-
+        //Log to console when card is added
         btnAddCard.setOnClickListener(){
             info("Card added")
         }
-
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -38,4 +34,5 @@ class AddCardActivity : AppCompatActivity(), AnkoLogger {
 
         return super.onOptionsItemSelected(item)
     }
+
 }
