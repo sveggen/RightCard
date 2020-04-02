@@ -3,6 +3,8 @@
     <string name="menu_accessCardmenu">Cardmenu</string>
     <string name="menu_accessPreferences">Preferences</string>
     <string name="menu_searchStores">Search</string>
+    <string name="button_searchStore">Search for store</string>
     <string name="button_addCard">Add Card</string>
     <string name="hint_creditcard">Credit Card</string>
+    <string name="hint_store">Store name</string>
 </resources>
