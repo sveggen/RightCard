@@ -7,4 +7,13 @@
     <string name="button_addCard">Add Card</string>
     <string name="hint_creditcard">Credit Card</string>
     <string name="hint_store">Store name</string>
+
+    <string-array name="CreditCards">
+        <item>Norwegian Visa</item>
+        <item>Re:member</item>
+        <item>Sas Gold Mastercard</item>
+        <item>DNB Mastercard</item>
+        <item>SV American express</item>
+        <item>Nordea Mastercard</item>
+    </string-array>
 </resources>

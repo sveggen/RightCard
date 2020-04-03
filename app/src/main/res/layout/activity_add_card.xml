@@ -27,9 +27,10 @@
                 android:orientation="vertical">
 
                 <Spinner
-                    android:id="@+id/planets_spinner"
+                    android:id="@+id/spinner"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"/>
 
                 <Button
                     android:id="@+id/btnAddCard"
