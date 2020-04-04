@@ -4,19 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
-import org.wit.rightcard.main.MainApp
 
 class StoreSearchActivity : AppCompatActivity(), AnkoLogger{
-
- //   lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_store_search)
-  //      app = application as MainApp
 
         setSupportActionBar(findViewById(R.id.toolbar))
     }
@@ -28,9 +23,14 @@ class StoreSearchActivity : AppCompatActivity(), AnkoLogger{
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.actionCards -> startActivityForResult<AddCardActivity>(0)
+            R.id.actionSearch -> startActivityForResult<StoreSearchActivity>(0)
         }
-
+        when (item?.itemId) {
+            R.id.actionCards -> startActivityForResult<CardActivity>(0)
+        }
+        when (item?.itemId) {
+            R.id.actionPreferences -> startActivityForResult<LoginActivity>(0)
+        }
         return super.onOptionsItemSelected(item)
     }
 }

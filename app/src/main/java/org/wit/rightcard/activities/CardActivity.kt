@@ -17,7 +17,7 @@ import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 
 
-class AddCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelectedListener {
+class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelectedListener {
 
     lateinit var database: DatabaseReference
     lateinit var adapter: CardAdapter
@@ -44,7 +44,6 @@ class AddCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelec
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             // Applies the adapter to the spinner
             spinner.adapter = adapter
-
         }
     }
 
@@ -58,11 +57,17 @@ class AddCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelec
         when (item?.itemId) {
             R.id.actionSearch -> startActivityForResult<StoreSearchActivity>(0)
         }
+        when (item?.itemId) {
+            R.id.actionCards -> startActivityForResult<CardActivity>(0)
+        }
+        when (item?.itemId) {
+            R.id.actionPreferences -> startActivityForResult<LoginActivity>(0)
+        }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
-        //do somethin
+        //do something
     }
 
     override fun onItemSelected(parent:AdapterView<*>, view:View, pos:Int, id:Long) {

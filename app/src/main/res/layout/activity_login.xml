@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.wit.rightcard.activities.CardActivity">
+    tools:context="org.wit.rightcard.activities.LoginActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -26,33 +26,36 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="fill_parent"
+                <EditText
+                    android:id="@+id/username1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"/>
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"/>
 
+                <EditText
+                    android:id="@+id/password1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"/>
                 <Button
-                    android:id="@+id/btnAddCard"
+                    android:id="@+id/btn_log_in"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:background="@color/colorAccent"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
-                    android:stateListAnimator="@null"
-                    android:text="@string/button_addCard"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
+                    android:background="@color/colorPrimary"
+                    android:text="Log in"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorAccent" />
+                <Button
+                    android:id="@+id/btn_sign_up"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scrollbars="vertical"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+                    android:background="@color/colorPrimary"
+                    android:text="Don't have an account? Click here"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
-
         </ScrollView>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
