@@ -10,7 +10,6 @@ import android.widget.ListView
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import org.jetbrains.anko.AnkoLogger
@@ -33,13 +32,6 @@ class AddCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelec
 
         //Database reference
         database = Firebase.database.reference
-
-
-        //Write to database
-        database.setValue("Hello, World!")
-
-
-
 
         //spinner spinner spinner spinner spinner
         val spinner: Spinner = findViewById(R.id.spinner)
@@ -79,9 +71,7 @@ class AddCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelec
         //save id to user-json
         //display user json in recycleview
     }
-
-
-        }
+}
 
 
 

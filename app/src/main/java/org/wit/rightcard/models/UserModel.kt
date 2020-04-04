@@ -1,6 +1,6 @@
 package org.wit.rightcard.models
 
-class UserJSON (
+data class UserModel (
     var id:String="",
     var email:String="",
     var cards : List<CreditCardModel> = listOf()
