@@ -44,6 +44,7 @@
                     android:text="@string/button_addCard"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"/>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
