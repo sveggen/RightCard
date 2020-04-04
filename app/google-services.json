@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "579474626628",
+    "firebase_url": "https://rightcard-a5290.firebaseio.com",
+    "project_id": "rightcard-a5290",
+    "storage_bucket": "rightcard-a5290.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579474626628:android:949f97c520180169254411",
+        "android_client_info": {
+          "package_name": "org.wit.rightcard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "579474626628-p60gmlpdu28tmcgp0e01k1f6qkr54p2d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDB-jjrXfjyTiyuBXdYH0-Cg0wjHvy3r44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "579474626628-p60gmlpdu28tmcgp0e01k1f6qkr54p2d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
