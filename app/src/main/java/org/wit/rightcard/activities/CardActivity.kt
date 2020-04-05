@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
@@ -20,8 +19,8 @@ import org.wit.rightcard.R
 class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelectedListener {
 
     lateinit var database: DatabaseReference
-    lateinit var adapter: CardAdapter
-    private var CreditCardModel: ListView? = null
+  //  lateinit var adapter: CardAdapter
+    //private var CreditCardModel: ListView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
