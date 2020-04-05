@@ -2,18 +2,25 @@ package org.wit.rightcard.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.*
-import org.jetbrains.anko.AnkoLogger
+import android.view.Menu
+import android.view.MenuItem
+import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 
-class StoreSearchActivity : AppCompatActivity(), AnkoLogger{
+class SignOutActivity : AppCompatActivity() {
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_store_search)
-
+        setContentView(R.layout.activity_sign_out)
+        //Init toolbar
         setSupportActionBar(findViewById(R.id.toolbar))
+        // Initialize Firebase Auth
+        auth = FirebaseAuth.getInstance()
+
+        signOut()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -31,8 +38,12 @@ class StoreSearchActivity : AppCompatActivity(), AnkoLogger{
         when (item?.itemId) {
             R.id.actionPreferences -> startActivityForResult<LoginActivity>(0)
         }
+
         return super.onOptionsItemSelected(item)
     }
+
+    private fun signOut() {
+        auth.signOut()
+    }
+
 }
-
-
