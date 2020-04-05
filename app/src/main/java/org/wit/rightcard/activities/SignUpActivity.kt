@@ -52,7 +52,8 @@ class SignUpActivity : AppCompatActivity(), AnkoLogger {
             auth.createUserWithEmailAndPassword(username.text.toString(), password.text.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        val user : FirebaseUser? = auth.currentUser
+                        val user = auth.currentUser
+                        //   val user : FirebaseUser? = auth.currentUser
                         user?.sendEmailVerification()
                             ?.addOnCompleteListener{task ->
                                 if (task.isSuccessful){

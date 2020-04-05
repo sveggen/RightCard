@@ -8,7 +8,7 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/placemarkTitle"
+            android:id="@+id/cardTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -18,7 +18,7 @@
             android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/placemarkTitle"/>
+            android:layout_below="@id/cardTitle"/>
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
