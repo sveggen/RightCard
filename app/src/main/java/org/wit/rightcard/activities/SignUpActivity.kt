@@ -2,6 +2,7 @@ package org.wit.rightcard.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Patterns
 import android.view.Menu
 import android.view.MenuItem
@@ -83,7 +84,7 @@ class SignUpActivity : AppCompatActivity(), AnkoLogger {
                     R.id.actionCards -> startActivityForResult<CardActivity>(0)
                 }
                 when (item?.itemId) {
-                    R.id.actionPreferences -> startActivityForResult<LoginActivity>(0)
+                    R.id.actionPreferences -> startActivityForResult<ProfileActivity>(0)
                 }
 
                 return super.onOptionsItemSelected(item)
