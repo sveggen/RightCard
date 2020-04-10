@@ -97,7 +97,7 @@ class LoginActivity : AppCompatActivity() {
             R.id.actionCards -> startActivityForResult<CardActivity>(0)
         }
         when (item?.itemId) {
-            R.id.actionPreferences -> startActivityForResult<LoginActivity>(0)
+            R.id.actionPreferences -> startActivityForResult<ProfileActivity>(0)
         }
 
         return super.onOptionsItemSelected(item)
