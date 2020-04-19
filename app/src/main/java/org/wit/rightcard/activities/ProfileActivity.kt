@@ -1,20 +1,26 @@
 package org.wit.rightcard.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.activity_profile.btn_sign_up
-import kotlinx.android.synthetic.main.activity_sign_up.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 
-class ProfileActivity : AppCompatActivity() {
+
+class ProfileActivity : AppCompatActivity(), AnkoLogger {
 
     private lateinit var auth: FirebaseAuth
+    lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +29,8 @@ class ProfileActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
+        //Database reference
+        database = Firebase.database.reference
 
         btn_sign_out.setOnClickListener{
             signOut()
@@ -34,6 +42,9 @@ class ProfileActivity : AppCompatActivity() {
         btn_log_in.setOnClickListener{
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
+        }
+        btn_delete_user.setOnClickListener{
+            deleteUser()
         }
     }
 
@@ -58,6 +69,24 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun signOut() {
         auth.signOut()
+        info("user signed out")
+        startActivity(Intent(this,SignUpActivity::class.java))
+        finish()
+    }
+
+    private fun deleteUser(){
+        //delete user in auth
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.delete()
+            ?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    //sign user out
+                    auth.signOut()
+                    info("user deleted + signed out")
+                    startActivity(Intent(this,SignUpActivity::class.java))
+                    finish()
+                }
+            }
     }
 
 }

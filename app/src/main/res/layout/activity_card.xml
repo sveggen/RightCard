@@ -45,6 +45,13 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"/>
 
+
+                <TextView
+                    android:id="@+id/spinnerResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"

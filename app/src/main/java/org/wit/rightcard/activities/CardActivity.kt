@@ -1,6 +1,7 @@
 package org.wit.rightcard.activities
 
 import android.os.Bundle
+import android.text.method.TextKeyListener.clear
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -14,6 +15,7 @@ import com.google.firebase.ktx.Firebase
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
+import org.wit.rightcard.models.CreditCardModel
 
 
 class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelectedListener {
@@ -32,6 +34,8 @@ class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelected
         //Database reference
         database = Firebase.database.reference
 
+        loadDatabase(database);
+
         //spinner spinner spinner spinner spinner
         val spinner: Spinner = findViewById(R.id.spinner)
         // ArrayAdapter using the dummy string array
@@ -46,6 +50,19 @@ class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelected
         }
     }
 
+    fun loadDatabase(firebaseData: DatabaseReference) {
+        val avcreditcards: List<CreditCardModel> = mutableListOf(
+            CreditCardModel("Norwegian", "Norwegian")
+        )
+
+        avcreditcards.forEach {
+            val key = firebaseData.child("creditcards").push().key
+                it.uuid = key
+            if (key != null) {
+                firebaseData.child("creditcards").child(key).setValue(it)
+            }
+            }
+        }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -64,18 +81,15 @@ class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelected
         }
         return super.onOptionsItemSelected(item)
     }
-
     override fun onNothingSelected(p0: AdapterView<*>?) {
-        //do something
+        TODO("Not yet implemented")
     }
 
-    override fun onItemSelected(parent:AdapterView<*>, view:View, pos:Int, id:Long) {
-      val spinneritem = parent.getItemAtPosition(pos)
-        //get id of item
-        //save id to user-json
-        //display user json in recycleview
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        TODO("Not yet implemented")
     }
 }
+
 
 
 
