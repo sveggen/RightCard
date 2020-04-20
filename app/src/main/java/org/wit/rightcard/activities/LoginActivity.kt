@@ -33,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
         btn_log_in.setOnClickListener{
             login()
         }
+
     }
 
     private fun login() {

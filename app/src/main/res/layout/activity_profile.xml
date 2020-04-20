@@ -48,7 +48,14 @@
                     android:text="Log in"
                     android:textSize="14sp"
                     android:textColor="@color/colorAccent" />
-
+                <Button
+                    android:id="@+id/btn_delete_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:text="Delete user"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

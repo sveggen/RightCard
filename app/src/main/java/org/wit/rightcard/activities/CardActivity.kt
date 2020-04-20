@@ -1,6 +1,7 @@
 package org.wit.rightcard.activities
 
 import android.os.Bundle
+import android.text.method.TextKeyListener.clear
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -14,23 +15,23 @@ import com.google.firebase.ktx.Firebase
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
+import org.wit.rightcard.models.CreditCardStore
 
 
 class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelectedListener {
 
+    lateinit var CreditCardStore: CreditCardStore
     lateinit var database: DatabaseReference
-  //  lateinit var adapter: CardAdapter
-    //private var CreditCardModel: ListView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card)
-
         //Init toolbar
         setSupportActionBar(findViewById(R.id.toolbar))
-
         //Database reference
         database = Firebase.database.reference
+
+        CreditCardStore.loadDatabase();
 
         //spinner spinner spinner spinner spinner
         val spinner: Spinner = findViewById(R.id.spinner)
@@ -45,7 +46,6 @@ class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelected
             spinner.adapter = adapter
         }
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -64,18 +64,15 @@ class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelected
         }
         return super.onOptionsItemSelected(item)
     }
-
     override fun onNothingSelected(p0: AdapterView<*>?) {
-        //do something
+        TODO("Not yet implemented")
     }
 
-    override fun onItemSelected(parent:AdapterView<*>, view:View, pos:Int, id:Long) {
-      val spinneritem = parent.getItemAtPosition(pos)
-        //get id of item
-        //save id to user-json
-        //display user json in recycleview
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        TODO("Not yet implemented")
     }
 }
+
 
 
 
