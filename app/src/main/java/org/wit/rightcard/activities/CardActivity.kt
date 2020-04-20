@@ -15,26 +15,23 @@ import com.google.firebase.ktx.Firebase
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
-import org.wit.rightcard.models.CreditCardModel
+import org.wit.rightcard.models.CreditCardStore
 
 
 class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelectedListener {
 
+    lateinit var CreditCardStore: CreditCardStore
     lateinit var database: DatabaseReference
-  //  lateinit var adapter: CardAdapter
-    //private var CreditCardModel: ListView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card)
-
         //Init toolbar
         setSupportActionBar(findViewById(R.id.toolbar))
-
         //Database reference
         database = Firebase.database.reference
 
-        loadDatabase(database);
+        CreditCardStore.loadDatabase();
 
         //spinner spinner spinner spinner spinner
         val spinner: Spinner = findViewById(R.id.spinner)
@@ -49,20 +46,6 @@ class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelected
             spinner.adapter = adapter
         }
     }
-
-    fun loadDatabase(firebaseData: DatabaseReference) {
-        val avcreditcards: List<CreditCardModel> = mutableListOf(
-            CreditCardModel("Norwegian", "Norwegian")
-        )
-
-        avcreditcards.forEach {
-            val key = firebaseData.child("creditcards").push().key
-                it.uuid = key
-            if (key != null) {
-                firebaseData.child("creditcards").child(key).setValue(it)
-            }
-            }
-        }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
