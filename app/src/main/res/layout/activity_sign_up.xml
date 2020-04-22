@@ -40,14 +40,14 @@
         android:hint="@string/password"
         android:inputType="textPassword"/>
 
-    <Button
-        android:id="@+id/btn_sign_up"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="Sign Up"
-        android:textSize="14sp"
-        android:textColor="@color/colorAccent" />
+        <Button
+            android:id="@+id/btn_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="Sign Up"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
     </LinearLayout>
     </ScrollView>
     </RelativeLayout>

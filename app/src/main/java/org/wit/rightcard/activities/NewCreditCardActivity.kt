@@ -1,5 +1,6 @@
 package org.wit.rightcard.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -30,7 +31,7 @@ class NewCreditCardActivity : AppCompatActivity(), AnkoLogger {
 
         recyclerview_n.adapter = adapter
         retrieveCards()
-            }
+     }
 
     private fun retrieveCards(){
         val dataref = FirebaseDatabase.getInstance().getReference("/creditcards")
@@ -46,6 +47,14 @@ class NewCreditCardActivity : AppCompatActivity(), AnkoLogger {
                         //adds the creditcard object to the adapter
                         adapter.add(CardItem(creditcard))
                     }
+                }
+                adapter.setOnItemClickListener{item, view ->
+                    val cardItem = item as CardItem
+
+                 //   val intent = Intent(view.context, CardActivity::class.java)
+                   // intent.putExtra(cardItem.creditcard.name)
+                    //startActivity(intent)
+
                 }
                 //tells the recycleview to use the adapter
                 recyclerview_n.adapter = adapter

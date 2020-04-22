@@ -1,8 +1,11 @@
 package org.wit.rightcard.models
 
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class UserCreditCardStore {
 
@@ -35,3 +38,12 @@ class UserCreditCardStore {
         //delete card with specified uid form db and users collection
     }
 
+private fun saveCardToDB(creditcarduuid: String?){
+    val uid = FirebaseAuth.getInstance().uid
+    val ref = FirebaseDatabase.getInstance().getReference("/usercreditcards/$uid")
+
+    val userCreditCard = UserCreditCardModel("uuid", creditcarduuid, " ", uid)
+
+    ref.setValue(userCreditCard)
+        .addOnSuccessListener {  }
+}
