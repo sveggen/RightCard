@@ -9,6 +9,7 @@
     <string name="hint_store">Store name</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="menu_actionNewCard">Add a Credit Card</string>
 
     <string-array name="CreditCards">
         <item>Norwegian Visa</item>

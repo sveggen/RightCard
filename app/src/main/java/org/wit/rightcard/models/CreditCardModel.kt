@@ -1,6 +1,6 @@
 package org.wit.rightcard.models
 
-data class CreditCardModel(
+ class CreditCardModel(
     var uuid: String?,
     var name: String?
-    )
+    ){constructor() : this("", "")}

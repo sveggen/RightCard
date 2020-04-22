@@ -9,19 +9,20 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
+import org.wit.rightcard.models.UserModel
 import org.wit.rightcard.models.UserStore
 
 
 class SignUpActivity : AppCompatActivity(), AnkoLogger {
 
     private lateinit var auth: FirebaseAuth
-    lateinit var UserStore: UserStore
     lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,7 +65,7 @@ class SignUpActivity : AppCompatActivity(), AnkoLogger {
                         user?.sendEmailVerification()
                             ?.addOnCompleteListener{task ->
                                 if (task.isSuccessful){
-                                    UserStore.createUser(auth.currentUser!!.uid, auth.currentUser!!.email)
+                                    saveUserDB()
                                     startActivity(Intent(this,LoginActivity::class.java))
                                     finish()
                                 }
@@ -94,7 +95,20 @@ class SignUpActivity : AppCompatActivity(), AnkoLogger {
                 when (item?.itemId) {
                     R.id.actionPreferences -> startActivityForResult<ProfileActivity>(0)
                 }
+                when (item?.itemId) {
+                    R.id.actionNewCard -> startActivityForResult<NewCreditCardActivity>(0)
+                }
                 return super.onOptionsItemSelected(item)
+            }
+
+            private fun saveUserDB(){
+                val uid = FirebaseAuth.getInstance().uid
+                val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+
+                val user = UserModel(uid, username.text.toString())
+
+                ref.setValue(user)
+                    .addOnSuccessListener {  }
             }
         }
 
