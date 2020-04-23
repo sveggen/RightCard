@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -19,6 +20,7 @@ import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 import org.wit.rightcard.models.CreditCardModel
+import org.wit.rightcard.models.UserCreditCardModel
 
 class NewCreditCardActivity : AppCompatActivity(), AnkoLogger {
 
@@ -32,6 +34,7 @@ class NewCreditCardActivity : AppCompatActivity(), AnkoLogger {
         recyclerview_n.adapter = adapter
         retrieveCards()
      }
+
 
     private fun retrieveCards(){
         val dataref = FirebaseDatabase.getInstance().getReference("/creditcards")
@@ -51,9 +54,11 @@ class NewCreditCardActivity : AppCompatActivity(), AnkoLogger {
                 adapter.setOnItemClickListener{item, view ->
                     val cardItem = item as CardItem
 
-                 //   val intent = Intent(view.context, CardActivity::class.java)
-                   // intent.putExtra(cardItem.creditcard.name)
-                    //startActivity(intent)
+                    val creditcarduuid = cardItem.creditcard.uuid.toString()
+                    saveCardToDB(creditcarduuid)
+                  val intent = Intent(view.context, CardActivity::class.java)
+                   //intent.putExtra(CARD_KEY, cardItem.creditcard.name)
+                    startActivity(intent)
 
                 }
                 //tells the recycleview to use the adapter
@@ -92,4 +97,18 @@ class NewCreditCardActivity : AppCompatActivity(), AnkoLogger {
                 }
                 return super.onOptionsItemSelected(item)
             }
+    private fun saveCardToDB(creditcarduuid: String?){
+        val uid = FirebaseAuth.getInstance().uid
+        val usercarduuid = uid+creditcarduuid
+        val ref = FirebaseDatabase.getInstance().getReference("/usercreditcards/$usercarduuid")
+
+        val userCreditCard = UserCreditCardModel(usercarduuid, creditcarduuid, " ", uid)
+
+        ref.setValue(userCreditCard)
+            .addOnSuccessListener {  }
+    }
+    fun deleteCard(carduid: String?){
+            var firebaseData = FirebaseDatabase.getInstance().reference
+            firebaseData.child("usercreditcards").setValue(null)
         }
+    }
