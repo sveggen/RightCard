@@ -12,7 +12,10 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_card.*
+import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.mycards_listing.*
 import kotlinx.android.synthetic.main.mycards_listing.view.*
+import kotlinx.android.synthetic.main.mycards_listing.view.deleteCreditCard
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
@@ -49,6 +52,13 @@ class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelected
                         adapter.add(UserCardItem(userCreditcard))
                     }
                 }
+                adapter.setOnItemClickListener { item, view ->
+                    val userCardItem = item as UserCardItem
+                    val usercarduuid =userCardItem.userCreditcard.uuid
+                    deleteCard(usercarduuid)
+                    finish()
+                    startActivity(intent)
+                }
                 //tells the recycleview to use the adapter
                 recycleview_my_cards.adapter = adapter
             }
@@ -59,7 +69,8 @@ class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelected
 
     class UserCardItem(val userCreditcard: UserCreditCardModel): Item<ViewHolder>(){
         override fun bind(viewHolder: ViewHolder, position: Int) {
-            viewHolder.itemView.my_creditcard.text=userCreditcard.uuid
+            viewHolder.itemView.my_creditcard.text=userCreditcard.creditcardname
+            viewHolder.itemView.creditcard_nickname.text=userCreditcard.nickname
         }
         override fun getLayout(): Int {
             return R.layout.mycards_listing
@@ -94,16 +105,6 @@ class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelected
 
     }
 
-    private fun addCreditCard(){
-        //onitemclicklistener
-        //val creditcarduuid = creditcard.uuid
-        //addUserCreditCard(creditcarduuid)
-
-        //addUserCreditCard
-        //useruuid = authuuid
-        //nickname = "  "
-    }
-
     private fun editNickname(uuid: String?){
         //edittext
         val ref = FirebaseDatabase.getInstance().getReference("/usercreditcards/$uuid")
@@ -112,8 +113,8 @@ class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelected
     private fun deleteCard(uuid: String?){
         //delete user card from db
         val ref = FirebaseDatabase.getInstance().getReference("/usercreditcards/$uuid")
-         ref.removeValue()
-        }
+        ref.removeValue()
+    }
     }
 
 

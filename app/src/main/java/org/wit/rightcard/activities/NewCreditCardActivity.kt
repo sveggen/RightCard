@@ -54,10 +54,11 @@ class NewCreditCardActivity : AppCompatActivity(), AnkoLogger {
                 adapter.setOnItemClickListener{item, view ->
                     val cardItem = item as CardItem
 
-                    val creditcarduuid = cardItem.creditcard.uuid.toString()
-                    saveCardToDB(creditcarduuid)
-                  val intent = Intent(view.context, CardActivity::class.java)
-                   //intent.putExtra(CARD_KEY, cardItem.creditcard.name)
+                    val creditcardname = cardItem.creditcard.name
+                    val creditcarduuid = cardItem.creditcard.uuid
+                    info("CREDITCARDUUID"+ creditcarduuid)
+                    saveCardToDB(creditcarduuid, creditcardname)
+                    val intent = Intent(view.context, CardActivity::class.java)
                     startActivity(intent)
 
                 }
@@ -97,18 +98,15 @@ class NewCreditCardActivity : AppCompatActivity(), AnkoLogger {
                 }
                 return super.onOptionsItemSelected(item)
             }
-    private fun saveCardToDB(creditcarduuid: String?){
+    private fun saveCardToDB(creditcarduuid: String?, creditcardname: String?){
         val uid = FirebaseAuth.getInstance().uid
         val usercarduuid = uid+creditcarduuid
         val ref = FirebaseDatabase.getInstance().getReference("/usercreditcards/$usercarduuid")
 
-        val userCreditCard = UserCreditCardModel(usercarduuid, creditcarduuid, " ", uid)
+        val userCreditCard = UserCreditCardModel(usercarduuid, creditcarduuid,creditcardname," ", uid)
 
         ref.setValue(userCreditCard)
             .addOnSuccessListener {  }
     }
-    fun deleteCard(carduid: String?){
-            var firebaseData = FirebaseDatabase.getInstance().reference
-            firebaseData.child("usercreditcards").setValue(null)
-        }
+
     }
