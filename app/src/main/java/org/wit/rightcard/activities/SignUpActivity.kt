@@ -17,7 +17,6 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 import org.wit.rightcard.models.UserModel
-import org.wit.rightcard.models.UserStore
 
 
 class SignUpActivity : AppCompatActivity(), AnkoLogger {
