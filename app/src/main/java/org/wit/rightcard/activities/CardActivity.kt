@@ -12,16 +12,12 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_card.*
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.mycards_listing.*
 import kotlinx.android.synthetic.main.mycards_listing.view.*
-import kotlinx.android.synthetic.main.mycards_listing.view.deleteCreditCard
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 import org.wit.rightcard.models.UserCreditCardModel
-
 
 class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelectedListener {
 
