@@ -33,7 +33,6 @@ class LoginActivity : AppCompatActivity() {
         btn_log_in.setOnClickListener{
             login()
         }
-
     }
 
     private fun login() {
@@ -99,6 +98,9 @@ class LoginActivity : AppCompatActivity() {
         }
         when (item?.itemId) {
             R.id.actionPreferences -> startActivityForResult<ProfileActivity>(0)
+        }
+        when (item?.itemId) {
+            R.id.actionNewCard -> startActivityForResult<NewCreditCardActivity>(0)
         }
 
         return super.onOptionsItemSelected(item)

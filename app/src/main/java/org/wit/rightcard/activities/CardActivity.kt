@@ -1,49 +1,75 @@
 package org.wit.rightcard.activities
 
 import android.os.Bundle
-import android.text.method.TextKeyListener.clear
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Item
+import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.main.activity_card.*
+import kotlinx.android.synthetic.main.mycards_listing.view.*
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
-import org.wit.rightcard.models.CreditCardStore
-
+import org.wit.rightcard.models.UserCreditCardModel
 
 class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelectedListener {
-
-    lateinit var CreditCardStore: CreditCardStore
-    lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card)
-        //Init toolbar
         setSupportActionBar(findViewById(R.id.toolbar))
-        //Database reference
-        database = Firebase.database.reference
 
-        CreditCardStore.loadDatabase();
+        val adapter = GroupAdapter<ViewHolder>()
 
-        //spinner spinner spinner spinner spinner
-        val spinner: Spinner = findViewById(R.id.spinner)
-        // ArrayAdapter using the dummy string array
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.CreditCards,
-            android.R.layout.simple_spinner_dropdown_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Applies the adapter to the spinner
-            spinner.adapter = adapter
+        recycleview_my_cards.adapter = adapter
+        retrieveMyCards()
+    }
+
+    private fun retrieveMyCards(){
+        val datareference = FirebaseDatabase.getInstance().getReference("/usercreditcards")
+        datareference.addListenerForSingleValueEvent(object: ValueEventListener {
+            val firebaseauth = FirebaseAuth.getInstance().uid
+
+            override fun onDataChange(dataSnap: DataSnapshot) {
+                val adapter = GroupAdapter<ViewHolder>()
+
+                dataSnap.children.forEach{
+                    info("Users credit cards = "+ it.toString()) //logs the fetching of data from db
+                    val userCreditcard = it.getValue(UserCreditCardModel::class.java)
+                    if (userCreditcard != null && userCreditcard.useruuid==firebaseauth) {
+                        //adds the users credit card object to the adapter
+                        adapter.add(UserCardItem(userCreditcard))
+                    }
+                }
+                adapter.setOnItemClickListener { item, view ->
+                    val userCardItem = item as UserCardItem
+                    val usercarduuid =userCardItem.userCreditcard.uuid
+                    deleteCard(usercarduuid)
+                    finish()
+                    startActivity(intent)
+                }
+                //tells the recycleview to use the adapter
+                recycleview_my_cards.adapter = adapter
+            }
+            override fun onCancelled(p0: DatabaseError) {
+            }
+        })
+    }
+
+    class UserCardItem(val userCreditcard: UserCreditCardModel): Item<ViewHolder>(){
+        override fun bind(viewHolder: ViewHolder, position: Int) {
+            viewHolder.itemView.my_creditcard.text=userCreditcard.creditcardname
+            viewHolder.itemView.creditcard_nickname.text=userCreditcard.nickname
+        }
+        override fun getLayout(): Int {
+            return R.layout.mycards_listing
         }
     }
 
@@ -62,16 +88,31 @@ class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelected
         when (item?.itemId) {
             R.id.actionPreferences -> startActivityForResult<ProfileActivity>(0)
         }
+        when (item?.itemId) {
+            R.id.actionNewCard -> startActivityForResult<NewCreditCardActivity>(0)
+        }
         return super.onOptionsItemSelected(item)
     }
     override fun onNothingSelected(p0: AdapterView<*>?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        TODO("Not yet implemented")
+
     }
-}
+
+    private fun editNickname(uuid: String?){
+        //edittext
+        val ref = FirebaseDatabase.getInstance().getReference("/usercreditcards/$uuid")
+    }
+
+    private fun deleteCard(uuid: String?){
+        //delete user card from db
+        val ref = FirebaseDatabase.getInstance().getReference("/usercreditcards/$uuid")
+        ref.removeValue()
+    }
+    }
+
 
 
 

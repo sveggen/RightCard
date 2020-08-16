@@ -21,4 +21,10 @@
         android:title="@string/menu_accessPreferences"
         android:icon="@drawable/ic_person_black_24dp"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/actionNewCard"
+        android:orderInCategory="300"
+        android:title="@string/menu_actionNewCard"
+        android:icon="@drawable/ic_person_outline_black_24dp"
+        app:showAsAction="ifRoom" />
     </menu>

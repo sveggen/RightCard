@@ -7,7 +7,6 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_profile.*
@@ -63,6 +62,9 @@ class ProfileActivity : AppCompatActivity(), AnkoLogger {
         when (item?.itemId) {
             R.id.actionPreferences -> startActivityForResult<ProfileActivity>(0)
         }
+        when (item?.itemId) {
+            R.id.actionNewCard -> startActivityForResult<NewCreditCardActivity>(0)
+        }
 
         return super.onOptionsItemSelected(item)
     }
@@ -70,7 +72,7 @@ class ProfileActivity : AppCompatActivity(), AnkoLogger {
     private fun signOut() {
         auth.signOut()
         info("user signed out")
-        startActivity(Intent(this,SignUpActivity::class.java))
+        startActivity(Intent(this,LoginActivity::class.java))
         finish()
     }
 
