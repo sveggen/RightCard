@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,7 +9,11 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <include
             android:id="@+id/toolbar"
@@ -32,6 +37,7 @@
                     android:text="Sign out"
                     android:textSize="14sp"
                     android:textColor="@color/colorAccent" />
+
                 <Button
                     android:id="@+id/btn_sign_up"
                     android:layout_width="match_parent"
@@ -40,6 +46,7 @@
                     android:text="Sign up"
                     android:textSize="14sp"
                     android:textColor="@color/colorAccent" />
+
                 <Button
                     android:id="@+id/btn_log_in"
                     android:layout_width="match_parent"
@@ -48,6 +55,7 @@
                     android:text="Log in"
                     android:textSize="14sp"
                     android:textColor="@color/colorAccent" />
+
                 <Button
                     android:id="@+id/btn_delete_user"
                     android:layout_width="match_parent"
@@ -56,6 +64,7 @@
                     android:text="Delete user"
                     android:textSize="14sp"
                     android:textColor="@color/colorAccent" />
+
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>
