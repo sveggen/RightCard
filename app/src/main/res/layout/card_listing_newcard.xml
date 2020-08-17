@@ -12,10 +12,9 @@
         android:id="@+id/creditcard_new_creditcard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         android:layout_marginBottom="15dp"
         android:text="CreditCardName"
-        android:textSize="22dp"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +26,7 @@
         android:layout_height="101dp"
         android:layout_gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creditcard_new_creditcard"
+        app:layout_constraintTop_toBottomOf="@id/creditcard_new_creditcard"
         app:srcCompat="@drawable/ic_7_bank_norwegian_kortet"
         tools:src="@drawable/ic_7_bank_norwegian_kortet" />
 
@@ -39,7 +38,7 @@
         android:backgroundTint="@color/colorAccent"
         android:text="Add Credit Card"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/card_image"
-        app:layout_constraintTop_toTopOf="@+id/card_image"/>
+        app:layout_constraintStart_toEndOf="@id/card_image"
+        app:layout_constraintTop_toTopOf="@id/card_image"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
