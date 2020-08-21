@@ -12,18 +12,19 @@ class ShopStore : Store<ShopModel>, AnkoLogger {
     private var firestore = FirebaseFirestore.getInstance()
 
 
-    override fun getSingle(documentPath: String): String {
+    override fun getSingle(documentPath: String): ShopModel {
+        var shopModel = ShopModel("", "")
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
         val document = firestore.collection("shops").document(documentPath.toString())
         document.get().addOnSuccessListener {
-            val shop = it.toObject(ShopModel::class.java)
+            shopModel = it.toObject(ShopModel::class.java)!!
             return@addOnSuccessListener
         }
             .addOnFailureListener{ exception ->
                 info("get failed with ", exception)
                 return@addOnFailureListener
             }
-        return "he"
+        return shopModel
     }
 
     override fun create(arg: ShopModel) {
@@ -46,9 +47,11 @@ class ShopStore : Store<ShopModel>, AnkoLogger {
         firestore.collection("shops").document("1")
         .delete()
             .addOnSuccessListener { info("document deleted") }
-
     }
 
+    /**
+     * Retrieves all shops in a List of type ShopModel (object).
+     */
     override fun getAll(): List<ShopModel> {
         val list = mutableListOf<ShopModel>()
         firestore.collection("shops")
