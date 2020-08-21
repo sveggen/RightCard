@@ -9,19 +9,21 @@ import org.wit.rightcard.models.interfaces.Store
 
 
 class ShopStore : Store<ShopModel>, AnkoLogger {
-    var firestore = FirebaseFirestore.getInstance()
+    private var firestore = FirebaseFirestore.getInstance()
 
 
-    override fun findAll(): List<ShopModel> {
+    override fun getSingle(documentPath: String): String {
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
-        val document = firestore.collection("shops").document("1")
-        document.get().addOnSuccessListener { documentSnapshot ->
-            val shop = documentSnapshot.toObject<ShopModel>()
-
+        val document = firestore.collection("shops").document(documentPath.toString())
+        document.get().addOnSuccessListener {
+            val shop = it.toObject(ShopModel::class.java)
+            return@addOnSuccessListener
         }
-            .addOnFailureListener { exception ->
+            .addOnFailureListener{ exception ->
                 info("get failed with ", exception)
+                return@addOnFailureListener
             }
+        return "he"
     }
 
     override fun create(arg: ShopModel) {
@@ -39,12 +41,28 @@ class ShopStore : Store<ShopModel>, AnkoLogger {
             .addOnSuccessListener { info("updated document") }
     }
 
-    override fun delete(shopModel: ShopModel) {
+    override fun delete(arg: ShopModel) {
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
         firestore.collection("shops").document("1")
         .delete()
             .addOnSuccessListener { info("document deleted") }
 
+    }
+
+    override fun getAll(): List<ShopModel> {
+        val list = mutableListOf<ShopModel>()
+        firestore.collection("shops")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents){
+                    val shop = document.toObject(ShopModel::class.java)
+                    list.add(shop)
+                }
+            }
+            .addOnFailureListener { e ->
+                info("Could not receive all documents", e)
+            }
+        return list
     }
 }
 
