@@ -32,7 +32,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/username1"
+                    android:id="@+id/loginusername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email"
@@ -40,7 +40,7 @@
                     android:padding="15sp"/>
 
                 <EditText
-                    android:id="@+id/password1"
+                    android:id="@+id/loginpassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/password"
@@ -57,7 +57,7 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/password1" />
+                    app:layout_constraintTop_toBottomOf="@id/loginpassword" />
 
                 <Button
                     android:id="@+id/btn_sign_up"

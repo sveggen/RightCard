@@ -5,15 +5,17 @@ import android.os.Bundle
 import android.util.Patterns
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.activity_sign_up.btn_sign_up
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 import org.wit.rightcard.models.UserModel
@@ -37,44 +39,40 @@ class SignUpActivity : AppCompatActivity(), AnkoLogger {
         btn_sign_up.setOnClickListener {
             userSignUp()
         }
+
+        btn_user_exists.setOnClickListener{
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
     }
         private fun userSignUp() {
-            if (username.text.toString().isEmpty()) {
-                username.error = "Please enter an email address"
-                username.requestFocus()
+            if (signupusername.text.toString().isEmpty()) {
+                signupusername.error = "Please enter an email address"
+                signupusername.requestFocus()
                 return
             }
 
-            if (!Patterns.EMAIL_ADDRESS.matcher(username.text.toString()).matches()) {
-                username.error = "Please enter a valid email address"
-                username.requestFocus()
+            if (!Patterns.EMAIL_ADDRESS.matcher(signupusername.text.toString()).matches()) {
+                signupusername.error = "Please enter a valid email address"
+                signupusername.requestFocus()
                 return
             }
-            if (password.text.toString().isEmpty()) {
-                password.error = "Please enter a password"
-                password.requestFocus()
+            if (signuppassword.text.toString().isEmpty()) {
+                signuppassword.error = "Please enter a password"
+                signuppassword.requestFocus()
                 return
             }
 
-            auth.createUserWithEmailAndPassword(username.text.toString(), password.text.toString())
+            val userModel = UserModel(signupusername.text.toString(), signuppassword.text.toString())
+            auth = FirebaseAuth.getInstance()
+            auth.createUserWithEmailAndPassword(userModel.email.toString(), userModel.password.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        val user = auth.currentUser
-                        //   val user : FirebaseUser? = auth.currentUser
-                        user?.sendEmailVerification()
-                            ?.addOnCompleteListener{task ->
-                                if (task.isSuccessful){
-                                    saveUserDB()
-                                    startActivity(Intent(this,LoginActivity::class.java))
-                                    finish()
-                                }
-                            }
+                        info("User created")
+                        startActivity(Intent(this,LoginActivity::class.java))
+                        finish()
                     } else {
-                        Toast.makeText(
-                            baseContext,
-                            "Signing up failed. Please restart the app or try again later.",
-                            Toast.LENGTH_SHORT).show()
-                            finish()
+                        info("User not created")
                     }
                 }
         }
@@ -98,16 +96,6 @@ class SignUpActivity : AppCompatActivity(), AnkoLogger {
                     R.id.actionNewCard -> startActivityForResult<NewCreditCardActivity>(0)
                 }
                 return super.onOptionsItemSelected(item)
-            }
-
-            private fun saveUserDB(){
-                val uid = FirebaseAuth.getInstance().uid
-                val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-
-                val user = UserModel(uid, username.text.toString())
-
-                ref.setValue(user)
-                    .addOnSuccessListener {  }
             }
         }
 

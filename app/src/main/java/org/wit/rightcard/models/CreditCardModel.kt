@@ -7,4 +7,4 @@ import kotlinx.android.parcel.Parcelize
  class CreditCardModel(
     var uuid: String?,
     var name: String?
-    ) : Parcelable {constructor() : this("", "")}
+) : Parcelable {constructor() : this("", "")}

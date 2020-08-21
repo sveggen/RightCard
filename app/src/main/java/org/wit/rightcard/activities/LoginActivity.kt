@@ -6,15 +6,18 @@ import android.os.Bundle
 import android.util.Patterns
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
+
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.btn_sign_up
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
+import org.wit.rightcard.models.UserModel
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), AnkoLogger {
 
     private lateinit var auth: FirebaseAuth
 
@@ -30,37 +33,10 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, SignUpActivity::class.java))
             finish()
         }
+
         btn_log_in.setOnClickListener{
             login()
         }
-    }
-
-    private fun login() {
-        if (username1.text.toString().isEmpty()) {
-            username1.error = "Please enter an email address"
-            username1.requestFocus()
-            return
-        }
-
-        if (!Patterns.EMAIL_ADDRESS.matcher(username1.text.toString()).matches()) {
-            username1.error = "Please enter a valid email address"
-            username1.requestFocus()
-            return
-        }
-        if (password1.text.toString().isEmpty()) {
-            password1.error = "Please enter a password"
-            password1.requestFocus()
-            return
-        }
-        auth.signInWithEmailAndPassword(username1.text.toString(), password1.text.toString())
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    val user:FirebaseUser? = auth.currentUser
-                    updateUI(user)
-                } else {
-                    updateUI(null)
-                }
-            }
     }
 
     override fun onStart() {
@@ -69,18 +45,45 @@ class LoginActivity : AppCompatActivity() {
         val currentUser = auth.currentUser
         updateUI(currentUser)
     }
-    private fun updateUI(currentUser: FirebaseUser?) {
 
+    private fun login() {
+        if (loginusername.text.toString().isEmpty()) {
+            loginusername.error = "Please enter an email address"
+            loginusername.requestFocus()
+            return
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(loginusername.text.toString()).matches()) {
+            loginusername.error = "Please enter a valid email address"
+            loginusername.requestFocus()
+            return
+        }
+        if (loginpassword.text.toString().isEmpty()) {
+            loginpassword.error = "Please enter a password"
+            loginpassword.requestFocus()
+            return
+        }
+        val userModel = UserModel(loginusername.text.toString(), loginpassword.text.toString())
+        auth = FirebaseAuth.getInstance()
+        info(userModel)
+        auth.signInWithEmailAndPassword(userModel.email.toString(), userModel.password.toString())
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val firebaseUser: FirebaseUser? = auth.currentUser
+                    info(firebaseUser)
+                    updateUI(firebaseUser)
+                    info("User logged in")
+                } else {
+                    updateUI(null)
+                    info("User NOT logged in")
+                }
+            }
+    }
+
+     private fun updateUI(currentUser: FirebaseUser?) {
         if (currentUser != null) {
-            if (currentUser.isEmailVerified) {
                 startActivity(Intent(this, CardActivity::class.java))
                 finish()
-            } else {
-                Toast.makeText(
-                    baseContext, "..",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
         }
     }
 
@@ -105,5 +108,4 @@ class LoginActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
-
 }

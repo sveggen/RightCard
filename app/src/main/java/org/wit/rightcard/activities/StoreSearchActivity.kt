@@ -3,9 +3,12 @@ package org.wit.rightcard.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
+
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
+import org.wit.rightcard.models.stores.CreditCardStore
+import org.wit.rightcard.models.UserModel
 
 class StoreSearchActivity : AppCompatActivity(), AnkoLogger{
 
@@ -13,6 +16,9 @@ class StoreSearchActivity : AppCompatActivity(), AnkoLogger{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_store_search)
 
+        val user1 = UserModel("13123", "a@hotmail.com")
+        val creditCardStore = CreditCardStore()
+        creditCardStore.create(user1)
         setSupportActionBar(findViewById(R.id.toolbar))
     }
 
