@@ -7,4 +7,4 @@ import kotlinx.android.parcel.Parcelize
 data class ShopModel (
     var uuid: String?,
     var name: String?
-) : Parcelable
+) : Parcelable {constructor() : this("","")}
