@@ -66,8 +66,6 @@ class ShopStore : Store<ShopModel>, AnkoLogger {
             .addOnSuccessListener { documents ->
                 for (document in documents){
                     val shop = document.toObject(ShopModel::class.java)
-                    info("DOCUMENTSHOP:")
-                    info(shop)
                     list.add(shop)
                 }
             }

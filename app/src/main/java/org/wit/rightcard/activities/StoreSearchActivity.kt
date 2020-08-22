@@ -31,6 +31,7 @@ class StoreSearchActivity : AppCompatActivity(), AnkoLogger{
         val adapter = ArrayAdapter(this,
             android.R.layout.simple_list_item_1, creditcards)
         autotextView.setAdapter(adapter)
+
         findViewById<Button>(R.id.btn)?.setOnClickListener {
             val enteredText = getString(R.string.submitted_lang) + " " + autotextView.getText()
             Toast.makeText(this@StoreSearchActivity, enteredText, Toast.LENGTH_SHORT).show()

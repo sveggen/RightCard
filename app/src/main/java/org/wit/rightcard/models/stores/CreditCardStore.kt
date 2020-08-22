@@ -9,17 +9,6 @@ import org.wit.rightcard.models.interfaces.Store
 
 class CreditCardStore : Store<CreditCardModel>, AnkoLogger {
 
-
-
-    override fun create(arg: CreditCardModel) {
-        val firestore = FirebaseFirestore.getInstance()
-        firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
-        firestore.collection("shops").document("5")
-            .set(arg)
-            .addOnSuccessListener {info("DocumentSnapshot successfully written!") }
-            .addOnFailureListener { e -> info( "Error writing document", e) }
-    }
-
     override fun update(arg: CreditCardModel) {
         TODO("Not yet implemented")
     }
@@ -37,6 +26,10 @@ class CreditCardStore : Store<CreditCardModel>, AnkoLogger {
     }
 
     override fun search(searchTerm: String): List<CreditCardModel> {
+        TODO("Not yet implemented")
+    }
+
+    override fun create(arg: CreditCardModel) {
         TODO("Not yet implemented")
     }
 

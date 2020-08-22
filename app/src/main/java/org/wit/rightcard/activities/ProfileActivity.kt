@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 import com.google.firebase.auth.FirebaseAuth
@@ -46,6 +47,9 @@ class ProfileActivity : AppCompatActivity(), AnkoLogger {
         btn_delete_user.setOnClickListener{
             deleteUser()
         }
+
+        val textView = findViewById<TextView>(R.id.text_email)
+        textView.text = auth.currentUser?.email
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
