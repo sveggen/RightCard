@@ -3,13 +3,16 @@
     <string name="menu_accessCardmenu">Cardmenu</string>
     <string name="menu_accessPreferences">Preferences</string>
     <string name="menu_searchStores">Search</string>
-    <string name="button_searchStore">Search for store</string>
+    <string name="button_submit">Search for store</string>
     <string name="button_addCard">Add Card</string>
     <string name="hint_creditcard">Credit Card</string>
     <string name="hint_store">Store name</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="menu_actionNewCard">Add a Credit Card</string>
+    <string name="hint">Please type language…</string>
+    <string name="submitted_lang">Submitted language:</string>
+
 
 
     <string-array name="CreditCards">
@@ -20,4 +23,16 @@
         <item>SV American express</item>
         <item>Nordea Mastercard</item>
     </string-array>
+
+    <string-array name="Languages">
+        <item>Java</item>
+        <item>Kotlin</item>
+        <item>Swift</item>
+        <item>Python</item>
+        <item>Scala</item>
+        <item>Perl</item>
+        <item>Javascript</item>
+        <item>Jquery</item>
+    </string-array>
+
 </resources>

@@ -2,6 +2,10 @@ package org.wit.rightcard.models.stores
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.wit.rightcard.models.ShopModel
@@ -9,44 +13,47 @@ import org.wit.rightcard.models.interfaces.Store
 
 
 class ShopStore : Store<ShopModel>, AnkoLogger {
-    private var firestore = FirebaseFirestore.getInstance()
-
+    private val firestore = FirebaseFirestore.getInstance()
 
     override fun getSingle(documentPath: String): ShopModel {
-        var shopModel = ShopModel("", "")
+        var shopModel = ShopModel()
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
-        val document = firestore.collection("shops").document(documentPath.toString())
-        document.get().addOnSuccessListener {
-            shopModel = it.toObject(ShopModel::class.java)!!
-            return@addOnSuccessListener
+        val document = firestore.collection("shops").document(documentPath)
+        GlobalScope.launch(Dispatchers.IO){
+            shopModel = document.get().await().toObject(shopModel::class.java)!!
+
         }
-            .addOnFailureListener{ exception ->
-                info("get failed with ", exception)
-                return@addOnFailureListener
-            }
         return shopModel
     }
 
+    //works
     override fun create(arg: ShopModel) {
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
-        firestore.collection("shops").document("1")
-            .set(arg)
-            .addOnSuccessListener {info("DocumentSnapshot successfully written!") }
-            .addOnFailureListener{e -> info( "Error writing document", e) }
+        val document = firestore.collection("shops").document("1")
+            GlobalScope.launch(Dispatchers.IO){
+                document.set(arg).await()
+            }
     }
 
+    //under construction !!
     override fun update(arg: ShopModel) {
+        val map = mutableMapOf<String, Any>()
+        map["uuid"] = arg.uuid.toString()
+        map["name"] = arg.name.toString()
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
-        firestore.collection("shops").document("1")
-        .update("title", "test")
-            .addOnSuccessListener { info("updated document") }
+        val document = firestore.collection("shops").document("2")
+        GlobalScope.launch(Dispatchers.IO) {
+            document.update(map).await()
+        }
     }
 
-    override fun delete(arg: ShopModel) {
+    //works
+    override fun delete(documentPath: String) {
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
-        firestore.collection("shops").document("1")
-        .delete()
-            .addOnSuccessListener { info("document deleted") }
+        val document = firestore.collection("shops").document(documentPath)
+        GlobalScope.launch(Dispatchers.IO) {
+            document.delete().await()
+        }
     }
 
     /**
@@ -59,13 +66,21 @@ class ShopStore : Store<ShopModel>, AnkoLogger {
             .addOnSuccessListener { documents ->
                 for (document in documents){
                     val shop = document.toObject(ShopModel::class.java)
+                    info("DOCUMENTSHOP:")
+                    info(shop)
                     list.add(shop)
                 }
             }
             .addOnFailureListener { e ->
                 info("Could not receive all documents", e)
             }
+        info("LIST")
+        info(list)
         return list
+    }
+
+    override fun search(searchTerm: String): List<ShopModel> {
+        TODO("Not yet implemented")
     }
 }
 
