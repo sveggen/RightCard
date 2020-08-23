@@ -81,7 +81,7 @@ class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelected
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.actionSearch -> startActivityForResult<StoreSearchActivity>(0)
+            R.id.actionSearch -> startActivityForResult<ShopSearchActivity>(0)
         }
         when (item?.itemId) {
             R.id.actionCards -> startActivityForResult<CardActivity>(0)
@@ -100,11 +100,6 @@ class CardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelected
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-    }
-
-    private fun editNickname(uuid: String?){
-        //edittext
-        val ref = FirebaseDatabase.getInstance().getReference("/usercreditcards/$uuid")
     }
 
     private fun deleteCard(uuid: String?){

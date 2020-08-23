@@ -83,7 +83,7 @@ class NewCreditCardActivity : AppCompatActivity(), AnkoLogger {
 
             override fun onOptionsItemSelected(item: MenuItem?): Boolean {
                 when (item?.itemId) {
-                    R.id.actionSearch -> startActivityForResult<StoreSearchActivity>(0)
+                    R.id.actionSearch -> startActivityForResult<ShopSearchActivity>(0)
                 }
                 when (item?.itemId) {
                     R.id.actionCards -> startActivityForResult<CardActivity>(0)

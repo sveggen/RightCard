@@ -15,11 +15,11 @@ import org.wit.rightcard.R
 import org.wit.rightcard.models.ShopModel
 import org.wit.rightcard.models.stores.ShopStore
 
-class StoreSearchActivity : AppCompatActivity(), AnkoLogger{
+class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_store_search)
+        setContentView(R.layout.activity_shop_search)
         setSupportActionBar(findViewById(R.id.toolbar))
 
         val shopModel = ShopModel("1234", "124412")
@@ -34,7 +34,7 @@ class StoreSearchActivity : AppCompatActivity(), AnkoLogger{
 
         findViewById<Button>(R.id.btn)?.setOnClickListener {
             val enteredText = getString(R.string.submitted_lang) + " " + autotextView.getText()
-            Toast.makeText(this@StoreSearchActivity, enteredText, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@ShopSearchActivity, enteredText, Toast.LENGTH_SHORT).show()
         }
 
 
@@ -48,7 +48,7 @@ class StoreSearchActivity : AppCompatActivity(), AnkoLogger{
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.actionSearch -> startActivityForResult<StoreSearchActivity>(0)
+            R.id.actionSearch -> startActivityForResult<ShopSearchActivity>(0)
         }
         when (item?.itemId) {
             R.id.actionCards -> startActivityForResult<CardActivity>(0)

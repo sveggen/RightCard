@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activities.StoreSearchActivity">
+    tools:context=".activities.ShopSearchActivity">
     <item
         android:id="@+id/actionCards"
         android:orderInCategory="300"

@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_sign_up.*
@@ -84,7 +83,7 @@ class SignUpActivity : AppCompatActivity(), AnkoLogger {
 
             override fun onOptionsItemSelected(item: MenuItem?): Boolean {
                 when (item?.itemId) {
-                    R.id.actionSearch -> startActivityForResult<StoreSearchActivity>(0)
+                    R.id.actionSearch -> startActivityForResult<ShopSearchActivity>(0)
                 }
                 when (item?.itemId) {
                     R.id.actionCards -> startActivityForResult<CardActivity>(0)
