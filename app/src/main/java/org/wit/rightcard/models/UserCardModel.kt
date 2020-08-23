@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class UserCreditCardModel(
+data class UserCardModel(
     var uuid: String?,
     var creditcarduuid: String?,
     var creditcardname: String?,

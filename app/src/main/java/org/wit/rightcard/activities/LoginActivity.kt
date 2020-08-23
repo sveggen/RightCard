@@ -82,7 +82,7 @@ class LoginActivity : AppCompatActivity(), AnkoLogger {
 
      private fun updateUI(currentUser: FirebaseUser?) {
         if (currentUser != null) {
-                startActivity(Intent(this, CardActivity::class.java))
+                startActivity(Intent(this, UserCardActivity::class.java))
                 finish()
         }
     }
@@ -97,13 +97,13 @@ class LoginActivity : AppCompatActivity(), AnkoLogger {
             R.id.actionSearch -> startActivityForResult<ShopSearchActivity>(0)
         }
         when (item?.itemId) {
-            R.id.actionCards -> startActivityForResult<CardActivity>(0)
+            R.id.actionCards -> startActivityForResult<UserCardActivity>(0)
         }
         when (item?.itemId) {
             R.id.actionPreferences -> startActivityForResult<ProfileActivity>(0)
         }
         when (item?.itemId) {
-            R.id.actionNewCard -> startActivityForResult<NewCreditCardActivity>(0)
+            R.id.actionNewCard -> startActivityForResult<NewCardActivity>(0)
         }
 
         return super.onOptionsItemSelected(item)
