@@ -2,7 +2,6 @@ package org.wit.rightcard.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -10,11 +9,10 @@ import android.widget.Button
 import android.widget.Toast
 
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
-import org.wit.rightcard.models.ShopModel
-import org.wit.rightcard.models.stores.ShopStore
+import org.wit.rightcard.models.UserCardModel
+import org.wit.rightcard.models.stores.UserCardStore
 
 class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
 
@@ -22,23 +20,6 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_search)
         setSupportActionBar(findViewById(R.id.toolbar))
-
-        val shopStore2 = ShopStore()
-        info("her:")
-
-        shopStore2.readDataEasy() {
-            Log.d("TAG", it.size.toString())
-            Log.d("TAG", it[1].toString())
-        }
-
-        shopStore2.readData234(object: ShopStore.MyCallback {
-            override fun onCallback(list: ArrayList<ShopModel>) {
-                Log.d("TAG", "FORSØK 2")
-                Log.d("TAG", list.size.toString())
-                Log.d("TAG", list[1].toString())
-            }
-        })
-
 
         //autocomplete
         val autotextView = findViewById<AutoCompleteTextView>(R.id.autoTextView)
@@ -52,6 +33,9 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
             Toast.makeText(this@ShopSearchActivity, enteredText, Toast.LENGTH_SHORT).show()
         }
 
+        val userCardModel = UserCardModel("1", "1", "1", "1", "1")
+        val userCardStore = UserCardStore()
+        userCardStore.update(userCardModel)
 
     }
 
@@ -59,7 +43,6 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
@@ -77,5 +60,3 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
         return super.onOptionsItemSelected(item)
     }
 }
-
-

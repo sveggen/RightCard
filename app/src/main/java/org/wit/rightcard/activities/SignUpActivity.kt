@@ -8,9 +8,6 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_sign_up.btn_sign_up
 import org.jetbrains.anko.AnkoLogger
@@ -23,7 +20,6 @@ import org.wit.rightcard.models.UserModel
 class SignUpActivity : AppCompatActivity(), AnkoLogger {
 
     private lateinit var auth: FirebaseAuth
-    lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +28,6 @@ class SignUpActivity : AppCompatActivity(), AnkoLogger {
         setSupportActionBar(findViewById(R.id.toolbar))
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
-        //Database reference
-        database = Firebase.database.reference
         //Init UserSignUp fun from button click
         btn_sign_up.setOnClickListener {
             userSignUp()
@@ -97,12 +91,3 @@ class SignUpActivity : AppCompatActivity(), AnkoLogger {
                 return super.onOptionsItemSelected(item)
             }
         }
-
-
-
-
-
-
-
-
-
