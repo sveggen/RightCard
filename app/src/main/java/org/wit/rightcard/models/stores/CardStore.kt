@@ -1,32 +1,57 @@
 package org.wit.rightcard.models.stores
 
-import org.jetbrains.anko.AnkoLogger
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import org.wit.rightcard.helpers.randomId
 import org.wit.rightcard.models.CardModel
 import org.wit.rightcard.models.interfaces.Callback
 import org.wit.rightcard.models.interfaces.Store
+import kotlin.collections.ArrayList
 
-class CardStore : Store<CardModel>, AnkoLogger {
 
-    override fun update(arg: CardModel) {
-        TODO("Not yet implemented")
-    }
+class CardStore : Store<CardModel> {
 
-    override fun delete(documentPath: String) {
-        TODO("Not yet implemented")
-    }
+    private val firestore = FirebaseFirestore.getInstance()
+    private lateinit var auth: FirebaseAuth
 
     override fun getSingle(documentPath: String): CardModel {
         TODO("Not yet implemented")
     }
 
-    override fun create(arg: CardModel) {
-        TODO("Not yet implemented")
-    }
-
     override fun getAll(myCallback: Callback<CardModel>) {
-        TODO("Not yet implemented")
+        val documentdata = firestore.collection("creditcards")
+        documentdata.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val list = ArrayList<CardModel>()
+                for (document in task.result!!) {
+                    val card = document.toObject(CardModel::class.java)
+                    list.add(card)
+                }
+                myCallback.onCallback(list)
+            }
+        }
     }
 
+    override fun create(arg: CardModel) {
+        arg.id = randomId()
+        firestore.collection("creditcards")
+            .document("1")
+            .set(arg)
+    }
 
+    override fun update(arg: CardModel) {
+        auth = FirebaseAuth.getInstance()
+        val map = mutableMapOf<String, Any>()
+        map["uuid"] = arg.id.toString()
+        map["name"] = arg.name.toString()
+        firestore.collection("cards")
+            .document("1")
+            .update(map)
+    }
 
+    override fun delete(documentPath: String) {
+        firestore.collection("cards")
+            .document(documentPath)
+            .delete()
+    }
 }

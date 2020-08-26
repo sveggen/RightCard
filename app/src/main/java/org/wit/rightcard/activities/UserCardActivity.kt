@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 
-import com.google.firebase.database.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_user_card.*
@@ -44,9 +43,9 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
         })
         adapter.setOnItemClickListener { item, view ->
             val userCardItem = item as UserCardItem
-            val usercarduuid =userCardItem.userCreditcard.uuid
-            if (usercarduuid != null) {
-                deleteCard(usercarduuid)
+            val usercardid =userCardItem.userCreditcard.id
+            if (usercardid != null) {
+                deleteCard(usercardid)
             }
             finish()
             startActivity(intent)
@@ -88,6 +87,7 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
         TODO("Not yet implemented")
     }
+
 }
 
 

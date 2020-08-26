@@ -7,11 +7,16 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.Toast
+import org.wit.rightcard.models.stores.ShopStore
 
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
+import org.wit.rightcard.models.CardModel
+import org.wit.rightcard.models.ShopModel
 import org.wit.rightcard.models.UserCardModel
+import org.wit.rightcard.models.interfaces.Store
+import org.wit.rightcard.models.stores.CardStore
 import org.wit.rightcard.models.stores.UserCardStore
 
 class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
@@ -37,6 +42,8 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
         val userCardStore = UserCardStore()
         userCardStore.update(userCardModel)
 
+        val card = CardModel("1447", "Sparebanken Sør")
+        CardStore().create(card)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

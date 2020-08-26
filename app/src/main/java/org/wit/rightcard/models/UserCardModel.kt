@@ -5,9 +5,9 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class UserCardModel(
-    var uuid: String?,
-    var creditcarduuid: String?,
+    var id: String?,
+    var creditcardid: String?,
     var creditcardname: String?,
     var nickname: String?,
-    var useruuid: String?
+    var userid: String?
 ) : Parcelable {constructor() : this("","", "", "", "")}

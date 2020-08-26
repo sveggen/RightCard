@@ -5,6 +5,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import org.wit.rightcard.models.UserCardModel
 import org.wit.rightcard.models.interfaces.Callback
 import org.wit.rightcard.models.interfaces.Store
+import kotlin.random.Random
 
 
 class UserCardStore : Store<UserCardModel> {
@@ -31,18 +32,18 @@ class UserCardStore : Store<UserCardModel> {
 
     override fun create(arg: UserCardModel) {
         firestore.collection("ownedcreditcards")
-            .document("1")
+            .document(arg.id.toString())
             .set(arg)
     }
 
     override fun update(arg: UserCardModel) {
         auth = FirebaseAuth.getInstance()
         val map = mutableMapOf<String, Any>()
-        map["uuid"] = arg.uuid.toString()
-        map["creditcarduuid"] = arg.creditcarduuid.toString()
+        map["uuid"] = arg.id.toString()
+        map["creditcardid"] = arg.creditcardid.toString()
         map["creditcardname"] = arg.creditcardname.toString()
         map["nickname"] = arg.nickname.toString()
-        map["useruuid"] = auth.uid.toString()
+        map["userid"] = auth.uid.toString()
         firestore.collection("ownedcreditcards")
             .document("1")
             .update(map)

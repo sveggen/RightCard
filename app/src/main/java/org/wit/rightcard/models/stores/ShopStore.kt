@@ -29,7 +29,7 @@ class ShopStore : Store<ShopModel>, AnkoLogger {
 
     override fun update(arg: ShopModel) {
         val map = mutableMapOf<String, Any>()
-        map["uuid"] = arg.uuid.toString()
+        map["uuid"] = arg.id.toString()
         map["name"] = arg.name.toString()
         firestore.collection("shops")
             .document("1")
