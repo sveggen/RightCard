@@ -26,6 +26,7 @@ class LoginActivity : AppCompatActivity(), AnkoLogger {
         setContentView(R.layout.activity_login)
         //Init toolbar
         setSupportActionBar(findViewById(R.id.toolbar))
+
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 

@@ -1,6 +1,7 @@
 package org.wit.rightcard.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -17,7 +18,10 @@ import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 import org.wit.rightcard.activities.items.UserCardItem
+import org.wit.rightcard.models.ShopModel
 import org.wit.rightcard.models.UserCardModel
+import org.wit.rightcard.models.stores.ShopStore
+import org.wit.rightcard.models.stores.UserCardStore
 
 class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelectedListener {
 
@@ -29,43 +33,34 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
         setSupportActionBar(findViewById(R.id.toolbar))
 
         recycleview_my_cards.adapter = adapter
-        retrieveMyCards()
+        retrieveCardsV2()
 
     }
 
-    private fun retrieveMyCards(){
-        val datareference = FirebaseDatabase.getInstance().getReference("/usercreditcards")
-        datareference.addListenerForSingleValueEvent(object: ValueEventListener {
-            val firebaseauth = FirebaseAuth.getInstance().uid
-
-            override fun onDataChange(dataSnap: DataSnapshot) {
-
-                dataSnap.children.forEach{
-                    info("Users credit cards = "+ it.toString()) //logs the fetching of data from db
-                    val userCreditcard = it.getValue(UserCardModel::class.java)
-                    if (userCreditcard != null && userCreditcard.useruuid==firebaseauth) {
-                        //adds the users credit card object to the adapter
-                        adapter.add(
-                            UserCardItem(
-                                userCreditcard
-                            )
-                        )
-                    }
+    fun retrieveCardsV2(){
+        val userCreditcard = UserCardStore()
+        userCreditcard.readData234(object: UserCardStore.MyCallback {
+            override fun onCallback(list: ArrayList<UserCardModel>) {
+                for (card in list) {
+                    adapter.add(
+                        UserCardItem(card))
                 }
-                adapter.setOnItemClickListener { item, view ->
-                    val userCardItem = item as UserCardItem
-                    val usercarduuid =userCardItem.userCreditcard.uuid
-                    deleteCard(usercarduuid)
-                    finish()
-                    startActivity(intent)
-                }
-                //tells the recycleview to use the adapter
-                recycleview_my_cards.adapter = adapter
-            }
-            override fun onCancelled(p0: DatabaseError) {
             }
         })
-    }
+        adapter.setOnItemClickListener { item, view ->
+            val userCardItem = item as UserCardItem
+            val usercarduuid =userCardItem.userCreditcard.uuid
+            if (usercarduuid != null) {
+                deleteCardV2(usercarduuid)
+            }
+            finish()
+            startActivity(intent)
+        }
+        //tells the recycleview to use the adapter
+        // recycleview_my_cards.adapter = adapter
+        }
+
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -93,6 +88,11 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
+    }
+
+    private fun deleteCardV2(uuid: String){
+        val userCardStore = UserCardStore()
+        userCardStore.delete(uuid)
     }
 
     private fun deleteCard(uuid: String?){

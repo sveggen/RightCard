@@ -2,6 +2,7 @@ package org.wit.rightcard.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -22,8 +23,22 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
         setContentView(R.layout.activity_shop_search)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        val shopModel = ShopModel("1234", "124412")
-        info(ShopStore().getSingle("2"))
+        val shopStore2 = ShopStore()
+        info("her:")
+
+        shopStore2.readDataEasy() {
+            Log.d("TAG", it.size.toString())
+            Log.d("TAG", it[1].toString())
+        }
+
+        shopStore2.readData234(object: ShopStore.MyCallback {
+            override fun onCallback(list: ArrayList<ShopModel>) {
+                Log.d("TAG", "FORSØK 2")
+                Log.d("TAG", list.size.toString())
+                Log.d("TAG", list[1].toString())
+            }
+        })
+
 
         //autocomplete
         val autotextView = findViewById<AutoCompleteTextView>(R.id.autoTextView)
