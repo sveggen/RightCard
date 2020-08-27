@@ -10,6 +10,7 @@ class CardItem(val creditcard: CardModel): Item<ViewHolder>(){
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.creditcard_new_creditcard.text=creditcard.name
+        viewHolder.itemView.card_image.setImageResource(R.drawable.ic_credit_card_black_24dp)
     }
 
     override fun getLayout(): Int {

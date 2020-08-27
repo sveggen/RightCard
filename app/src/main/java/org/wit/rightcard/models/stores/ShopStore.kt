@@ -8,13 +8,13 @@ import org.wit.rightcard.models.interfaces.Store
 
 class ShopStore : Store<ShopModel>, AnkoLogger {
     private val firestore = FirebaseFirestore.getInstance()
+    private val documentdata = firestore.collection("shops")
 
     override fun getSingle(documentPath: String): ShopModel {
         TODO("Not yet implemented")
     }
 
     override fun getAll(myCallback : Callback<ShopModel>) {
-        val documentdata = firestore.collection("shops")
         documentdata.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val list = ArrayList<ShopModel>()
@@ -31,19 +31,19 @@ class ShopStore : Store<ShopModel>, AnkoLogger {
         val map = mutableMapOf<String, Any>()
         map["uuid"] = arg.id.toString()
         map["name"] = arg.name.toString()
-        firestore.collection("shops")
+        documentdata
             .document("1")
             .update(map)
     }
 
     override fun delete(documentPath: String) {
-        firestore.collection("shops")
+        documentdata
             .document(documentPath)
             .delete()
     }
 
     override fun create(arg: ShopModel) {
-        firestore.collection("shops")
+        documentdata
             .document("1")
             .set(arg)
     }

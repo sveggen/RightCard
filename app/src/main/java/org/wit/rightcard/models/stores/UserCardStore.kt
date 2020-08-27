@@ -10,17 +10,16 @@ import org.wit.rightcard.models.interfaces.Store
 class UserCardStore : Store<UserCardModel> {
     private val firestore = FirebaseFirestore.getInstance()
     private lateinit var auth: FirebaseAuth
+    private val documentdata = firestore.collection("ownedcreditcards")
 
     override fun getSingle(documentPath: String): UserCardModel {
         TODO("Not yet implemented")
     }
 
-
-
     override fun getAll(myCallback: Callback<UserCardModel>) {
         auth = FirebaseAuth.getInstance()
-        val documentdata = firestore.collection("ownedcreditcards").whereIn("userid", listOf(auth.uid))
-        documentdata.get().addOnCompleteListener { task ->
+        documentdata.whereIn("userid", listOf(auth.uid))
+           .get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val list = ArrayList<UserCardModel>()
                 for (document in task.result!!) {
@@ -33,7 +32,7 @@ class UserCardStore : Store<UserCardModel> {
     }
 
     override fun create(arg: UserCardModel) {
-        firestore.collection("ownedcreditcards")
+        documentdata
             .document(arg.id.toString())
             .set(arg)
     }
@@ -46,13 +45,13 @@ class UserCardStore : Store<UserCardModel> {
         map["creditcardname"] = arg.creditcardname.toString()
         map["nickname"] = arg.nickname.toString()
         map["userid"] = auth.uid.toString()
-        firestore.collection("ownedcreditcards")
+        documentdata
             .document("1")
             .update(map)
     }
 
     override fun delete(documentPath: String) {
-        firestore.collection("ownedcreditcards")
+        documentdata
             .document(documentPath)
             .delete()
     }

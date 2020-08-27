@@ -2,6 +2,7 @@ package org.wit.rightcard.models.stores
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import org.jetbrains.anko.AnkoLogger
 import org.wit.rightcard.helpers.randomId
 import org.wit.rightcard.models.CardModel
 import org.wit.rightcard.models.interfaces.Callback
@@ -9,18 +10,18 @@ import org.wit.rightcard.models.interfaces.Store
 import kotlin.collections.ArrayList
 
 
-class CardStore : Store<CardModel> {
+class CardStore : Store<CardModel>, AnkoLogger {
 
     private val firestore = FirebaseFirestore.getInstance()
     private lateinit var auth: FirebaseAuth
+    private val documentdata = firestore.collection("creditcards")
 
     override fun getSingle(documentPath: String): CardModel {
         TODO("Not yet implemented")
     }
 
     override fun getAll(myCallback: Callback<CardModel>) {
-        val documentdata = firestore.collection("creditcards")
-        documentdata.get().addOnCompleteListener { task ->
+        documentdata.orderBy("name").get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val list = ArrayList<CardModel>()
                 for (document in task.result!!) {
@@ -34,7 +35,7 @@ class CardStore : Store<CardModel> {
 
     override fun create(arg: CardModel) {
         arg.id = randomId()
-        firestore.collection("creditcards")
+        documentdata
             .document(arg.id.toString())
             .set(arg)
     }
@@ -45,14 +46,21 @@ class CardStore : Store<CardModel> {
         map["uuid"] = arg.id.toString()
         map["name"] = arg.name.toString()
         map["provider"] = arg.provider.toString()
-        firestore.collection("cards")
+        map["image"] = arg.image.toString()
+        documentdata
             .document("1")
             .update(map)
     }
 
     override fun delete(documentPath: String) {
-        firestore.collection("cards")
+        documentdata
             .document(documentPath)
             .delete()
+    }
+
+    fun getAllNewCards() {
+        val mutablelist = mutableListOf<Any>()
+
+
     }
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
 
 import com.google.firebase.auth.FirebaseAuth
 import com.xwray.groupie.GroupAdapter
@@ -43,7 +44,7 @@ class NewCardActivity : AppCompatActivity(), AnkoLogger {
         creditcard.getAll(object: Callback<CardModel> {
             override fun onCallback(list: List<CardModel>) {
                 for (card in list) {
-                    adapter.add(CardItem(card))
+                        adapter.add(CardItem(card))
                 }
             }
         })
