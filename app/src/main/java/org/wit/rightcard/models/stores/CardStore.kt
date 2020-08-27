@@ -5,6 +5,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import org.jetbrains.anko.AnkoLogger
 import org.wit.rightcard.helpers.randomId
 import org.wit.rightcard.models.CardModel
+import org.wit.rightcard.models.UserCardModel
 import org.wit.rightcard.models.interfaces.Callback
 import org.wit.rightcard.models.interfaces.Store
 import kotlin.collections.ArrayList
@@ -58,9 +59,4 @@ class CardStore : Store<CardModel>, AnkoLogger {
             .delete()
     }
 
-    fun getAllNewCards() {
-        val mutablelist = mutableListOf<Any>()
-
-
     }
-}

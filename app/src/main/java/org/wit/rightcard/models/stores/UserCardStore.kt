@@ -55,5 +55,12 @@ class UserCardStore : Store<UserCardModel> {
             .document(documentPath)
             .delete()
     }
+
+    fun updateNickname(arg: UserCardModel){
+        auth = FirebaseAuth.getInstance()
+        documentdata
+            .document(auth.uid + arg.creditcardid)
+            .update("nickname", arg.nickname)
+    }
 }
 

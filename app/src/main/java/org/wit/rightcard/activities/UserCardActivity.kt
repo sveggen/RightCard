@@ -29,31 +29,19 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
 
         recycleview_my_cards.adapter = adapter
         retrieveCards()
+
     }
 
-    private fun retrieveCards(){
+    private fun retrieveCards() {
         val userCreditcard = UserCardStore()
-        userCreditcard.getAll(object: Callback<UserCardModel> {
+        userCreditcard.getAll(object : Callback<UserCardModel> {
             override fun onCallback(list: List<UserCardModel>) {
                 for (card in list) {
-                    adapter.add(
-                        UserCardItem(card))
+                    adapter.add(UserCardItem(card))
                 }
             }
         })
-        adapter.setOnItemClickListener { item, view ->
-            val userCardItem = item as UserCardItem
-            val usercardid =userCardItem.userCreditcard.id
-            if (usercardid != null) {
-                deleteCard(usercardid)
-            }
-            finish()
-            startActivity(intent)
-        }
-
-        //tells the recycleview to use the adapter
-        recycleview_my_cards.adapter = adapter
-        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -76,10 +64,6 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
         return super.onOptionsItemSelected(item)
     }
 
-    private fun deleteCard(uuid: String){
-        val userCardStore = UserCardStore()
-        userCardStore.delete(uuid)
-    }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
         TODO("Not yet implemented")

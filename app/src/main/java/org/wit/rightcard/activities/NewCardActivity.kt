@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ImageView
 
 import com.google.firebase.auth.FirebaseAuth
 import com.xwray.groupie.GroupAdapter
@@ -15,11 +14,8 @@ import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 import org.wit.rightcard.activities.items.CardItem
 import org.wit.rightcard.models.CardModel
-import org.wit.rightcard.models.UserCardModel
 import org.wit.rightcard.models.interfaces.Callback
 import org.wit.rightcard.models.stores.CardStore
-import org.wit.rightcard.models.stores.UserCardStore
-import org.wit.rightcard.helpers.*
 
 
 class NewCardActivity : AppCompatActivity(), AnkoLogger {
@@ -48,21 +44,7 @@ class NewCardActivity : AppCompatActivity(), AnkoLogger {
                 }
             }
         })
-        adapter.setOnItemClickListener { item, view ->
-            val cardItem = item as CardItem
-            val newUserCard =
-                UserCardModel(
-                    auth.uid + cardItem.creditcard.id, cardItem.creditcard.id, cardItem.creditcard.name,
-                    "", auth.uid)
-
-            if (cardItem.creditcard.id != null) {
-                addCard(newUserCard)
-            }
-            finish()
-            startActivity(intent)
-        }
     }
-
 
             override fun onCreateOptionsMenu(menu: Menu?): Boolean {
                 menuInflater.inflate(R.menu.menu_main, menu)
@@ -84,11 +66,6 @@ class NewCardActivity : AppCompatActivity(), AnkoLogger {
                 }
                 return super.onOptionsItemSelected(item)
             }
-
-    private fun addCard(userCardModel: UserCardModel){
-        val userCardStore = UserCardStore()
-        userCardStore.create(userCardModel)
-    }
 }
 
 
