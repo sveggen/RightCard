@@ -35,7 +35,7 @@ class CardStore : Store<CardModel> {
     override fun create(arg: CardModel) {
         arg.id = randomId()
         firestore.collection("creditcards")
-            .document("1")
+            .document(arg.id.toString())
             .set(arg)
     }
 
@@ -44,6 +44,7 @@ class CardStore : Store<CardModel> {
         val map = mutableMapOf<String, Any>()
         map["uuid"] = arg.id.toString()
         map["name"] = arg.name.toString()
+        map["provider"] = arg.provider.toString()
         firestore.collection("cards")
             .document("1")
             .update(map)

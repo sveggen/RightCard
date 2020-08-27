@@ -7,17 +7,10 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.Toast
-import org.wit.rightcard.models.stores.ShopStore
 
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
-import org.wit.rightcard.models.CardModel
-import org.wit.rightcard.models.ShopModel
-import org.wit.rightcard.models.UserCardModel
-import org.wit.rightcard.models.interfaces.Store
-import org.wit.rightcard.models.stores.CardStore
-import org.wit.rightcard.models.stores.UserCardStore
 
 class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
 
@@ -28,22 +21,15 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
 
         //autocomplete
         val autotextView = findViewById<AutoCompleteTextView>(R.id.autoTextView)
-        val creditcards = resources.getStringArray(R.array.CreditCards)
+        val shops = resources.getStringArray(R.array.Shops)
         val adapter = ArrayAdapter(this,
-            android.R.layout.simple_list_item_1, creditcards)
+            android.R.layout.simple_list_item_1, shops)
         autotextView.setAdapter(adapter)
 
         findViewById<Button>(R.id.btn)?.setOnClickListener {
-            val enteredText = getString(R.string.submitted_lang) + " " + autotextView.getText()
+            val enteredText = getString(R.string.submitted_shop) + " " + autotextView.getText()
             Toast.makeText(this@ShopSearchActivity, enteredText, Toast.LENGTH_SHORT).show()
         }
-
-        val userCardModel = UserCardModel("1", "1", "1", "1", "1")
-        val userCardStore = UserCardStore()
-        userCardStore.update(userCardModel)
-
-        val card = CardModel("1447", "Sparebanken Sør")
-        CardStore().create(card)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -12,7 +12,7 @@
     <string name="email">email@email.com</string>
     <string name="menu_actionNewCard">Add a Credit Card</string>
     <string name="hint">Please type language…</string>
-    <string name="submitted_lang">Submitted language:</string>
+    <string name="submitted_shop">Submitted shop:</string>
 
 
 
@@ -25,15 +25,15 @@
         <item>Nordea Mastercard</item>
     </string-array>
 
-    <string-array name="Languages">
-        <item>Java</item>
-        <item>Kotlin</item>
-        <item>Swift</item>
-        <item>Python</item>
-        <item>Scala</item>
-        <item>Perl</item>
-        <item>Javascript</item>
-        <item>Jquery</item>
+    <string-array name="Shops">
+        <item>Kiwi</item>
+        <item>Rema 1000</item>
+        <item>Shell</item>
+        <item>Cirkle K</item>
+        <item>Spar</item>
+        <item>XXL</item>
+        <item>Intersport</item>
+        <item>Coop Extra</item>
     </string-array>
 
 </resources>

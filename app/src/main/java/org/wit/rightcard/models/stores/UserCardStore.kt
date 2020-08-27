@@ -5,7 +5,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import org.wit.rightcard.models.UserCardModel
 import org.wit.rightcard.models.interfaces.Callback
 import org.wit.rightcard.models.interfaces.Store
-import kotlin.random.Random
 
 
 class UserCardStore : Store<UserCardModel> {

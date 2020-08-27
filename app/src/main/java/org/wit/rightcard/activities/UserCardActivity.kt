@@ -50,6 +50,7 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
             finish()
             startActivity(intent)
         }
+
         //tells the recycleview to use the adapter
         recycleview_my_cards.adapter = adapter
         }
