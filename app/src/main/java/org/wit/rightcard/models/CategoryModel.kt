@@ -4,10 +4,8 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class BenefitModel (
+data class CategoryModel (
     var id: String?,
-    var conditions: String?,
-    var category: String?,
-    var discount: String?,
-    var creditcardid: String?
+    var type: String?
+
 ) : Parcelable

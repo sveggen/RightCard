@@ -15,8 +15,11 @@ class UserCardStore : Store<UserCardModel> {
         TODO("Not yet implemented")
     }
 
+
+
     override fun getAll(myCallback: Callback<UserCardModel>) {
-        val documentdata = firestore.collection("ownedcreditcards")
+        auth = FirebaseAuth.getInstance()
+        val documentdata = firestore.collection("ownedcreditcards").whereIn("userid", listOf(auth.uid))
         documentdata.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val list = ArrayList<UserCardModel>()

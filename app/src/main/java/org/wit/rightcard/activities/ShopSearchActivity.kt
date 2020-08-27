@@ -11,6 +11,7 @@ import android.widget.Toast
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
+import org.wit.rightcard.models.BenefitModel
 
 class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
 
@@ -30,6 +31,7 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
             val enteredText = getString(R.string.submitted_shop) + " " + autotextView.getText()
             Toast.makeText(this@ShopSearchActivity, enteredText, Toast.LENGTH_SHORT).show()
         }
+        BenefitModel("", "", "1", "", "")
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
