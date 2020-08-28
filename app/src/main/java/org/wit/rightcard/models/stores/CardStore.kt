@@ -5,7 +5,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import org.jetbrains.anko.AnkoLogger
 import org.wit.rightcard.helpers.randomId
 import org.wit.rightcard.models.CardModel
-import org.wit.rightcard.models.UserCardModel
 import org.wit.rightcard.models.interfaces.Callback
 import org.wit.rightcard.models.interfaces.Store
 import kotlin.collections.ArrayList
@@ -57,6 +56,44 @@ class CardStore : Store<CardModel>, AnkoLogger {
         documentdata
             .document(documentPath)
             .delete()
+    }
+
+    fun getAllNewCards(myCallback: Callback<CardModel>){
+        auth = FirebaseAuth.getInstance()
+        firestore.collection("ownedcreditcards").whereIn("userid", listOf(auth.uid))
+            .get().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val list = ArrayList<String>()
+                    val objectList = HashMap<String, CardModel>()
+                    val finallist =  ArrayList<CardModel>()
+                    for (document in task.result!!) {
+                        //val usercard = document.toObject(UserCardModel::class.java)
+                        val creditcardid = document.get("creditcardid").toString()
+                        list.add(creditcardid)
+                    }
+                    firestore.collection("creditcards").get().addOnCompleteListener { task2 ->
+                        if (task2.isSuccessful){
+                            for (document in task2.result!!) {
+                                //adds object of type CardModel to Map
+                                val card = document.toObject(CardModel::class.java)
+                                objectList.put(card.id.toString(), card)
+
+                                //adds String of CardModel.id to ArrayList
+                                val id = document.get("id").toString()
+                                list.add(id)
+                            }
+                            val unique = list.groupingBy { it }.eachCount().filter { it.value == 1 }.keys.toCollection(ArrayList<Any>())
+                            for (key in unique){
+                                if(objectList.get(key.toString()) != null){
+                                    finallist.add(objectList.get(key.toString())!!)
+                                }
+
+                            }
+                        }
+                        myCallback.onCallback(finallist)
+                    }
+                }
+            }
     }
 
     }

@@ -2,12 +2,15 @@ package org.wit.rightcard.models.stores
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
+import org.wit.rightcard.models.CardModel
 import org.wit.rightcard.models.UserCardModel
 import org.wit.rightcard.models.interfaces.Callback
 import org.wit.rightcard.models.interfaces.Store
 
 
-class UserCardStore : Store<UserCardModel> {
+class UserCardStore : Store<UserCardModel>, AnkoLogger {
     private val firestore = FirebaseFirestore.getInstance()
     private lateinit var auth: FirebaseAuth
     private val documentdata = firestore.collection("ownedcreditcards")

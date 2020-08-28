@@ -9,8 +9,12 @@ import android.widget.Button
 import android.widget.Toast
 
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
+import org.wit.rightcard.models.CardModel
+import org.wit.rightcard.models.interfaces.Callback
+import org.wit.rightcard.models.stores.UserCardStore
 
 
 class ShopSearchActivity : AppCompatActivity(), AnkoLogger{

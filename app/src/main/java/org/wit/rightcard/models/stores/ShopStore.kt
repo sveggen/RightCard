@@ -47,5 +47,6 @@ class ShopStore : Store<ShopModel>, AnkoLogger {
             .document("1")
             .set(arg)
     }
+
 }
 

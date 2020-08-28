@@ -21,6 +21,7 @@ import org.wit.rightcard.models.stores.UserCardStore
 class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelectedListener {
 
     val adapter = GroupAdapter<ViewHolder>()
+    val arrayList = ArrayList<Any>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +39,7 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
             override fun onCallback(list: List<UserCardModel>) {
                 for (card in list) {
                     adapter.add(UserCardItem(card))
+                    arrayList.add(card)
                 }
             }
         })
@@ -72,6 +74,7 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
         TODO("Not yet implemented")
     }
+
 
 }
 
