@@ -2,6 +2,7 @@ package org.wit.rightcard.models.stores
 
 import com.google.firebase.firestore.FirebaseFirestore
 import org.jetbrains.anko.AnkoLogger
+import org.wit.rightcard.helpers.randomId
 import org.wit.rightcard.models.ShopModel
 import org.wit.rightcard.models.interfaces.Callback
 import org.wit.rightcard.models.interfaces.Store
@@ -32,7 +33,7 @@ class ShopStore : Store<ShopModel>, AnkoLogger {
         map["uuid"] = arg.id.toString()
         map["name"] = arg.name.toString()
         documentdata
-            .document("1")
+            .document(arg.id.toString())
             .update(map)
     }
 
@@ -43,8 +44,9 @@ class ShopStore : Store<ShopModel>, AnkoLogger {
     }
 
     override fun create(arg: ShopModel) {
+        arg.id = randomId()
         documentdata
-            .document("1")
+            .document(arg.id.toString())
             .set(arg)
     }
 

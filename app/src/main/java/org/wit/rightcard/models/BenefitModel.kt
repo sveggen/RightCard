@@ -8,6 +8,5 @@ data class BenefitModel (
     var id: String?,
     var conditions: String?,
     var category: String?,
-    var discount: String?,
-    var creditcardid: String?
+    var discount: String?
 ) : Parcelable

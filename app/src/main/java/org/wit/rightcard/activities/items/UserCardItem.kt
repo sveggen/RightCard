@@ -1,17 +1,9 @@
 package org.wit.rightcard.activities.items
 
-import android.content.Context
-import android.content.Intent
-import android.widget.TextView
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.core.content.ContextCompat.startActivity
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.mycards_listing.view.*
-import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
-import org.wit.rightcard.activities.NewCardActivity
-import org.wit.rightcard.activities.UserCardActivity
 import org.wit.rightcard.models.UserCardModel
 import org.wit.rightcard.models.stores.UserCardStore
 
@@ -39,4 +31,4 @@ class UserCardItem(val userCreditcard: UserCardModel): Item<ViewHolder>(){
             userCardStore.delete(userCreditcard.id!!)
         }
     }
-    }
+}

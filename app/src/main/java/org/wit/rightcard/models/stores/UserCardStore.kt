@@ -49,7 +49,7 @@ class UserCardStore : Store<UserCardModel>, AnkoLogger {
         map["nickname"] = arg.nickname.toString()
         map["userid"] = auth.uid.toString()
         documentdata
-            .document("1")
+            .document(arg.id.toString())
             .update(map)
     }
 

@@ -12,8 +12,14 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
+import org.wit.rightcard.models.BenefitModel
+import org.wit.rightcard.models.CardBenefitsModel
 import org.wit.rightcard.models.CardModel
+import org.wit.rightcard.models.ShopModel
 import org.wit.rightcard.models.interfaces.Callback
+import org.wit.rightcard.models.stores.BenefitStore
+import org.wit.rightcard.models.stores.CardBenefitsStore
+import org.wit.rightcard.models.stores.ShopStore
 import org.wit.rightcard.models.stores.UserCardStore
 
 
@@ -35,6 +41,8 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
             val enteredText = getString(R.string.submitted_shop) + " " + autotextView.getText()
             Toast.makeText(this, enteredText, Toast.LENGTH_SHORT).show()
         }
+
+        createCardBenefit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -56,5 +64,24 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
             R.id.actionNewCard -> startActivityForResult<NewCardActivity>(0)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun createBenefit(){
+        val benefitModel = BenefitModel("", "10% off on all groceries", "Grocery", "10%")
+        BenefitStore().create(benefitModel)
+
+    }
+
+    fun createCardBenefit(){
+        val shopid = "51672797-153b-4cea-be57-5bb7431c538a"
+        val benefitid = "40708937-0c2a-408a-8003-8f7fa9dec039"
+        val creditcardid = "706c0cff-387b-4f3b-97d8-3f07ed4a304d"
+        val cardBenefitModel = CardBenefitsModel(shopid + benefitid + creditcardid, shopid, benefitid, creditcardid)
+        CardBenefitsStore().create(cardBenefitModel)
+    }
+
+    fun createStore(){
+        val shopModel = ShopModel("", "SAS")
+        ShopStore().create(shopModel)
     }
 }

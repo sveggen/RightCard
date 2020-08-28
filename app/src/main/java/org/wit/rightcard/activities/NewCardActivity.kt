@@ -15,6 +15,7 @@ import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 import org.wit.rightcard.activities.items.CardItem
 import org.wit.rightcard.models.CardModel
+import org.wit.rightcard.models.UserCardModel
 import org.wit.rightcard.models.interfaces.Callback
 import org.wit.rightcard.models.stores.CardStore
 import org.wit.rightcard.models.stores.UserCardStore

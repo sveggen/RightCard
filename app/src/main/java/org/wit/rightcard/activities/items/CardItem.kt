@@ -5,8 +5,10 @@ import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.card_listing_newcard.view.*
 import org.wit.rightcard.R
+import org.wit.rightcard.models.CardBenefitsModel
 import org.wit.rightcard.models.CardModel
 import org.wit.rightcard.models.UserCardModel
+import org.wit.rightcard.models.stores.CardBenefitsStore
 import org.wit.rightcard.models.stores.UserCardStore
 
 class CardItem(val creditcard: CardModel): Item<ViewHolder>(){

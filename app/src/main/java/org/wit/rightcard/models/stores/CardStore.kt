@@ -48,7 +48,7 @@ class CardStore : Store<CardModel>, AnkoLogger {
         map["provider"] = arg.provider.toString()
         map["image"] = arg.image.toString()
         documentdata
-            .document("1")
+            .document(arg.id.toString())
             .update(map)
     }
 
@@ -66,8 +66,8 @@ class CardStore : Store<CardModel>, AnkoLogger {
                     val list = ArrayList<String>()
                     val objectList = HashMap<String, CardModel>()
                     val finallist =  ArrayList<CardModel>()
+
                     for (document in task.result!!) {
-                        //val usercard = document.toObject(UserCardModel::class.java)
                         val creditcardid = document.get("creditcardid").toString()
                         list.add(creditcardid)
                     }
@@ -82,7 +82,12 @@ class CardStore : Store<CardModel>, AnkoLogger {
                                 val id = document.get("id").toString()
                                 list.add(id)
                             }
-                            val unique = list.groupingBy { it }.eachCount().filter { it.value == 1 }.keys.toCollection(ArrayList<Any>())
+                            val unique = list
+                                .groupingBy { it }
+                                .eachCount()
+                                .filter { it.value == 1 }
+                                .keys
+                                .toCollection(ArrayList<Any>())
                             for (key in unique){
                                 if(objectList.get(key.toString()) != null){
                                     finallist.add(objectList.get(key.toString())!!)
