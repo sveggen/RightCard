@@ -2,17 +2,15 @@ package org.wit.rightcard.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.Button
-import android.widget.Toast
+import android.widget.*
 
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
-import org.wit.rightcard.activities.items.CardItem
 import org.wit.rightcard.models.*
 import org.wit.rightcard.models.interfaces.Callback
 import org.wit.rightcard.models.stores.*
@@ -26,6 +24,7 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_search)
         setSupportActionBar(findViewById(R.id.toolbar))
+        findViewById<Button>(R.id.btn)?.visibility = View.INVISIBLE
 
         retrieveShops()
 
@@ -35,9 +34,32 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
             android.R.layout.simple_list_item_1, shops)
         autotextView.setAdapter(adapter)
 
+
+        findViewById<AutoCompleteTextView>(R.id.autoTextView).setOnItemClickListener { parent, view, position, id ->
+            val enteredText = getString(R.string.submitted_shop) + " " + autotextView.getText()
+            findViewById<Button>(R.id.btn)?.visibility = View.VISIBLE
+        }
+
+        findViewById<AutoCompleteTextView>(R.id.autoTextView).addTextChangedListener (object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, start: Int, count: Int, after: Int) {
+                findViewById<Button>(R.id.btn)?.visibility = View.INVISIBLE
+            }
+
+            override fun onTextChanged(p0: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                findViewById<Button>(R.id.btn)?.visibility = View.INVISIBLE
+            }
+        })
+
+
+
         findViewById<Button>(R.id.btn)?.setOnClickListener {
             val enteredText = getString(R.string.submitted_shop) + " " + autotextView.getText()
             Toast.makeText(this, enteredText, Toast.LENGTH_SHORT).show()
+
+            findViewById<Button>(R.id.btn)?.visibility = View.VISIBLE
         }
 
         hentAlle()
