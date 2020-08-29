@@ -20,14 +20,17 @@ import org.wit.rightcard.models.stores.*
 
 class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
 
+    val shops = ArrayList<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_search)
         setSupportActionBar(findViewById(R.id.toolbar))
 
+        retrieveShops()
+
         //autocomplete
         val autotextView = findViewById<AutoCompleteTextView>(R.id.autoTextView)
-        val shops = resources.getStringArray(R.array.Shops)
         val adapter = ArrayAdapter(this,
             android.R.layout.simple_list_item_1, shops)
         autotextView.setAdapter(adapter)
@@ -89,6 +92,17 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
                 for (card in list) {
                     info("kort hver for seg")
                     info(card)
+                }
+            }
+        })
+    }
+
+    private fun retrieveShops(){
+        val shopStore = ShopStore()
+        shopStore.getAll(object: Callback<ShopModel> {
+            override fun onCallback(list: List<ShopModel>) {
+                for (shop in list) {
+                    shops.add(shop.name.toString())
                 }
             }
         })
