@@ -12,15 +12,10 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
-import org.wit.rightcard.models.BenefitModel
-import org.wit.rightcard.models.CardBenefitsModel
-import org.wit.rightcard.models.CardModel
-import org.wit.rightcard.models.ShopModel
+import org.wit.rightcard.activities.items.CardItem
+import org.wit.rightcard.models.*
 import org.wit.rightcard.models.interfaces.Callback
-import org.wit.rightcard.models.stores.BenefitStore
-import org.wit.rightcard.models.stores.CardBenefitsStore
-import org.wit.rightcard.models.stores.ShopStore
-import org.wit.rightcard.models.stores.UserCardStore
+import org.wit.rightcard.models.stores.*
 
 
 class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
@@ -42,7 +37,7 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
             Toast.makeText(this, enteredText, Toast.LENGTH_SHORT).show()
         }
 
-        createCardBenefit()
+        hentAlle()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -84,4 +79,19 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
         val shopModel = ShopModel("", "SAS")
         ShopStore().create(shopModel)
     }
+
+    fun hentAlle(){
+        val cardBenefitsStore = CardBenefitsStore()
+        cardBenefitsStore.getAllEverything("Rema 1000", object: Callback<UserCardBenefitsModel> {
+            override fun onCallback(list: List<UserCardBenefitsModel>) {
+                info("kort")
+                info(list)
+                for (card in list) {
+                    info("kort hver for seg")
+                    info(card)
+                }
+            }
+        })
+    }
+
 }

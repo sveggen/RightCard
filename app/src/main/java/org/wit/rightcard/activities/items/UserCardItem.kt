@@ -13,7 +13,7 @@ class UserCardItem(val userCreditcard: UserCardModel): Item<ViewHolder>(){
         viewHolder.itemView.my_creditcard.text=userCreditcard.creditcardname
         viewHolder.itemView.creditcard_nickname.text=userCreditcard.nickname
         viewHolder.itemView.editNickname.setOnClickListener { editNickname() }
-        viewHolder.itemView.deleteCreditCard.setOnClickListener { deleteCard() }
+        viewHolder.itemView.deleteCreditCard.setOnClickListener { deleteCard(viewHolder) }
     }
 
     override fun getLayout(): Int {
@@ -25,10 +25,11 @@ class UserCardItem(val userCreditcard: UserCardModel): Item<ViewHolder>(){
         UserCardStore().updateNickname(userCreditcard)
     }
 
-    private fun deleteCard() {
+    private fun deleteCard(viewHolder: ViewHolder) {
         if (userCreditcard.id != null) {
             val userCardStore = UserCardStore()
             userCardStore.delete(userCreditcard.id!!)
+
         }
     }
 }

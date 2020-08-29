@@ -101,4 +101,6 @@ class CardStore : Store<CardModel>, AnkoLogger {
             }
     }
 
+
+
     }
