@@ -3,6 +3,7 @@ package org.wit.rightcard.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
+import android.widget.TextView
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_shop_search_result.*
@@ -30,6 +31,7 @@ class ShopSearchResultActivity : AppCompatActivity(), AnkoLogger{
         supportActionBar?.title = getString(R.string.toolbar_shop_result) +" '" + enteredText.toString() + "'"
 
         recyclerview_shop_search_result.adapter = adapter
+
         if (enteredText != null) {
             retrieveBenefits(enteredText)
             info(enteredText)
@@ -40,9 +42,17 @@ class ShopSearchResultActivity : AppCompatActivity(), AnkoLogger{
         val userCardBenefitsStore = UserCardBenefitsStore()
         userCardBenefitsStore.getAll(enteredText, object: Callback<UserCardBenefitsModel> {
             override fun onCallback(list: List<UserCardBenefitsModel>) {
-                for (benefit in list) {
-                    info(benefit)
-                    adapter.add(UserCardBenefitsItem(benefit))
+                if (list.isNotEmpty()) {
+                    for (benefit in list) {
+                        findViewById<TextView>(R.id.no_benefits)?.visibility = View.GONE
+                        recyclerview_shop_search_result.visibility = View.VISIBLE
+                        adapter.add(UserCardBenefitsItem(benefit))
+                        info("there are cards")
+                    }
+                } else {
+                    findViewById<TextView>(R.id.no_benefits)?.visibility = View.VISIBLE
+                    recyclerview_shop_search_result.visibility = View.GONE
+                    info("there are no cards")
                 }
             }
         })

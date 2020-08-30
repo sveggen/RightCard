@@ -31,11 +31,18 @@
                 android:orientation="vertical">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview-n"
+                    android:id="@+id/recyclerview_new_card"
                     android:layout_width="match_parent"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:layout_height="match_parent" />
-
+                <TextView
+                    android:id="@+id/no_new_cards"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:textSize="20sp"
+                    android:text="@string/no_new_cards" />
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

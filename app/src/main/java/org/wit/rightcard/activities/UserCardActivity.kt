@@ -5,10 +5,12 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.main.activity_new_card.*
 import kotlinx.android.synthetic.main.activity_user_card.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
@@ -38,9 +40,16 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
         val userCreditcard = UserCardStore()
         userCreditcard.get(object : Callback<UserCardModel> {
             override fun onCallback(list: List<UserCardModel>) {
-                for (card in list) {
-                    adapter.add(UserCardItem(card))
-                    arrayList.add(card)
+                if (list.isNotEmpty()) {
+                    for (card in list) {
+                        findViewById<TextView>(R.id.no_user_cards)?.visibility = View.GONE
+                        recycleview_my_cards.visibility = View.VISIBLE
+                        adapter.add(UserCardItem(card))
+                        arrayList.add(card)
+                    }
+                } else {
+                    findViewById<TextView>(R.id.no_user_cards)?.visibility = View.VISIBLE
+                    recycleview_my_cards.visibility = View.GONE
                 }
             }
         })

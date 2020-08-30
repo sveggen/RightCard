@@ -103,14 +103,13 @@ class UserCardBenefitsStore : Store<CardBenefitsModel>, AnkoLogger {
                                                                     }
                                                                 }
                                                             }
-                                                            info(usercardids)
-                                                            myCallback.onCallback(userBenefits)
                                                         }
                                                 }
                                             }
                                         }
                                 }
                             }
+                            myCallback.onCallback(userBenefits)
                         }
                 }
             }
