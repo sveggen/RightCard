@@ -1,5 +1,6 @@
 package org.wit.rightcard.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -36,7 +37,7 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
 
 
         findViewById<AutoCompleteTextView>(R.id.autoTextView).setOnItemClickListener { parent, view, position, id ->
-            val enteredText = getString(R.string.submitted_shop) + " " + autotextView.getText()
+           // val enteredText = getString(R.string.submitted_shop) + " " + autotextView.getText()
             findViewById<Button>(R.id.btn)?.visibility = View.VISIBLE
         }
 
@@ -53,13 +54,14 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
             }
         })
 
-
-
         findViewById<Button>(R.id.btn)?.setOnClickListener {
-            val enteredText = getString(R.string.submitted_shop) + " " + autotextView.getText()
-            Toast.makeText(this, enteredText, Toast.LENGTH_SHORT).show()
-
+            val enteredText = autotextView.text.toString()
             findViewById<Button>(R.id.btn)?.visibility = View.VISIBLE
+
+            val intent = Intent(this, ShopSearchResultActivity::class.java)
+            intent.putExtra("enteredText", enteredText)
+            startActivity(intent)
+            finish()
         }
 
         hentAlle()

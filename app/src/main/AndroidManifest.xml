@@ -18,6 +18,7 @@
         <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".activities.UserCardActivity" />
+        <activity android:name=".activities.ShopSearchResultActivity" />
         <activity android:name=".activities.ShopSearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

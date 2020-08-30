@@ -11,7 +11,7 @@
     <string name="password">Password</string>
     <string name="email">email@email.com</string>
     <string name="menu_actionNewCard">Add a Credit Card</string>
-    <string name="hint">Please type language…</string>
+    <string name="hint">Shop name...</string>
     <string name="submitted_shop">Submitted shop:</string>
 
 </resources>

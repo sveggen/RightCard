@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.wit.rightcard.activities.ShopSearchActivity">
+    tools:context="org.wit.rightcard.activities.ShopSearchResultActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,24 +30,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <AutoCompleteTextView
-                    android:id="@+id/autoTextView"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_shop_search_result"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="25dp"
-                    android:hint="@string/hint" />
-
-                <Button
-                    android:id="@+id/btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:background="@color/colorAccent"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
-                    android:text="@string/button_submit"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"/>
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
         </ScrollView>
