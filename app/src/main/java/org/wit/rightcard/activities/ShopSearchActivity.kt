@@ -26,6 +26,7 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_search)
         setSupportActionBar(findViewById(R.id.toolbar))
+        supportActionBar?.title = "Search for a Shop"
         findViewById<Button>(R.id.btn)?.visibility = View.INVISIBLE
 
         retrieveShops()

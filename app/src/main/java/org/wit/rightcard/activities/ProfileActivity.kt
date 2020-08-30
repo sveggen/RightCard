@@ -24,6 +24,7 @@ class ProfileActivity : AppCompatActivity(), AnkoLogger {
         setContentView(R.layout.activity_profile)
         //Init toolbar
         setSupportActionBar(findViewById(R.id.toolbar))
+        supportActionBar?.title = "My Profile"
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 

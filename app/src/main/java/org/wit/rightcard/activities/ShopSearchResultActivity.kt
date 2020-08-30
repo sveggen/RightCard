@@ -24,9 +24,11 @@ class ShopSearchResultActivity : AppCompatActivity(), AnkoLogger{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_search_result)
-        setSupportActionBar(findViewById(R.id.toolbar))
+        val enteredText: String? = intent.getStringExtra("enteredText")
 
-       val enteredText: String? = intent.getStringExtra("enteredText")
+        setSupportActionBar(findViewById(R.id.toolbar))
+        supportActionBar?.title = "Search Result for '" + enteredText.toString() + "'"
+
         recyclerview_shop_search_result.adapter = adapter
         if (enteredText != null) {
             retrieveBenefits(enteredText)
