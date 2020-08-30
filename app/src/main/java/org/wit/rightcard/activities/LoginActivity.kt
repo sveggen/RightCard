@@ -25,7 +25,7 @@ class LoginActivity : AppCompatActivity(), AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         //Init toolbar
-        setSupportActionBar(findViewById(R.id.toolbar))
+        setSupportActionBar(findViewById(R.id.signed_out_toolbar))
 
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
@@ -89,24 +89,8 @@ class LoginActivity : AppCompatActivity(), AnkoLogger {
      }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.signed_out_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.actionSearch -> startActivityForResult<ShopSearchActivity>(0)
-        }
-        when (item?.itemId) {
-            R.id.actionCards -> startActivityForResult<UserCardActivity>(0)
-        }
-        when (item?.itemId) {
-            R.id.actionPreferences -> startActivityForResult<ProfileActivity>(0)
-        }
-        when (item?.itemId) {
-            R.id.actionNewCard -> startActivityForResult<NewCardActivity>(0)
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
 }

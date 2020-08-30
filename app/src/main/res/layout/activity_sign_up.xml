@@ -16,13 +16,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar"/>
+            android:id="@+id/signed_out_toolbar"
+            layout="@layout/signed_out_toolbar"/>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
+            android:layout_below="@id/signed_out_toolbar"
             android:padding="15sp"
             android:fillViewport="true">
 
