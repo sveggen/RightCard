@@ -27,7 +27,7 @@ class ShopSearchResultActivity : AppCompatActivity(), AnkoLogger{
         val enteredText: String? = intent.getStringExtra("enteredText")
 
         setSupportActionBar(findViewById(R.id.toolbar))
-        supportActionBar?.title = "Search Result for '" + enteredText.toString() + "'"
+        supportActionBar?.title = getString(R.string.toolbar_shop_result) +" '" + enteredText.toString() + "'"
 
         recyclerview_shop_search_result.adapter = adapter
         if (enteredText != null) {

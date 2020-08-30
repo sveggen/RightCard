@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.view.Menu
-import android.view.MenuItem
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -13,7 +12,6 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.btn_sign_up
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
-import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 import org.wit.rightcard.models.UserModel
 

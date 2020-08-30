@@ -27,7 +27,7 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_card)
         setSupportActionBar(findViewById(R.id.toolbar))
-        supportActionBar?.title = "My Credit Cards"
+        supportActionBar?.title = getString(R.string.toolbar_my_credit_cards)
 
         recycleview_my_cards.adapter = adapter
         retrieveCards()

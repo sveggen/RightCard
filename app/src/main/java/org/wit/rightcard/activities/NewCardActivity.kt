@@ -27,7 +27,7 @@ class NewCardActivity : AppCompatActivity(), AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_card)
         setSupportActionBar(findViewById(R.id.toolbar))
-        supportActionBar?.title = "Add a Credit Card"
+        supportActionBar?.title = getString(R.string.toolbar_new_card)
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 

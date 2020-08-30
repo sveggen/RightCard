@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 
 import com.google.firebase.auth.FirebaseAuth

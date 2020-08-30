@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textStyle="bold"
-                    android:text="Signed in as: "/>
+                    android:text="@string/signed_in_as"/>
 
                 <TextView
                     android:id="@+id/text_email"
@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@color/colorPrimary"
-                    android:text="Sign out"
+                    android:text="@string/sign_out"
                     android:textColor="@color/colorAccent"
                     android:padding="15sp"
                     android:textSize="14sp"
@@ -67,7 +67,7 @@
                     android:layout_gravity="center"
                     android:background="@color/colorPrimary"
                     android:padding="15sp"
-                    android:text="Delete user"
+                    android:text="@string/delete_user"
                     android:textColor="@color/colorAccent"
                     android:textSize="14sp" />
 

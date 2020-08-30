@@ -21,13 +21,14 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
 
     val shops = ArrayList<String>()
     private lateinit var auth: FirebaseAuth
+    val searchButton = R.id.shop_search_btn
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_search)
         setSupportActionBar(findViewById(R.id.toolbar))
-        supportActionBar?.title = "Search for a Shop"
-        findViewById<Button>(R.id.btn)?.visibility = View.INVISIBLE
+        supportActionBar?.title = getString(R.string.toolbar_shop_search)
+        findViewById<Button>(searchButton)?.visibility = View.INVISIBLE
 
         retrieveShops()
 
@@ -40,25 +41,25 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
 
         findViewById<AutoCompleteTextView>(R.id.autoTextView).setOnItemClickListener { parent, view, position, id ->
            // val enteredText = getString(R.string.submitted_shop) + " " + autotextView.getText()
-            findViewById<Button>(R.id.btn)?.visibility = View.VISIBLE
+            findViewById<Button>(searchButton)?.visibility = View.VISIBLE
         }
 
         findViewById<AutoCompleteTextView>(R.id.autoTextView).addTextChangedListener (object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, start: Int, count: Int, after: Int) {
-                findViewById<Button>(R.id.btn)?.visibility = View.INVISIBLE
+                findViewById<Button>(searchButton)?.visibility = View.INVISIBLE
             }
 
             override fun onTextChanged(p0: CharSequence?, start: Int, before: Int, count: Int) {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                findViewById<Button>(R.id.btn)?.visibility = View.INVISIBLE
+                findViewById<Button>(searchButton)?.visibility = View.INVISIBLE
             }
         })
 
-        findViewById<Button>(R.id.btn)?.setOnClickListener {
+        findViewById<Button>(searchButton)?.setOnClickListener {
             val enteredText = autotextView.text.toString()
-            findViewById<Button>(R.id.btn)?.visibility = View.VISIBLE
+            findViewById<Button>(searchButton)?.visibility = View.VISIBLE
 
             val intent = Intent(this, ShopSearchResultActivity::class.java)
             intent.putExtra("enteredText", enteredText)

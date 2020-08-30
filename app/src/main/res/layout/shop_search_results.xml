@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:text="Credit card name"
+        android:text="@string/hint_creditcard"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +30,7 @@
         android:id="@+id/benefit_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Benefit name"
+        android:text="@string/benefit"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@id/creditcard_benefit"
         app:layout_constraintBottom_toTopOf="@id/benefitDiscount"
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorAccent"
-        android:text="Benefit discount"
+        android:text="@string/discount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/card_image_benefit"
         app:layout_constraintTop_toTopOf="@id/card_image_benefit" />

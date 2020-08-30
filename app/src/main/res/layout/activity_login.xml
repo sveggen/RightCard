@@ -35,7 +35,7 @@
                     android:id="@+id/loginusername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
+                    android:hint="@string/email"
                     android:inputType="textEmailAddress"
                     android:padding="15sp"/>
 
@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@color/colorPrimary"
-                    android:text="Log in"
+                    android:text="@string/log_in"
                     android:padding="15sp"
                     android:textColor="@color/colorAccent"
                     android:textSize="14sp"
@@ -65,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Don't have an account? Click here"
+                    android:text="@string/no_account"
                     android:textSize="12sp"
                     android:padding="15sp"
                     android:textColor="@color/colorPrimary"

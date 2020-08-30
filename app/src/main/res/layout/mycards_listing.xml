@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:text="My Credit card"
+        android:text="@string/my_creditcard"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +30,7 @@
         android:id="@+id/creditcard_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text='"Nickname"'
+        android:text="@string/nickname"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@id/my_creditcard"
         app:layout_constraintBottom_toTopOf="@id/deleteCreditCard"
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorAccent"
-        android:text="Delete"
+        android:text="@string/delete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/card_image"
         app:layout_constraintTop_toTopOf="@id/card_image" />
@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorAccent"
-        android:text="Edit Nickname"
+        android:text="@string/edit_nickname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/card_image"
         app:layout_constraintTop_toBottomOf="@id/deleteCreditCard" />
