@@ -7,4 +7,4 @@ import kotlinx.android.parcel.Parcelize
 data class UserModel (
     var email: String?,
     var password: String?
-) : Parcelable
+) : Parcelable {constructor() : this( "", "")}

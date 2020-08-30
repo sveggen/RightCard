@@ -30,14 +30,7 @@ class ProfileActivity : AppCompatActivity(), AnkoLogger {
         btn_sign_out.setOnClickListener{
             signOut()
         }
-        btn_sign_up.setOnClickListener{
-            startActivity(Intent(this, SignUpActivity::class.java))
-            finish()
-        }
-        btn_log_in.setOnClickListener{
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
+
         btn_delete_user.setOnClickListener{
             deleteUser()
         }

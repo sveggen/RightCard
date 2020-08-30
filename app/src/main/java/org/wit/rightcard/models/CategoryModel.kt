@@ -8,4 +8,4 @@ data class CategoryModel (
     var id: String?,
     var type: String?
 
-) : Parcelable
+) : Parcelable {constructor() : this( "", "")}

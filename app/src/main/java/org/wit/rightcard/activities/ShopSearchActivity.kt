@@ -8,8 +8,8 @@ import android.text.TextWatcher
 import android.view.*
 import android.widget.*
 
+import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 import org.wit.rightcard.models.*
@@ -20,6 +20,7 @@ import org.wit.rightcard.models.stores.*
 class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
 
     val shops = ArrayList<String>()
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,8 +64,6 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
             startActivity(intent)
             finish()
         }
-
-        hentAlle()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -107,23 +106,9 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
         ShopStore().create(shopModel)
     }
 
-    fun hentAlle(){
-        val cardBenefitsStore = CardBenefitsStore()
-        cardBenefitsStore.getAllEverything("Rema 1000", object: Callback<UserCardBenefitsModel> {
-            override fun onCallback(list: List<UserCardBenefitsModel>) {
-                info("kort")
-                info(list)
-                for (card in list) {
-                    info("kort hver for seg")
-                    info(card)
-                }
-            }
-        })
-    }
-
     private fun retrieveShops(){
         val shopStore = ShopStore()
-        shopStore.getAll(object: Callback<ShopModel> {
+        shopStore.get(object: Callback<ShopModel> {
             override fun onCallback(list: List<ShopModel>) {
                 for (shop in list) {
                     shops.add(shop.name.toString())
@@ -131,5 +116,4 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
             }
         })
     }
-
 }

@@ -9,4 +9,4 @@ data class BenefitModel (
     var conditions: String?,
     var category: String?,
     var discount: String?
-) : Parcelable{constructor() : this("", "", "", "")}
+) : Parcelable {constructor() : this("", "", "", "")}

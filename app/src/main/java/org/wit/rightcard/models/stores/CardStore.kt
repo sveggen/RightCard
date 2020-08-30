@@ -16,11 +16,7 @@ class CardStore : Store<CardModel>, AnkoLogger {
     private lateinit var auth: FirebaseAuth
     private val documentdata = firestore.collection("creditcards")
 
-    override fun getSingle(documentPath: String): CardModel {
-        TODO("Not yet implemented")
-    }
-
-    override fun getAll(myCallback: Callback<CardModel>) {
+    override fun get(myCallback: Callback<CardModel>) {
         documentdata.orderBy("name").get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val list = ArrayList<CardModel>()
@@ -63,44 +59,41 @@ class CardStore : Store<CardModel>, AnkoLogger {
         firestore.collection("ownedcreditcards").whereIn("userid", listOf(auth.uid))
             .get().addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val list = ArrayList<String>()
+                    val creditCardIdList = ArrayList<String>()
                     val objectList = HashMap<String, CardModel>()
-                    val finallist =  ArrayList<CardModel>()
+                    val newCardsList =  ArrayList<CardModel>()
 
                     for (document in task.result!!) {
-                        val creditcardid = document.get("creditcardid").toString()
-                        list.add(creditcardid)
+                        val creditCardId = document.get("creditcardid").toString()
+                        creditCardIdList.add(creditCardId)
                     }
                     firestore.collection("creditcards").get().addOnCompleteListener { task2 ->
                         if (task2.isSuccessful){
                             for (document in task2.result!!) {
                                 //adds object of type CardModel to Map
                                 val card = document.toObject(CardModel::class.java)
-                                objectList.put(card.id.toString(), card)
+                                objectList[card.id.toString()] = card
 
                                 //adds String of CardModel.id to ArrayList
                                 val id = document.get("id").toString()
-                                list.add(id)
+                                creditCardIdList.add(id)
                             }
-                            val unique = list
+                            val unique = creditCardIdList
                                 .groupingBy { it }
                                 .eachCount()
                                 .filter { it.value == 1 }
                                 .keys
                                 .toCollection(ArrayList<Any>())
                             for (key in unique){
-                                if(objectList.get(key.toString()) != null){
-                                    finallist.add(objectList.get(key.toString())!!)
+                                if(objectList[key.toString()] != null){
+                                    newCardsList.add(objectList[key.toString()]!!)
                                 }
 
                             }
                         }
-                        myCallback.onCallback(finallist)
+                        myCallback.onCallback(newCardsList)
                     }
                 }
             }
     }
-
-
-
-    }
+}

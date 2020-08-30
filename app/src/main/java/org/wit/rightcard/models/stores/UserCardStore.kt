@@ -3,8 +3,6 @@ package org.wit.rightcard.models.stores
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import org.wit.rightcard.models.CardModel
 import org.wit.rightcard.models.UserCardModel
 import org.wit.rightcard.models.interfaces.Callback
 import org.wit.rightcard.models.interfaces.Store
@@ -15,11 +13,7 @@ class UserCardStore : Store<UserCardModel>, AnkoLogger {
     private lateinit var auth: FirebaseAuth
     private val documentdata = firestore.collection("ownedcreditcards")
 
-    override fun getSingle(documentPath: String): UserCardModel {
-        TODO("Not yet implemented")
-    }
-
-    override fun getAll(myCallback: Callback<UserCardModel>) {
+    override fun get(myCallback: Callback<UserCardModel>) {
         auth = FirebaseAuth.getInstance()
         documentdata.whereIn("userid", listOf(auth.uid))
            .get().addOnCompleteListener { task ->

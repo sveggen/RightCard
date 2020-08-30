@@ -54,6 +54,7 @@
                     android:layout_gravity="center"
                     android:background="@color/colorPrimary"
                     android:text="Log in"
+                    android:padding="15sp"
                     android:textColor="@color/colorAccent"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +67,9 @@
                     android:layout_gravity="center"
                     android:text="Don't have an account? Click here"
                     android:textSize="12sp"
-                    android:textColor="@color/colorAccent"
+                    android:padding="15sp"
+                    android:textColor="@color/colorPrimary"
+                    android:background="@color/colorAccent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/btn_log_in"/>
 

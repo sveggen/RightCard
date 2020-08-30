@@ -11,11 +11,7 @@ class ShopStore : Store<ShopModel>, AnkoLogger {
     private val firestore = FirebaseFirestore.getInstance()
     private val documentdata = firestore.collection("shops")
 
-    override fun getSingle(documentPath: String): ShopModel {
-        TODO("Not yet implemented")
-    }
-
-    override fun getAll(myCallback : Callback<ShopModel>) {
+    override fun get(myCallback : Callback<ShopModel>) {
         documentdata.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val list = ArrayList<ShopModel>()

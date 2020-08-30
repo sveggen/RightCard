@@ -14,7 +14,7 @@ import org.wit.rightcard.R
 import org.wit.rightcard.activities.items.UserCardBenefitsItem
 import org.wit.rightcard.models.UserCardBenefitsModel
 import org.wit.rightcard.models.interfaces.Callback
-import org.wit.rightcard.models.stores.CardBenefitsStore
+import org.wit.rightcard.models.stores.UserCardBenefitsStore
 
 
 class ShopSearchResultActivity : AppCompatActivity(), AnkoLogger{
@@ -35,8 +35,8 @@ class ShopSearchResultActivity : AppCompatActivity(), AnkoLogger{
     }
 
     private fun retrieveBenefits(enteredText: String){
-        val cardBenefitsStore = CardBenefitsStore()
-        cardBenefitsStore.getAllEverything(enteredText, object: Callback<UserCardBenefitsModel> {
+        val userCardBenefitsStore = UserCardBenefitsStore()
+        userCardBenefitsStore.getAll(enteredText, object: Callback<UserCardBenefitsModel> {
             override fun onCallback(list: List<UserCardBenefitsModel>) {
                 for (benefit in list) {
                     info(benefit)

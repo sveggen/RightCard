@@ -10,15 +10,12 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_new_card.*
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 import org.wit.rightcard.activities.items.CardItem
 import org.wit.rightcard.models.CardModel
-import org.wit.rightcard.models.UserCardModel
 import org.wit.rightcard.models.interfaces.Callback
 import org.wit.rightcard.models.stores.CardStore
-import org.wit.rightcard.models.stores.UserCardStore
 
 
 class NewCardActivity : AppCompatActivity(), AnkoLogger {
@@ -48,6 +45,8 @@ class NewCardActivity : AppCompatActivity(), AnkoLogger {
         }
     })
     }
+
+
 
             override fun onCreateOptionsMenu(menu: Menu?): Boolean {
                 menuInflater.inflate(R.menu.menu_main, menu)

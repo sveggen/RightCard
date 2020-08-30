@@ -86,7 +86,7 @@ class LoginActivity : AppCompatActivity(), AnkoLogger {
                 startActivity(Intent(this, UserCardActivity::class.java))
                 finish()
         }
-    }
+     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)

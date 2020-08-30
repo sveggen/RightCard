@@ -35,7 +35,7 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
 
     private fun retrieveCards() {
         val userCreditcard = UserCardStore()
-        userCreditcard.getAll(object : Callback<UserCardModel> {
+        userCreditcard.get(object : Callback<UserCardModel> {
             override fun onCallback(list: List<UserCardModel>) {
                 for (card in list) {
                     adapter.add(UserCardItem(card))
