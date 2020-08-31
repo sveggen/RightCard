@@ -6,6 +6,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.wit.rightcard.models.*
 import org.wit.rightcard.models.interfaces.Callback
+import org.wit.rightcard.models.interfaces.SingleCallback
 import org.wit.rightcard.models.interfaces.Store
 
 class UserCardBenefitsStore : Store<CardBenefitsModel>, AnkoLogger {
@@ -93,15 +94,14 @@ class UserCardBenefitsStore : Store<CardBenefitsModel>, AnkoLogger {
                                                         .get().addOnCompleteListener { task4 ->
                                                             if (task4.isSuccessful) {
                                                                 for (document in task4.result!!) {
-                                                                    val benefit =
-                                                                        document.toObject(BenefitModel::class.java)
+                                                                    val benefit = document.toObject(BenefitModel::class.java)
                                                                     for (userBenefit in userBenefits) {
                                                                         if (userBenefit.benefit.id.toString() == benefit.id) {
-                                                                            userBenefit.benefit =
-                                                                                benefit
+                                                                            userBenefit.benefit = benefit
                                                                         }
                                                                     }
                                                                 }
+                                                                myCallback.onCallback(userBenefits)
                                                             }
                                                         }
                                                 }
@@ -109,10 +109,80 @@ class UserCardBenefitsStore : Store<CardBenefitsModel>, AnkoLogger {
                                         }
                                 }
                             }
-                            myCallback.onCallback(userBenefits)
                         }
+                    if (userBenefits.isEmpty()){
+                        myCallback.onCallback(userBenefits)
+                    }
                 }
             }
+
+    }
+
+    fun getAllv2(myCallback: Callback<UserCardBenefitsModelv2>){
+        val userBenefits = ArrayList<UserCardBenefitsModelv2>()
+        val creditCardId = ArrayList<String>()
+
+        //get the shop object that corresponds to the variable "nickname" and stores it
+        var shop: ShopModel
+        ShopStore().query("Rema 1000", object: SingleCallback<ShopModel> {
+        override fun onCallback(arg: ShopModel) {
+            shop = arg
+
+            //get all the users cards
+            UserCardStore().get(object: Callback<UserCardModel> {
+                override fun onCallback(list: List<UserCardModel>) {
+                    if (list.isNotEmpty()){
+                        for (card in list) {
+                            val userCardBenefitsModelv2 = UserCardBenefitsModelv2()
+                            creditCardId.add(card.creditcardid.toString())
+                            userCardBenefitsModelv2.usercard = card
+                            userBenefits.add(userCardBenefitsModelv2)
+                        }
+                    }
+
+                    //get all cardbenefits
+                    CardBenefitsStore().query(creditCardId, object: Callback<CardBenefitsModel>{
+                        override fun onCallback(list: List<CardBenefitsModel>){
+                            for (benefit in list) {
+                                        for (userBenefit in userBenefits) {
+                                            if (userBenefit.shop?.name != shop.name) {
+                                            }
+                                            if (userBenefit.usercard?.creditcardid == benefit.creditcardid &&  shop.id == benefit.shopid) {
+                                                userBenefit.cardbenefit = benefit
+                                            }
+                                    }
+                            }
+
+
+                            val benefitIdList = ArrayList<String>()
+                            for (userBenefit in userBenefits) {
+                                benefitIdList.add(userBenefit.cardbenefit.benefitid.toString())
+                            }
+
+                            //get all benefits
+                            BenefitStore().query(benefitIdList, object: Callback<BenefitModel>{
+                                override fun onCallback(list: List<BenefitModel>){
+                                    for (benefit in list) {
+                                        for (userBenefit in userBenefits) {
+                                            if (userBenefit.cardbenefit.benefitid.toString() == benefit.id) {
+                                                userBenefit.benefit = benefit
+                                                userBenefit.shop = shop
+                                            }
+                                        }
+                                    }
+                                    myCallback.onCallback(userBenefits)
+                                }
+                            })
+
+                        }
+                    })
+
+                }
+            })
+        }
+        })
     }
 }
+
+
 

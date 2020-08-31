@@ -10,6 +10,7 @@ import android.widget.*
 
 import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 import org.wit.rightcard.models.*
@@ -31,12 +32,16 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
         findViewById<Button>(searchButton)?.visibility = View.INVISIBLE
 
         retrieveShops()
+        retrieveShopsV2()
+
 
         //autocomplete
         val autotextView = findViewById<AutoCompleteTextView>(R.id.autoTextView)
         val adapter = ArrayAdapter(this,
             android.R.layout.simple_list_item_1, shops)
         autotextView.setAdapter(adapter)
+
+
 
 
         findViewById<AutoCompleteTextView>(R.id.autoTextView).setOnItemClickListener { parent, view, position, id ->
@@ -98,7 +103,7 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
     fun createCardBenefit(){
         val shopid = "51672797-153b-4cea-be57-5bb7431c538a"
         val benefitid = "40708937-0c2a-408a-8003-8f7fa9dec039"
-        val creditcardid = "706c0cff-387b-4f3b-97d8-3f07ed4a304d"
+        val creditcardid = "720f3839-fd89-416c-9537-83a28e5899d1"
         val cardBenefitModel = CardBenefitsModel(shopid + benefitid + creditcardid, shopid, benefitid, creditcardid)
         CardBenefitsStore().create(cardBenefitModel)
     }
@@ -114,6 +119,17 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
             override fun onCallback(list: List<ShopModel>) {
                 for (shop in list) {
                     shops.add(shop.name.toString())
+                }
+            }
+        })
+    }
+
+    fun retrieveShopsV2(){
+        val userCardBenefitsStore = UserCardBenefitsStore()
+        userCardBenefitsStore.getAllv2(object: Callback<UserCardBenefitsModelv2> {
+            override fun onCallback(list: List<UserCardBenefitsModelv2>) {
+                for (card in list) {
+                    info(card)
                 }
             }
         })

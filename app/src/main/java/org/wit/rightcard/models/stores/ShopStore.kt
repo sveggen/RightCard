@@ -4,7 +4,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import org.jetbrains.anko.AnkoLogger
 import org.wit.rightcard.helpers.randomId
 import org.wit.rightcard.models.ShopModel
+import org.wit.rightcard.models.UserCardBenefitsModel
 import org.wit.rightcard.models.interfaces.Callback
+import org.wit.rightcard.models.interfaces.SingleCallback
 import org.wit.rightcard.models.interfaces.Store
 
 class ShopStore : Store<ShopModel>, AnkoLogger {
@@ -22,6 +24,22 @@ class ShopStore : Store<ShopModel>, AnkoLogger {
                 myCallback.onCallback(list)
             }
         }
+    }
+
+    fun query(shop : String, mySingleCallback: SingleCallback<ShopModel>) {
+        firestore.collection("shops")
+            .whereIn("name", listOf(shop))
+            .get()
+            .addOnCompleteListener { task ->
+                val shopModel = ShopModel()
+                if (task.isSuccessful) {
+                    for (document in task.result!!) {
+                        shopModel.id = document["id"].toString()
+                        shopModel.name = shop
+                    }
+                }
+                mySingleCallback.onCallback(shopModel)
+            }
     }
 
     override fun update(arg: ShopModel) {
