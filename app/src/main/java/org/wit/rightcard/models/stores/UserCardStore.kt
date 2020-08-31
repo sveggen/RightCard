@@ -42,6 +42,7 @@ class UserCardStore : Store<UserCardModel>, AnkoLogger {
         map["creditcardname"] = arg.creditcardname.toString()
         map["nickname"] = arg.nickname.toString()
         map["userid"] = auth.uid.toString()
+        map["image"] = arg.image.toString()
         documentdata
             .document(arg.id.toString())
             .update(map)

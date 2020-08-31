@@ -15,6 +15,10 @@ class UserCardBenefitsItem(val userCardBenefitsModel: UserCardBenefitsModel): It
         viewHolder.itemView.benefit_name.text=userCardBenefitsModel.benefit?.conditions
         viewHolder.itemView.card_image_benefit.setImageResource(R.drawable.ic_7_bank_norwegian_kortet)
 
+        val uri = userCardBenefitsModel.usercard?.image
+        val target = viewHolder.itemView.card_image_benefit
+        Picasso.get().load(uri).into(target)
+
     }
 
     override fun getLayout(): Int {

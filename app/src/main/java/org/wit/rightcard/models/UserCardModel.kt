@@ -9,5 +9,6 @@ data class UserCardModel(
     var creditcardid: String?,
     var creditcardname: String?,
     var nickname: String?,
-    var userid: String?
-) : Parcelable {constructor() : this("","", "", "", "")}
+    var userid: String?,
+    var image: String?
+) : Parcelable {constructor() : this("","", "", "", "", "")}

@@ -34,7 +34,7 @@ class CardItem(val creditcard: CardModel): Item<ViewHolder>(){
     private fun addCard(){
         val newUserCard = UserCardModel(
             auth.uid + creditcard.id, creditcard.id, creditcard.name,
-            "", auth.uid)
+            "", auth.uid, creditcard.image)
         if (creditcard.id != null) {
             UserCardStore().create(newUserCard)
         }

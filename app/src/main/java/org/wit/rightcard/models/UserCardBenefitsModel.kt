@@ -11,4 +11,4 @@ data class UserCardBenefitsModel(
     var usercard: UserCardModel?,
     var benefit: BenefitModel?,
     var cardbenefit: CardBenefitsModel
-) : Parcelable {constructor() : this("", "", ShopModel("", ""), UserCardModel("", "", "", "", ""), BenefitModel("", "", "", ""), CardBenefitsModel("", "", "", ""))}
+) : Parcelable {constructor() : this("", "", ShopModel(), UserCardModel(), BenefitModel(), CardBenefitsModel())}
