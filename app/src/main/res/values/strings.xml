@@ -1,39 +1,40 @@
 <resources>
     <string name="app_name">RightCard</string>
     <string name="menu_accessCardmenu">Cardmenu</string>
-    <string name="menu_accessPreferences">Preferences</string>
+    <string name="menu_accessPreferences">My Profile</string>
     <string name="menu_searchStores">Search</string>
-    <string name="button_submit">Search for store</string>
+    <string name="search_shop">Search for shop</string>
     <string name="button_addCard">Add Card</string>
     <string name="hint_creditcard">Credit Card</string>
+    <string name="my_creditcard">My Credit card</string>
     <string name="hint_store">Store name</string>
+    <string name="menu_actionNewCard">Add a Credit Card</string>
+    <string name="hint">Shop name…</string>
+    <string name="submitted_shop">Submitted shop:</string>
+    <string name="nickname">"Nickname"</string>
+    <string name="edit_nickname">Edit Nickname</string>
+    <string name="delete">Delete</string>
+    <string name="benefit">Benefit</string>
+    <string name="discount">Discount</string>
+    <string name="no_account">Don\'t have a account? Click here</string>
+    <string name="account_exists">Already have an account? Click here</string>
+    <string name="log_in">Log in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_out">Sign out</string>
+    <string name="delete_user">Delete user</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="email">email@email.com</string>
-    <string name="menu_actionNewCard">Add a Credit Card</string>
-    <string name="hint">Please type language…</string>
-    <string name="submitted_shop">Submitted shop:</string>
-
-
-
-    <string-array name="CreditCards">
-        <item>Norwegian Visa</item>
-        <item>Re:member</item>
-        <item>Sas Gold Mastercard</item>
-        <item>DNB Mastercard</item>
-        <item>SV American express</item>
-        <item>Nordea Mastercard</item>
-    </string-array>
-
-    <string-array name="Shops">
-        <item>Kiwi</item>
-        <item>Rema 1000</item>
-        <item>Shell</item>
-        <item>Cirkle K</item>
-        <item>Spar</item>
-        <item>XXL</item>
-        <item>Intersport</item>
-        <item>Coop Extra</item>
-    </string-array>
-
+    <string name="email_placeholder">email@email.com</string>
+    <string name="email">Email</string>
+    <string name="add_credit_card">Add Credit Card</string>
+    <string name="signed_in_as">Signed in as: </string>
+    <string name="toolbar_new_card">Add a Credit Card</string>
+    <string name="toolbar_profile">My Profile</string>
+    <string name="toolbar_shop_search">Search for a Shop</string>
+    <string name="toolbar_shop_result">Shop:</string>
+    <string name="toolbar_my_credit_cards">My Credit Cards</string>
+    <string name="no_new_cards">There are no cards to add</string>
+    <string name="no_benefits">None of your credit cards provide \n any benefits in this shop</string>
+    <string name="no_user_cards">You haven\'t added any credit cards yet.</string>
+    <string name="creditcard_benefit_nickname">Nickname</string>
 </resources>

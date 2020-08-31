@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textStyle="bold"
-                    android:text="Signed in as: "/>
+                    android:text="@string/signed_in_as"/>
 
                 <TextView
                     android:id="@+id/text_email"
@@ -46,45 +46,30 @@
                     android:layout_height="wrap_content"
                     android:text="@string/email" />
 
+
                 <Button
                     android:id="@+id/btn_sign_out"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:text="Sign out"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorAccent" />
-
-                <Button
-                    android:id="@+id/btn_sign_up"
-                    android:layout_width="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_height="wrap_content"
                     android:background="@color/colorPrimary"
-                    android:text="Sign up"
+                    android:text="@string/sign_out"
+                    android:textColor="@color/colorAccent"
+                    android:padding="15sp"
                     android:textSize="14sp"
-                    android:textColor="@color/colorAccent" />
-
-                <Button
-                    android:id="@+id/btn_log_in"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:text="Log in"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorAccent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_email" />
 
                 <Button
                     android:id="@+id/btn_delete_user"
                     android:layout_width="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:background="@color/colorPrimary"
-                    android:text="Delete user"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorAccent" />
+                    android:padding="15sp"
+                    android:text="@string/delete_user"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp" />
 
             </LinearLayout>
         </ScrollView>

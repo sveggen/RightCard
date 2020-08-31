@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.wit.rightcard.activities.NewCardActivity">
+    tools:context="org.wit.rightcard.activities.ShopSearchResultActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -31,18 +31,19 @@
                 android:orientation="vertical">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview_new_card"
+                    android:id="@+id/recyclerview_shop_search_result"
                     android:layout_width="match_parent"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:layout_height="match_parent" />
                 <TextView
-                    android:id="@+id/no_new_cards"
+                    android:id="@+id/no_benefits"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:visibility="gone"
-                    android:textSize="20sp"
-                    android:text="@string/no_new_cards" />
+                    android:text="@string/no_benefits"
+                    android:textSize="20sp"/>
+
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

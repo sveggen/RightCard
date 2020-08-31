@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 
 import com.google.firebase.auth.FirebaseAuth
@@ -12,7 +11,6 @@ import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_sign_up.btn_sign_up
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
-import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 import org.wit.rightcard.models.UserModel
 
@@ -25,7 +23,7 @@ class SignUpActivity : AppCompatActivity(), AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
         //Init toolbar
-        setSupportActionBar(findViewById(R.id.toolbar))
+        setSupportActionBar(findViewById(R.id.signed_out_toolbar))
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
         //Init UserSignUp fun from button click
@@ -71,23 +69,8 @@ class SignUpActivity : AppCompatActivity(), AnkoLogger {
         }
 
             override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-                menuInflater.inflate(R.menu.menu_main, menu)
+                menuInflater.inflate(R.menu.signed_out_menu, menu)
                 return super.onCreateOptionsMenu(menu)
             }
 
-            override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-                when (item?.itemId) {
-                    R.id.actionSearch -> startActivityForResult<ShopSearchActivity>(0)
-                }
-                when (item?.itemId) {
-                    R.id.actionCards -> startActivityForResult<UserCardActivity>(0)
-                }
-                when (item?.itemId) {
-                    R.id.actionPreferences -> startActivityForResult<ProfileActivity>(0)
-                }
-                when (item?.itemId) {
-                    R.id.actionNewCard -> startActivityForResult<NewCardActivity>(0)
-                }
-                return super.onOptionsItemSelected(item)
-            }
         }

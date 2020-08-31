@@ -14,11 +14,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.UserCardActivity"/>
         </activity>
-        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.ShopSearchActivity" />
         <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".activities.UserCardActivity" />
-        <activity android:name=".activities.ShopSearchActivity">
+        <activity android:name=".activities.ShopSearchResultActivity" />
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

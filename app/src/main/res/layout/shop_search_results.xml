@@ -8,53 +8,47 @@
     android:padding="30dp">
 
     <TextView
-        android:id="@+id/my_creditcard"
+        android:id="@+id/creditcard_benefit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:text="@string/my_creditcard"
+        android:text="@string/hint_creditcard"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
     <ImageView
-        android:id="@+id/card_image"
+        android:id="@+id/card_image_benefit"
         android:layout_width="132dp"
         android:layout_height="101dp"
         android:layout_gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/my_creditcard"
+        app:layout_constraintTop_toBottomOf="@id/creditcard_benefit"
         app:srcCompat="@drawable/ic_7_bank_norwegian_kortet"
-        tools:src="@drawable/ic_7_bank_norwegian_kortet" />
+        tools:src="@drawable/ic_7_bank_norwegian_kortet"
+        android:contentDescription="TODO" />
 
     <TextView
-        android:id="@+id/creditcard_nickname"
+        android:id="@+id/creditcard_benefit_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/nickname"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@id/my_creditcard"
-        app:layout_constraintBottom_toTopOf="@id/deleteCreditCard"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_image_benefit"
+        android:textSize="22sp" />
 
-    <Button
-        android:id="@+id/deleteCreditCard"
+    <TextView
+        android:id="@+id/benefit_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorAccent"
-        android:text="@string/delete"
+        android:layout_marginTop="44dp"
+        android:text="@string/benefit"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/card_image"
-        app:layout_constraintTop_toTopOf="@id/card_image" />
-
-    <Button
-        android:id="@+id/editNickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorAccent"
-        android:text="@string/edit_nickname"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/card_image"
-        app:layout_constraintTop_toBottomOf="@id/deleteCreditCard" />
+        app:layout_constraintHorizontal_bias="0.422"
+        app:layout_constraintStart_toEndOf="@id/card_image_benefit"
+        app:layout_constraintTop_toBottomOf="@id/creditcard_benefit" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

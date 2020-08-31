@@ -5,15 +5,31 @@ import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.mycards_listing.view.*
 import org.wit.rightcard.R
 import org.wit.rightcard.models.UserCardModel
+import org.wit.rightcard.models.stores.UserCardStore
 
 class UserCardItem(val userCreditcard: UserCardModel): Item<ViewHolder>(){
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.my_creditcard.text=userCreditcard.creditcardname
         viewHolder.itemView.creditcard_nickname.text=userCreditcard.nickname
+        viewHolder.itemView.editNickname.setOnClickListener { editNickname() }
+        viewHolder.itemView.deleteCreditCard.setOnClickListener { deleteCard(viewHolder) }
     }
 
     override fun getLayout(): Int {
         return R.layout.mycards_listing
+    }
+
+    private fun editNickname(){
+        userCreditcard.nickname = "potet"
+        UserCardStore().updateNickname(userCreditcard)
+    }
+
+    private fun deleteCard(viewHolder: ViewHolder) {
+        if (userCreditcard.id != null) {
+            val userCardStore = UserCardStore()
+            userCardStore.delete(userCreditcard.id!!)
+
+        }
     }
 }

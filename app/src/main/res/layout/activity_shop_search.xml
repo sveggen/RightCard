@@ -34,18 +34,19 @@
                     android:id="@+id/autoTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:hint="@string/hint"/>
+                    android:layout_margin="25dp"
+                    android:hint="@string/hint" />
 
                 <Button
-                    android:id="@+id/btn"
-                    android:layout_width="match_parent"
+                    android:id="@+id/shop_search_btn"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:padding="15sp"
+                    android:layout_gravity="center"
                     android:background="@color/colorAccent"
                     android:paddingBottom="8dp"
                     android:paddingTop="8dp"
-                    android:text="@string/button_submit"
+                    android:text="@string/search_shop"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"/>
 

@@ -16,13 +16,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar"/>
+            android:id="@+id/signed_out_toolbar"
+            layout="@layout/signed_out_toolbar"/>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
+            android:layout_below="@id/signed_out_toolbar"
             android:padding="15sp"
             android:fillViewport="true">
 
@@ -53,9 +53,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@color/colorPrimary"
-                    android:text="Sign Up"
+                    android:text="@string/sign_up"
                     android:textColor="@color/colorAccent"
                     android:textSize="14sp"
+                    android:padding="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/signuppassword" />
 
@@ -64,11 +65,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Already have an account? Click here"
+                    android:background="@color/colorAccent"
+                    android:padding="15sp"
+                    android:text="@string/account_exists"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="12sp"
-                    android:textColor="@color/colorAccent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/btn_sign_up"/>
+                    app:layout_constraintTop_toBottomOf="@id/btn_sign_up" />
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

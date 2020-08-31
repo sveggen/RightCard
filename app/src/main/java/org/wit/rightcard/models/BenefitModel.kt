@@ -8,5 +8,5 @@ data class BenefitModel (
     var id: String?,
     var conditions: String?,
     var category: String?,
-    var creditcardid: String?
-) : Parcelable
+    var discount: String?
+) : Parcelable {constructor() : this("", "", "", "")}

@@ -7,5 +7,6 @@ import kotlinx.android.parcel.Parcelize
 data class CardModel(
     var id: String?,
     var name: String?,
-    var provider: String?
-) : Parcelable {constructor() : this("", "", "")}
+    var provider: String?,
+    var image: String?
+) : Parcelable {constructor() : this("", "", "", "")}
