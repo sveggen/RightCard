@@ -30,6 +30,7 @@ class UserCardItem(val userCreditcard: UserCardModel): Item<ViewHolder>(){
             val userCardStore = UserCardStore()
             userCardStore.delete(userCreditcard.id!!)
 
+
         }
     }
 }

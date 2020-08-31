@@ -9,8 +9,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Section
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.activity_new_card.*
 import kotlinx.android.synthetic.main.activity_user_card.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
@@ -23,7 +23,7 @@ import org.wit.rightcard.models.stores.UserCardStore
 class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelectedListener {
 
     val adapter = GroupAdapter<ViewHolder>()
-    val arrayList = ArrayList<Any>()
+    val section = Section()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +32,8 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
         supportActionBar?.title = getString(R.string.toolbar_my_credit_cards)
 
         recycleview_my_cards.adapter = adapter
+        adapter.add(section)
         retrieveCards()
-
     }
 
     private fun retrieveCards() {
@@ -45,7 +45,6 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
                         findViewById<TextView>(R.id.no_user_cards)?.visibility = View.GONE
                         recycleview_my_cards.visibility = View.VISIBLE
                         adapter.add(UserCardItem(card))
-                        arrayList.add(card)
                     }
                 } else {
                     findViewById<TextView>(R.id.no_user_cards)?.visibility = View.VISIBLE
@@ -83,6 +82,11 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
         TODO("Not yet implemented")
+    }
+
+    private fun deleteCard(creditCardId : String) {
+            val userCardStore = UserCardStore()
+            userCardStore.delete(creditCardId)
     }
 
 

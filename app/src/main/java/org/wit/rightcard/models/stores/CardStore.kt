@@ -88,7 +88,6 @@ class CardStore : Store<CardModel>, AnkoLogger {
                                 if(objectList[key.toString()] != null){
                                     newCardsList.add(objectList[key.toString()]!!)
                                 }
-
                             }
                         }
                         myCallback.onCallback(newCardsList)
