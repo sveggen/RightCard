@@ -13,6 +13,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.wit.rightcard.R
 import org.wit.rightcard.models.UserModel
+import java.util.regex.Pattern
 
 
 class SignUpActivity : AppCompatActivity(), AnkoLogger {
@@ -53,17 +54,23 @@ class SignUpActivity : AppCompatActivity(), AnkoLogger {
                 signuppassword.requestFocus()
                 return
             }
+            if (!"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}".toRegex().matches(signuppassword.text.toString())){
+                signuppassword.error = "Please enter a password that has:\nOne uppercase and " +
+                        "lowercase letter, and one number and is at least 6 digits long. "
+                signuppassword.requestFocus()
+                return
+            }
 
             val userModel = UserModel(signupusername.text.toString(), signuppassword.text.toString())
             auth = FirebaseAuth.getInstance()
             auth.createUserWithEmailAndPassword(userModel.email.toString(), userModel.password.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        info("User created")
                         startActivity(Intent(this,LoginActivity::class.java))
                         finish()
                     } else {
-                        info("User not created")
+                        signupusername.error = "User already exists"
+                        signupusername.requestFocus()
                     }
                 }
         }

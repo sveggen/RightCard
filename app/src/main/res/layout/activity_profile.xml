@@ -37,12 +37,16 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textStyle="bold"
+                    android:padding="15sp"
+                    android:textSize="20sp"
                     android:text="@string/signed_in_as"/>
 
                 <TextView
                     android:id="@+id/text_email"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="20sp"
                     android:layout_height="wrap_content"
                     android:text="@string/email" />
 
@@ -52,10 +56,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
                     android:background="@color/colorPrimary"
+                    android:padding="15sp"
                     android:text="@string/sign_out"
                     android:textColor="@color/colorAccent"
-                    android:padding="15sp"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_email" />

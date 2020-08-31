@@ -71,10 +71,10 @@ class LoginActivity : AppCompatActivity(), AnkoLogger {
                     val firebaseUser: FirebaseUser? = auth.currentUser
                     info(firebaseUser)
                     updateUI(firebaseUser)
-                    info("User logged in")
                 } else {
                     updateUI(null)
-                    info("User NOT logged in")
+                    loginpassword.error = "Login failed: Wrong username or password."
+                    loginpassword.requestFocus()
                 }
             }
     }
