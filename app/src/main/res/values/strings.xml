@@ -36,4 +36,5 @@
     <string name="no_new_cards">There are no cards to add</string>
     <string name="no_benefits">None of your credit cards provide \n any benefits in this shop</string>
     <string name="no_user_cards">You haven\'t added any credit cards yet.</string>
+    <string name="creditcard_benefit_nickname">Nickname</string>
 </resources>

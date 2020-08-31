@@ -21,7 +21,6 @@ import org.wit.rightcard.models.stores.*
 class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
 
     val shops = ArrayList<String>()
-    private lateinit var auth: FirebaseAuth
     val searchButton = R.id.shop_search_btn
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,17 +31,12 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
         findViewById<Button>(searchButton)?.visibility = View.INVISIBLE
 
         retrieveShops()
-        retrieveShopsV2()
-
 
         //autocomplete
         val autotextView = findViewById<AutoCompleteTextView>(R.id.autoTextView)
         val adapter = ArrayAdapter(this,
             android.R.layout.simple_list_item_1, shops)
         autotextView.setAdapter(adapter)
-
-
-
 
         findViewById<AutoCompleteTextView>(R.id.autoTextView).setOnItemClickListener { parent, view, position, id ->
            // val enteredText = getString(R.string.submitted_shop) + " " + autotextView.getText()
@@ -97,7 +91,6 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
     fun createBenefit(){
         val benefitModel = BenefitModel("", "10% off on all groceries", "Grocery", "10%")
         BenefitStore().create(benefitModel)
-
     }
 
     fun createCardBenefit(){
@@ -119,17 +112,6 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
             override fun onCallback(list: List<ShopModel>) {
                 for (shop in list) {
                     shops.add(shop.name.toString())
-                }
-            }
-        })
-    }
-
-    fun retrieveShopsV2(){
-        val userCardBenefitsStore = UserCardBenefitsStore()
-        userCardBenefitsStore.getAllv2(object: Callback<UserCardBenefitsModelv2> {
-            override fun onCallback(list: List<UserCardBenefitsModelv2>) {
-                for (card in list) {
-                    info(card)
                 }
             }
         })

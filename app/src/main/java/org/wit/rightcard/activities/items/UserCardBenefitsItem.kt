@@ -6,12 +6,11 @@ import kotlinx.android.synthetic.main.shop_search_results.view.*
 import org.wit.rightcard.R
 import org.wit.rightcard.models.UserCardBenefitsModel
 
-class UserCardBenefitsItem(val userCardBenefitsModel: UserCardBenefitsModel): Item<ViewHolder>(){
+class UserCardBenefitsItem(val userCardBenefitsModelv2: UserCardBenefitsModel): Item<ViewHolder>(){
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.creditcard_benefit.text="heisann"
-        viewHolder.itemView.benefit_name.text=userCardBenefitsModel.benefit.conditions
-        viewHolder.itemView.benefitDiscount.text=userCardBenefitsModel.benefit.discount
+        viewHolder.itemView.creditcard_benefit.text=userCardBenefitsModelv2.usercard?.creditcardname
+        viewHolder.itemView.benefit_name.text=userCardBenefitsModelv2.benefit?.conditions
         viewHolder.itemView.card_image_benefit.setImageResource(R.drawable.ic_7_bank_norwegian_kortet)
     }
 

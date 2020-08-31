@@ -7,8 +7,8 @@ import kotlinx.android.parcel.Parcelize
 data class UserCardBenefitsModel(
     var id: String?,
     var userid: String?,
-    var shopid: String?,
-    var cardname: String?,
-    var benefit: BenefitModel,
-    var creditcardid: String?
-) : Parcelable {constructor() : this( "", "", "", "", BenefitModel("", "", "", ""), "")}
+    var shop: ShopModel?,
+    var usercard: UserCardModel?,
+    var benefit: BenefitModel?,
+    var cardbenefit: CardBenefitsModel
+) : Parcelable {constructor() : this("", "", ShopModel("", ""), UserCardModel("", "", "", "", ""), BenefitModel("", "", "", ""), CardBenefitsModel("", "", "", ""))}

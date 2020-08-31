@@ -4,7 +4,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import org.jetbrains.anko.AnkoLogger
 import org.wit.rightcard.helpers.randomId
 import org.wit.rightcard.models.ShopModel
-import org.wit.rightcard.models.UserCardBenefitsModel
 import org.wit.rightcard.models.interfaces.Callback
 import org.wit.rightcard.models.interfaces.SingleCallback
 import org.wit.rightcard.models.interfaces.Store

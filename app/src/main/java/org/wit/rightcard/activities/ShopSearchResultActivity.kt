@@ -43,18 +43,21 @@ class ShopSearchResultActivity : AppCompatActivity(), AnkoLogger{
         userCardBenefitsStore.getAll(enteredText, object: Callback<UserCardBenefitsModel> {
             override fun onCallback(list: List<UserCardBenefitsModel>) {
                 if (list.isNotEmpty()) {
-                    for (benefit in list) {
+                for (benefit in list) {
+                    if (!benefit.shop?.id.isNullOrEmpty()) {
                         findViewById<TextView>(R.id.no_benefits)?.visibility = View.GONE
                         recyclerview_shop_search_result.visibility = View.VISIBLE
                         adapter.add(UserCardBenefitsItem(benefit))
                         info("there are cards")
                     }
+                }
                 } else {
                     findViewById<TextView>(R.id.no_benefits)?.visibility = View.VISIBLE
                     recyclerview_shop_search_result.visibility = View.GONE
                     info("there are no cards")
                 }
             }
+
         })
     }
 
