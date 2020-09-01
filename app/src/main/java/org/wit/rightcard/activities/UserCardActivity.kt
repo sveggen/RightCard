@@ -14,7 +14,6 @@ import com.xwray.groupie.Section
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_user_card.*
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 import org.wit.rightcard.items.UserCardItem

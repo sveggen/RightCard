@@ -55,6 +55,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorAccent"
         android:text="@string/edit_nickname"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/card_image"
         app:layout_constraintTop_toBottomOf="@id/deleteCreditCard" />
