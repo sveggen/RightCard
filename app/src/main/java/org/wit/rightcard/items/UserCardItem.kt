@@ -13,9 +13,9 @@ class UserCardItem(val userCreditcard: UserCardModel): Item<ViewHolder>(){
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.my_creditcard.text=userCreditcard.creditcardname
-        viewHolder.itemView.creditcard_nickname.text=userCreditcard.nickname
+        viewHolder.itemView.creditcard_nickname.hint=userCreditcard.nickname
         viewHolder.itemView.editNickname.setOnClickListener { editNickname() }
-        viewHolder.itemView.deleteCreditCard.setOnClickListener { deleteCard(viewHolder) }
+        //viewHolder.itemView.deleteCreditCard.setOnClickListener { deleteCard(viewHolder) }
 
         val uri = userCreditcard.image
         val target = viewHolder.itemView.card_image

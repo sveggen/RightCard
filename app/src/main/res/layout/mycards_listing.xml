@@ -26,7 +26,7 @@
         app:srcCompat="@drawable/ic_7_bank_norwegian_kortet"
         tools:src="@drawable/ic_7_bank_norwegian_kortet" />
 
-    <TextView
+    <EditText
         android:id="@+id/creditcard_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,6 +42,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorAccent"
         android:text="@string/delete"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/card_image"
         app:layout_constraintTop_toTopOf="@id/card_image" />

@@ -9,6 +9,7 @@ import android.widget.TextView
 
 import com.google.firebase.auth.FirebaseAuth
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Section
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_new_card.*
 import org.jetbrains.anko.AnkoLogger

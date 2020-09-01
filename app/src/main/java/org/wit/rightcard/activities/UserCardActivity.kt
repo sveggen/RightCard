@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -13,6 +14,7 @@ import com.xwray.groupie.Section
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_user_card.*
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 import org.wit.rightcard.items.UserCardItem
@@ -24,6 +26,7 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
 
     val adapter = GroupAdapter<ViewHolder>()
     val section = Section()
+    val listItems = mutableListOf<UserCardItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +34,25 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.title = getString(R.string.toolbar_my_credit_cards)
 
+
+        retrieveCards()
         recycleview_my_cards.adapter = adapter
         adapter.add(section)
-        retrieveCards()
+
+        findViewById<Button>(R.id.deleteCreditCard)?.setOnClickListener {
+
+        }
+
+        //this works
+        adapter.setOnItemClickListener { item, view ->
+            val userCardItem = item as UserCardItem
+            val id = userCardItem.userCreditcard.id
+            if (id != null) {
+                deleteCard(id)
+            }
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun retrieveCards() {
@@ -44,12 +63,14 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
                     for (card in list) {
                         findViewById<TextView>(R.id.no_user_cards)?.visibility = View.GONE
                         recycleview_my_cards.visibility = View.VISIBLE
-                        adapter.add(UserCardItem(card))
+                        //adapter.add(UserCardItem(card))
+                        listItems.add(UserCardItem(card))
                     }
                 } else {
                     findViewById<TextView>(R.id.no_user_cards)?.visibility = View.VISIBLE
                     recycleview_my_cards.visibility = View.GONE
                 }
+                section.addAll(listItems)
             }
         })
     }
@@ -88,6 +109,7 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
             val userCardStore = UserCardStore()
             userCardStore.delete(creditCardId)
     }
+
 
 
 }

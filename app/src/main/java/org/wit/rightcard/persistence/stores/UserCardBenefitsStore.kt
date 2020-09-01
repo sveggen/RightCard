@@ -89,6 +89,9 @@ class UserCardBenefitsStore : Store<CardBenefitsModel>, AnkoLogger {
 
                 }
             })
+            if (userBenefits.isEmpty()) {
+                myCallback.onCallback(userBenefits)
+            }
         }
         })
     }
