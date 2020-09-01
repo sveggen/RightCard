@@ -34,10 +34,11 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.title = getString(R.string.toolbar_my_credit_cards)
 
-
         retrieveCards()
         recycleview_my_cards.adapter = adapter
         adapter.add(section)
+
+        findViewById<Button>(R.id.editNickname)?.visibility = View.INVISIBLE
 
         findViewById<Button>(R.id.deleteCreditCard)?.setOnClickListener {
 

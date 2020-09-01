@@ -30,11 +30,13 @@
         android:id="@+id/creditcard_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nickname"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@id/my_creditcard"
-        app:layout_constraintBottom_toTopOf="@id/deleteCreditCard"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_image"
+        android:singleLine="true"
+        android:textSize="22sp"
+        />
+
+
 
     <Button
         android:id="@+id/deleteCreditCard"
