@@ -12,10 +12,10 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
-import org.wit.rightcard.activities.items.UserCardBenefitsItem
-import org.wit.rightcard.models.UserCardBenefitsModel
-import org.wit.rightcard.models.interfaces.Callback
-import org.wit.rightcard.models.stores.UserCardBenefitsStore
+import org.wit.rightcard.items.UserCardBenefitsItem
+import org.wit.rightcard.persistence.models.UserCardBenefitsModel
+import org.wit.rightcard.persistence.interfaces.Callback
+import org.wit.rightcard.persistence.stores.UserCardBenefitsStore
 
 
 class ShopSearchResultActivity : AppCompatActivity(), AnkoLogger{

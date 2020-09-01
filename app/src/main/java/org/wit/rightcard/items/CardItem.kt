@@ -1,4 +1,4 @@
-package org.wit.rightcard.activities.items
+package org.wit.rightcard.items
 
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
@@ -6,9 +6,9 @@ import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.card_listing_newcard.view.*
 import org.wit.rightcard.R
-import org.wit.rightcard.models.CardModel
-import org.wit.rightcard.models.UserCardModel
-import org.wit.rightcard.models.stores.UserCardStore
+import org.wit.rightcard.persistence.models.CardModel
+import org.wit.rightcard.persistence.models.UserCardModel
+import org.wit.rightcard.persistence.stores.UserCardStore
 
 class CardItem(val creditcard: CardModel): Item<ViewHolder>(){
 

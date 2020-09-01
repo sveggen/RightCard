@@ -3,7 +3,6 @@ package org.wit.rightcard
 import org.junit.Test
 
 import org.junit.Assert.*
-import org.wit.rightcard.models.ShopModel
 
 /**
  * Example local unit test, which will execute on the development machine (host).

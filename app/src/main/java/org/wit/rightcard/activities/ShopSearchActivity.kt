@@ -8,14 +8,14 @@ import android.text.TextWatcher
 import android.view.*
 import android.widget.*
 
-import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
-import org.wit.rightcard.models.*
-import org.wit.rightcard.models.interfaces.Callback
-import org.wit.rightcard.models.stores.*
+import org.wit.rightcard.persistence.interfaces.Callback
+import org.wit.rightcard.persistence.models.BenefitModel
+import org.wit.rightcard.persistence.models.CardBenefitsModel
+import org.wit.rightcard.persistence.models.ShopModel
+import org.wit.rightcard.persistence.stores.*
 
 
 class ShopSearchActivity : AppCompatActivity(), AnkoLogger{

@@ -15,10 +15,10 @@ import kotlinx.android.synthetic.main.activity_user_card.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
-import org.wit.rightcard.activities.items.UserCardItem
-import org.wit.rightcard.models.UserCardModel
-import org.wit.rightcard.models.interfaces.Callback
-import org.wit.rightcard.models.stores.UserCardStore
+import org.wit.rightcard.items.UserCardItem
+import org.wit.rightcard.persistence.models.UserCardModel
+import org.wit.rightcard.persistence.interfaces.Callback
+import org.wit.rightcard.persistence.stores.UserCardStore
 
 class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelectedListener {
 

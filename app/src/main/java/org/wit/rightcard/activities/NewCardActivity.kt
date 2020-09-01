@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
 
 import com.google.firebase.auth.FirebaseAuth
@@ -16,10 +15,10 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
-import org.wit.rightcard.activities.items.CardItem
-import org.wit.rightcard.models.CardModel
-import org.wit.rightcard.models.interfaces.Callback
-import org.wit.rightcard.models.stores.CardStore
+import org.wit.rightcard.items.CardItem
+import org.wit.rightcard.persistence.models.CardModel
+import org.wit.rightcard.persistence.interfaces.Callback
+import org.wit.rightcard.persistence.stores.CardStore
 
 
 class NewCardActivity : AppCompatActivity(), AnkoLogger {

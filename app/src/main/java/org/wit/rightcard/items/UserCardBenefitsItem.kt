@@ -1,12 +1,11 @@
-package org.wit.rightcard.activities.items
+package org.wit.rightcard.items
 
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.card_listing_newcard.view.*
 import kotlinx.android.synthetic.main.shop_search_results.view.*
 import org.wit.rightcard.R
-import org.wit.rightcard.models.UserCardBenefitsModel
+import org.wit.rightcard.persistence.models.UserCardBenefitsModel
 
 class UserCardBenefitsItem(val userCardBenefitsModel: UserCardBenefitsModel): Item<ViewHolder>(){
 

@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_sign_up.btn_sign_up
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.wit.rightcard.R
-import org.wit.rightcard.models.UserModel
+import org.wit.rightcard.persistence.models.UserModel
 
 class LoginActivity : AppCompatActivity(), AnkoLogger {
 

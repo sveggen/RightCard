@@ -1,4 +1,4 @@
-package org.wit.rightcard.activities.items
+package org.wit.rightcard.items
 
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.Item
@@ -6,8 +6,8 @@ import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.mycards_listing.view.*
 import kotlinx.android.synthetic.main.mycards_listing.view.card_image
 import org.wit.rightcard.R
-import org.wit.rightcard.models.UserCardModel
-import org.wit.rightcard.models.stores.UserCardStore
+import org.wit.rightcard.persistence.models.UserCardModel
+import org.wit.rightcard.persistence.stores.UserCardStore
 
 class UserCardItem(val userCreditcard: UserCardModel): Item<ViewHolder>(){
 

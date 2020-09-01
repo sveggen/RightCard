@@ -10,10 +10,8 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_sign_up.btn_sign_up
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.wit.rightcard.R
-import org.wit.rightcard.models.UserModel
-import java.util.regex.Pattern
+import org.wit.rightcard.persistence.models.UserModel
 
 
 class SignUpActivity : AppCompatActivity(), AnkoLogger {
