@@ -1,13 +1,16 @@
 package org.wit.rightcard.items
 
+import android.widget.ImageView
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.mycards_listing.view.*
 import kotlinx.android.synthetic.main.shop_search_results.view.*
 import org.wit.rightcard.R
 import org.wit.rightcard.persistence.models.UserCardBenefitsModel
 
+/**
+ * Item-class for UserCardBenefitsModel. Used to populate RecyclerView.
+ */
 class UserCardBenefitsItem(val userCardBenefitsModel: UserCardBenefitsModel): Item<ViewHolder>(){
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
@@ -16,13 +19,20 @@ class UserCardBenefitsItem(val userCardBenefitsModel: UserCardBenefitsModel): It
         viewHolder.itemView.card_image_benefit.setImageResource(R.drawable.ic_7_bank_norwegian_kortet)
         viewHolder.itemView.creditcard_benefit_nickname.hint = userCardBenefitsModel.usercard?.nickname
 
-        val uri = userCardBenefitsModel.usercard?.image
         val target = viewHolder.itemView.card_image_benefit
-        Picasso.get().load(uri).into(target)
-
+        loadImage(target)
     }
 
     override fun getLayout(): Int {
         return R.layout.shop_search_results
+    }
+
+
+    /**
+     * Loads image from Firebase Cloud Storage using Picasso into the RecyclerView.
+     */
+    private fun loadImage(target: ImageView){
+        val uri = userCardBenefitsModel.usercard?.image
+        Picasso.get().load(uri).into(target)
     }
 }

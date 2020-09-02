@@ -1,7 +1,6 @@
 package org.wit.rightcard.activities
 
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -10,7 +9,6 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_shop_search.*
 
@@ -40,9 +38,10 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
         supportActionBar?.title = getString(R.string.toolbar_shop_search)
         findViewById<Button>(searchButton)?.visibility = View.INVISIBLE
 
+        //adds all the shops to the resultAdapter
         retrieveShops()
 
-        //autocomplete
+        //adds array populated with retrieveShops() to adapter
         val autotextView = findViewById<AutoCompleteTextView>(R.id.autoTextView)
         val adapter = ArrayAdapter(
             this,
@@ -50,12 +49,8 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
         )
         autotextView.setAdapter(adapter)
 
-
-        /**
-         * Hides and displays search button based on input in EditText-field.
-         */
-        findViewById<AutoCompleteTextView>(R.id.autoTextView).setOnItemClickListener { parent, view, position, id ->
-            // val enteredText = getString(R.string.submitted_shop) + " " + autotextView.getText()
+         // Hides and displays search button based on input in EditText-field.
+        findViewById<AutoCompleteTextView>(R.id.autoTextView).setOnItemClickListener { _, _, _, _ ->
             findViewById<Button>(searchButton)?.visibility = View.VISIBLE
         }
         findViewById<AutoCompleteTextView>(R.id.autoTextView).addTextChangedListener(object :
@@ -72,6 +67,11 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
             }
         })
 
+        /**
+         * Handles search button-event, hides the keyboard and
+         * calls the retrieveBenefits()-function.
+         */
+
         findViewById<Button>(searchButton)?.setOnClickListener {
             val enteredText = autotextView.text.toString()
             recyclerview_shop_search_result.adapter = resultAdapter
@@ -79,12 +79,12 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
                 supportActionBar?.title = getString(R.string.toolbar_shop_result) +" '" + enteredText + "'"
                 resultAdapter.clear()
                 retrieveBenefits(enteredText)
+                //hides the keyboard
                 val view = this.currentFocus
                 view?.let { v ->
                     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
                     imm?.hideSoftInputFromWindow(v.windowToken, 0)
                 }
-                info(enteredText)
             }
         }
     }
@@ -166,9 +166,7 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
                     info("there are no cards")
                 }
             }
-
         })
-
     }
 
 
