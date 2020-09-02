@@ -44,18 +44,14 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
         //this works
         adapter.setOnItemClickListener { item, view ->
             val userCardItem = item as UserCardItem
-
-            findViewById<Button>(R.id.deleteCreditCard)?.visibility = View.VISIBLE
-            findViewById<Button>(R.id.deleteCreditCard)?.setOnClickListener {
+            view.findViewById<Button>(R.id.deleteCreditCard)?.visibility = View.VISIBLE
+            view.findViewById<Button>(R.id.deleteCreditCard)?.setOnClickListener {
                 val id = userCardItem.userCreditcard.id
                 if (id != null) {
                     deleteCard(id)
                 }
                 listItems.remove(item)
                 section.update(listItems)
-
-                recycleview_my_cards.findViewHolderForItemId(R.id.deleteCreditCard.toLong())
-
             }
         }
     }
