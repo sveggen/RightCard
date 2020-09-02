@@ -1,25 +1,35 @@
 package org.wit.rightcard.activities
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Item
+import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.main.activity_shop_search.*
 
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
+import org.wit.rightcard.items.UserCardBenefitsItem
 import org.wit.rightcard.persistence.interfaces.Callback
 import org.wit.rightcard.persistence.models.BenefitModel
 import org.wit.rightcard.persistence.models.CardBenefitsModel
 import org.wit.rightcard.persistence.models.ShopModel
+import org.wit.rightcard.persistence.models.UserCardBenefitsModel
 import org.wit.rightcard.persistence.stores.*
 
 
 class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
 
+    private val resultAdapter = GroupAdapter<ViewHolder>()
     val shops = ArrayList<String>()
     val searchButton = R.id.shop_search_btn
 
@@ -34,16 +44,22 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
 
         //autocomplete
         val autotextView = findViewById<AutoCompleteTextView>(R.id.autoTextView)
-        val adapter = ArrayAdapter(this,
-            android.R.layout.simple_list_item_1, shops)
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1, shops
+        )
         autotextView.setAdapter(adapter)
 
+
+        /**
+         * Hides and displays search button based on input in EditText-field.
+         */
         findViewById<AutoCompleteTextView>(R.id.autoTextView).setOnItemClickListener { parent, view, position, id ->
-           // val enteredText = getString(R.string.submitted_shop) + " " + autotextView.getText()
+            // val enteredText = getString(R.string.submitted_shop) + " " + autotextView.getText()
             findViewById<Button>(searchButton)?.visibility = View.VISIBLE
         }
-
-        findViewById<AutoCompleteTextView>(R.id.autoTextView).addTextChangedListener (object : TextWatcher {
+        findViewById<AutoCompleteTextView>(R.id.autoTextView).addTextChangedListener(object :
+            TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, start: Int, count: Int, after: Int) {
                 findViewById<Button>(searchButton)?.visibility = View.INVISIBLE
             }
@@ -58,12 +74,18 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
 
         findViewById<Button>(searchButton)?.setOnClickListener {
             val enteredText = autotextView.text.toString()
-            findViewById<Button>(searchButton)?.visibility = View.VISIBLE
-
-            val intent = Intent(this, ShopSearchResultActivity::class.java)
-            intent.putExtra("enteredText", enteredText)
-            startActivity(intent)
-            finish()
+            recyclerview_shop_search_result.adapter = resultAdapter
+            if (enteredText != null) {
+                supportActionBar?.title = getString(R.string.toolbar_shop_result) +" '" + enteredText + "'"
+                resultAdapter.clear()
+                retrieveBenefits(enteredText)
+                val view = this.currentFocus
+                view?.let { v ->
+                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                    imm?.hideSoftInputFromWindow(v.windowToken, 0)
+                }
+                info(enteredText)
+            }
         }
     }
 
@@ -106,6 +128,10 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
         ShopStore().create(shopModel)
     }
 
+    /**
+     * Retrieves all the shops that exists in the database and adds them to the
+     * shop-adapter.
+     */
     private fun retrieveShops(){
         val shopStore = ShopStore()
         shopStore.get(object: Callback<ShopModel> {
@@ -116,4 +142,34 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
             }
         })
     }
+
+    /**
+     * Retrieves all the benefits of owned cards for a specific shop based on the input String.
+     * @param enteredText shopname
+     */
+    private fun retrieveBenefits(enteredText: String){
+        val userCardBenefitsStore = UserCardBenefitsStore()
+        userCardBenefitsStore.getAll(enteredText, object: Callback<UserCardBenefitsModel> {
+            override fun onCallback(list: List<UserCardBenefitsModel>) {
+                if (list.isNotEmpty()) {
+                    for (benefit in list) {
+                        if (!benefit.shop?.id.isNullOrEmpty()) {
+                            findViewById<TextView>(R.id.no_benefits)?.visibility = View.GONE
+                            recyclerview_shop_search_result.visibility = View.VISIBLE
+                            resultAdapter.add(UserCardBenefitsItem(benefit))
+                            info("there are cards")
+                        }
+                    }
+                } else {
+                    findViewById<TextView>(R.id.no_benefits)?.visibility = View.VISIBLE
+                    recyclerview_shop_search_result.visibility = View.GONE
+                    info("there are no cards")
+                }
+            }
+
+        })
+
+    }
+
+
 }
