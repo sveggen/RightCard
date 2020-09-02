@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
+import androidx.core.app.NavUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_shop_search_result.*
@@ -26,9 +27,9 @@ class ShopSearchResultActivity : AppCompatActivity(), AnkoLogger{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_search_result)
         val enteredText: String? = intent.getStringExtra("enteredText")
-
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.title = getString(R.string.toolbar_shop_result) +" '" + enteredText.toString() + "'"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         recyclerview_shop_search_result.adapter = adapter
 
@@ -79,8 +80,12 @@ class ShopSearchResultActivity : AppCompatActivity(), AnkoLogger{
         when (item?.itemId) {
             R.id.actionNewCard -> startActivityForResult<NewCardActivity>(0)
         }
+        when (item?.itemId){
+            android.R.id.home -> NavUtils.navigateUpFromSameTask(this)
+        }
         return super.onOptionsItemSelected(item)
     }
+
 }
 
 

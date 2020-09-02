@@ -40,7 +40,6 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
 
         findViewById<Button>(R.id.editNickname)?.visibility = View.INVISIBLE
 
-
         //this works
         adapter.setOnItemClickListener { item, view ->
             val userCardItem = item as UserCardItem
@@ -51,6 +50,10 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
                     deleteCard(id)
                 }
                 listItems.remove(item)
+                if (listItems.isEmpty()){
+                    findViewById<TextView>(R.id.no_user_cards)?.visibility = View.VISIBLE
+                    recycleview_my_cards.visibility = View.GONE
+                }
                 section.update(listItems)
             }
         }
@@ -64,7 +67,6 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
                     for (card in list) {
                         findViewById<TextView>(R.id.no_user_cards)?.visibility = View.GONE
                         recycleview_my_cards.visibility = View.VISIBLE
-                        //adapter.add(UserCardItem(card))
                         listItems.add(UserCardItem(card))
                     }
                 } else {

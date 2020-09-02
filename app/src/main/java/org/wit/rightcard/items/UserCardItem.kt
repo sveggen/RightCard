@@ -1,6 +1,7 @@
 package org.wit.rightcard.items
 
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
@@ -14,12 +15,18 @@ class UserCardItem(val userCreditcard: UserCardModel): Item<ViewHolder>(){
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         if (!userCreditcard.nickname.isNullOrEmpty()) {
-            viewHolder.itemView.creditcard_nickname.hint = userCreditcard.nickname
+            viewHolder.itemView.creditcard_nickname.setText(userCreditcard.nickname)
         }
-        viewHolder.itemView.creditcard_nickname.setOnClickListener { editNickname(viewHolder) }
-        viewHolder.itemView.editNickname.setOnClickListener { saveNickname(viewHolder) }
-        //viewHolder.itemView.deleteCreditCard.setOnClickListener { deleteCard(viewHolder) }
         viewHolder.itemView.my_creditcard.text = userCreditcard.creditcardname
+        //viewHolder.itemView.creditcard_nickname.setImeActionLabel("Save", KeyEvent.KEYCODE_ENTER);
+        viewHolder.itemView.creditcard_nickname.setOnEditorActionListener{ _, actionId, _ ->
+            if(actionId == EditorInfo.IME_ACTION_DONE){
+                saveNickname(viewHolder)
+                true
+            } else {
+                false
+            }
+        }
 
         val uri = userCreditcard.image
         val target = viewHolder.itemView.card_image
@@ -39,14 +46,5 @@ class UserCardItem(val userCreditcard: UserCardModel): Item<ViewHolder>(){
 
     private fun editNickname(viewHolder: ViewHolder){
         viewHolder.itemView.editNickname.visibility = View.VISIBLE
-    }
-
-    private fun deleteCard(viewHolder: ViewHolder) {
-        if (userCreditcard.id != null) {
-            val userCardStore = UserCardStore()
-            userCardStore.delete(userCreditcard.id!!)
-
-
-        }
     }
 }
