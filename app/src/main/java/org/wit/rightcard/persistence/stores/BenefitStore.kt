@@ -6,6 +6,9 @@ import org.wit.rightcard.persistence.models.BenefitModel
 import org.wit.rightcard.persistence.interfaces.Callback
 import org.wit.rightcard.persistence.interfaces.Store
 
+/**
+ * Handles all database calls for BenefitModel.
+ */
 class BenefitStore : Store<BenefitModel> {
 
     private val firestore = FirebaseFirestore.getInstance()

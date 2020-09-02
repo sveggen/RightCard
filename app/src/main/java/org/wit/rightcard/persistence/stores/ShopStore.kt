@@ -8,7 +8,11 @@ import org.wit.rightcard.persistence.interfaces.Callback
 import org.wit.rightcard.persistence.interfaces.SingleCallback
 import org.wit.rightcard.persistence.interfaces.Store
 
+/**
+ * Handles all database calls for ShopModel.
+ */
 class ShopStore : Store<ShopModel>, AnkoLogger {
+
     private val firestore = FirebaseFirestore.getInstance()
     private val documentdata = firestore.collection("shops")
 

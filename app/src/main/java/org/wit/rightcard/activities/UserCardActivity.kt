@@ -22,8 +22,8 @@ import org.wit.rightcard.persistence.interfaces.Callback
 import org.wit.rightcard.persistence.stores.UserCardStore
 
 /**
- * TODO
- *
+ * Handles the view for the users owned/added cards.
+ * The cards can be deleted and the nickname can be changed.
  */
 class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelectedListener {
 
@@ -39,11 +39,11 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
 
         retrieveCards()
         recycleview_my_cards.adapter = adapter
+
+        //adds section that contains listItems to adapter.
         adapter.add(section)
 
-        findViewById<Button>(R.id.editNickname)?.visibility = View.INVISIBLE
-
-        //this works
+        // delete card when user double-taps on card and then presses the delete button.
         adapter.setOnItemClickListener { item, view ->
             val userCardItem = item as UserCardItem
             view.findViewById<Button>(R.id.deleteCreditCard)?.visibility = View.VISIBLE
@@ -52,6 +52,7 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
                 if (id != null) {
                     deleteCard(id)
                 }
+                //remove item for list and update section with the updated list
                 listItems.remove(item)
                 if (listItems.isEmpty()){
                     findViewById<TextView>(R.id.no_user_cards)?.visibility = View.VISIBLE
@@ -62,6 +63,10 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
         }
     }
 
+    /**
+     * Retrieves all cards and adds them to the listItems-MutableList.
+     * Then adds listItems to a section. If no card is found a TextView will be shown instead.
+     */
     private fun retrieveCards() {
         val userCreditcard = UserCardStore()
         userCreditcard.get(object : Callback<UserCardModel> {
@@ -111,6 +116,9 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
         TODO("Not yet implemented")
     }
 
+    /**
+     * Deletes owned credit card from Database.
+     */
     private fun deleteCard(creditCardId : String) {
             val userCardStore = UserCardStore()
             userCardStore.delete(creditCardId)

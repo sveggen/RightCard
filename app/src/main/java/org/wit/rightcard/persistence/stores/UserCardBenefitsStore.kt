@@ -6,6 +6,11 @@ import org.wit.rightcard.persistence.interfaces.SingleCallback
 import org.wit.rightcard.persistence.interfaces.Store
 import org.wit.rightcard.persistence.models.*
 
+/**
+ * Handles the retrieval of data from various other Stores - respectively:
+ * ShopModel, UserCardModel, CardBenefitsModel, BenefitModel and stores said
+ * data in a UserCardBenefitsModel locally.
+ */
 class UserCardBenefitsStore : Store<UserCardBenefitsModel>, AnkoLogger {
 
 
@@ -26,7 +31,7 @@ class UserCardBenefitsStore : Store<UserCardBenefitsModel>, AnkoLogger {
     }
 
     /**
-     * Query that retrieves the benefit that each of his cards provide for a single shop,
+     * Query that retrieves the benefit that each of the users cards provide for a single shop,
      * that is provided as a String.
      */
     fun getAll(enteredText: String, myCallback: Callback<UserCardBenefitsModel>){

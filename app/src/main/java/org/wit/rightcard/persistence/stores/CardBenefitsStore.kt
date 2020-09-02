@@ -7,6 +7,9 @@ import org.wit.rightcard.persistence.interfaces.Callback
 import org.wit.rightcard.persistence.interfaces.Store
 import org.wit.rightcard.persistence.models.CardBenefitsModel
 
+/**
+ * Handles all database calls for CardBenefitsModel.
+ */
 class CardBenefitsStore : Store<CardBenefitsModel>, AnkoLogger {
 
     private val firestore = FirebaseFirestore.getInstance()

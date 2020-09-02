@@ -9,7 +9,9 @@ import org.wit.rightcard.persistence.interfaces.Callback
 import org.wit.rightcard.persistence.interfaces.Store
 import kotlin.collections.ArrayList
 
-
+/**
+ * Handles all database calls for CardModel.
+ */
 class CardStore : Store<CardModel>, AnkoLogger {
 
     private val firestore = FirebaseFirestore.getInstance()
