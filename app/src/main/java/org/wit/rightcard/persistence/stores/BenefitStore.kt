@@ -1,22 +1,22 @@
-package org.wit.rightcard.models.stores
+package org.wit.rightcard.persistence.stores
 
 import com.google.firebase.firestore.FirebaseFirestore
 import org.wit.rightcard.helpers.randomId
-import org.wit.rightcard.models.BenefitModel
-import org.wit.rightcard.models.CardBenefitsModel
-import org.wit.rightcard.models.interfaces.Callback
-import org.wit.rightcard.models.interfaces.Store
+import org.wit.rightcard.persistence.models.BenefitModel
+import org.wit.rightcard.persistence.interfaces.Callback
+import org.wit.rightcard.persistence.interfaces.Store
 
+/**
+ * Handles all database calls for BenefitModel.
+ */
 class BenefitStore : Store<BenefitModel> {
 
     private val firestore = FirebaseFirestore.getInstance()
     private val documentdata = firestore.collection("benefits")
 
-
-    override fun get(myCallback: Callback<BenefitModel>) {
-        TODO("Not yet implemented")
-    }
-
+    /**
+     * Retrieves all benefits that matches any of the benefits in the list provided as argument.
+     */
     fun query(benefitIdList: ArrayList<String>, myCallback: Callback<BenefitModel>){
         if (benefitIdList.isNotEmpty()) {
             //get all the benefit conditions
@@ -42,12 +42,17 @@ class BenefitStore : Store<BenefitModel> {
             .set(arg)
     }
 
+    override fun get(myCallback: Callback<BenefitModel>) {
+        TODO("Not yet implemented")
+    }
 
     override fun update(arg: BenefitModel) {
         TODO("Not yet implemented")
     }
 
     override fun delete(documentPath: String) {
-        TODO("Not yet implemented")
+        documentdata
+            .document(documentPath)
+            .delete()
     }
 }

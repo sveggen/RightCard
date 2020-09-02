@@ -11,10 +11,12 @@ import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.btn_sign_up
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.wit.rightcard.R
-import org.wit.rightcard.models.UserModel
+import org.wit.rightcard.persistence.models.UserModel
 
+/**
+ * Handles the login process.
+ */
 class LoginActivity : AppCompatActivity(), AnkoLogger {
 
     private lateinit var auth: FirebaseAuth
@@ -45,6 +47,9 @@ class LoginActivity : AppCompatActivity(), AnkoLogger {
         updateUI(currentUser)
     }
 
+    /**
+     * Logs user in if they provide the correct username and password.
+     */
     private fun login() {
         if (loginusername.text.toString().isEmpty()) {
             loginusername.error = "Please enter an email address"
@@ -62,23 +67,25 @@ class LoginActivity : AppCompatActivity(), AnkoLogger {
             loginpassword.requestFocus()
             return
         }
+
         val userModel = UserModel(loginusername.text.toString(), loginpassword.text.toString())
         auth = FirebaseAuth.getInstance()
-        info(userModel)
         auth.signInWithEmailAndPassword(userModel.email.toString(), userModel.password.toString())
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val firebaseUser: FirebaseUser? = auth.currentUser
-                    info(firebaseUser)
                     updateUI(firebaseUser)
-                    info("User logged in")
                 } else {
                     updateUI(null)
-                    info("User NOT logged in")
+                    loginpassword.error = "Login failed: Wrong username or password."
+                    loginpassword.requestFocus()
                 }
             }
     }
 
+    /**
+     * Start UserCardActivity if user is authenticated.
+     */
      private fun updateUI(currentUser: FirebaseUser?) {
         if (currentUser != null) {
                 startActivity(Intent(this, UserCardActivity::class.java))

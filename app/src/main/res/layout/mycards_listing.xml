@@ -5,36 +5,53 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/border"
-    android:padding="30dp">
+    android:focusable="true"
+    android:paddingBottom="15dp"
+    android:paddingTop="10dp"
+    android:focusableInTouchMode="true">
+
 
     <TextView
         android:id="@+id/my_creditcard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
         android:text="@string/my_creditcard"
         android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/card_image"
-        android:layout_width="132dp"
-        android:layout_height="101dp"
+        android:layout_width="172dp"
+        android:layout_height="142dp"
         android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/my_creditcard"
         app:srcCompat="@drawable/ic_7_bank_norwegian_kortet"
         tools:src="@drawable/ic_7_bank_norwegian_kortet" />
 
-    <TextView
+    <EditText
         android:id="@+id/creditcard_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nickname"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@id/my_creditcard"
-        app:layout_constraintBottom_toTopOf="@id/deleteCreditCard"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:background="@null"
+        android:hint="'nickname'"
+        android:singleLine="true"
+        android:textSize="15sp"
+        android:imeOptions="actionDone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/deleteCreditCard"
@@ -42,19 +59,24 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorAccent"
         android:text="@string/delete"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/card_image"
-        app:layout_constraintTop_toTopOf="@id/card_image" />
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/editNickname"
         android:layout_width="wrap_content"
+        android:visibility="gone"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="304dp"
         android:backgroundTint="@color/colorAccent"
         android:text="@string/edit_nickname"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/card_image"
-        app:layout_constraintTop_toBottomOf="@id/deleteCreditCard" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

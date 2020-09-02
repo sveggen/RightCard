@@ -10,11 +10,12 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_sign_up.btn_sign_up
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.wit.rightcard.R
-import org.wit.rightcard.models.UserModel
+import org.wit.rightcard.persistence.models.UserModel
 
-
+/**
+ * Handles the sign up page, and handles the creation of a new user.
+ */
 class SignUpActivity : AppCompatActivity(), AnkoLogger {
 
     private lateinit var auth: FirebaseAuth
@@ -53,17 +54,25 @@ class SignUpActivity : AppCompatActivity(), AnkoLogger {
                 signuppassword.requestFocus()
                 return
             }
+            // checks if password contains: One uppercase + one lowercase letter
+            // + one number and is between 6 and 16 characters long
+            if (!"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}".toRegex().matches(signuppassword.text.toString())){
+                signuppassword.error = "Please enter a password that has:\nOne uppercase and " +
+                        "lowercase letter, one number and is at least 6 characters long. "
+                signuppassword.requestFocus()
+                return
+            }
 
             val userModel = UserModel(signupusername.text.toString(), signuppassword.text.toString())
             auth = FirebaseAuth.getInstance()
             auth.createUserWithEmailAndPassword(userModel.email.toString(), userModel.password.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        info("User created")
                         startActivity(Intent(this,LoginActivity::class.java))
                         finish()
                     } else {
-                        info("User not created")
+                        signupusername.error = "User already exists"
+                        signupusername.requestFocus()
                     }
                 }
         }
@@ -72,5 +81,4 @@ class SignUpActivity : AppCompatActivity(), AnkoLogger {
                 menuInflater.inflate(R.menu.signed_out_menu, menu)
                 return super.onCreateOptionsMenu(menu)
             }
-
         }

@@ -37,8 +37,9 @@
         android:layout_gravity="center"
         android:backgroundTint="@color/colorAccent"
         android:text="@string/add_credit_card"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/card_image"
-        app:layout_constraintTop_toTopOf="@id/card_image"/>
+        app:layout_constraintTop_toTopOf="@id/card_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

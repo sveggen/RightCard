@@ -1,21 +1,26 @@
-package org.wit.rightcard.models.stores
+package org.wit.rightcard.persistence.stores
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import org.jetbrains.anko.AnkoLogger
 import org.wit.rightcard.helpers.randomId
-import org.wit.rightcard.models.CardModel
-import org.wit.rightcard.models.interfaces.Callback
-import org.wit.rightcard.models.interfaces.Store
+import org.wit.rightcard.persistence.models.CardModel
+import org.wit.rightcard.persistence.interfaces.Callback
+import org.wit.rightcard.persistence.interfaces.Store
 import kotlin.collections.ArrayList
 
-
+/**
+ * Handles all database calls for CardModel.
+ */
 class CardStore : Store<CardModel>, AnkoLogger {
 
     private val firestore = FirebaseFirestore.getInstance()
     private lateinit var auth: FirebaseAuth
     private val documentdata = firestore.collection("creditcards")
 
+    /**
+     * Retrieves all cards and orders them alphabetically.
+     */
     override fun get(myCallback: Callback<CardModel>) {
         documentdata.orderBy("name").get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -54,6 +59,9 @@ class CardStore : Store<CardModel>, AnkoLogger {
             .delete()
     }
 
+    /**
+     * Retrieves all cards that the user does not own.
+     */
     fun getAllNewCards(myCallback: Callback<CardModel>){
         auth = FirebaseAuth.getInstance()
         firestore.collection("ownedcreditcards").whereIn("userid", listOf(auth.uid))
@@ -88,7 +96,6 @@ class CardStore : Store<CardModel>, AnkoLogger {
                                 if(objectList[key.toString()] != null){
                                     newCardsList.add(objectList[key.toString()]!!)
                                 }
-
                             }
                         }
                         myCallback.onCallback(newCardsList)

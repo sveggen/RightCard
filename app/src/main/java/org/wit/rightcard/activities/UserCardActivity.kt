@@ -5,25 +5,31 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Section
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.activity_new_card.*
 import kotlinx.android.synthetic.main.activity_user_card.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
-import org.wit.rightcard.activities.items.UserCardItem
-import org.wit.rightcard.models.UserCardModel
-import org.wit.rightcard.models.interfaces.Callback
-import org.wit.rightcard.models.stores.UserCardStore
+import org.wit.rightcard.items.UserCardItem
+import org.wit.rightcard.persistence.models.UserCardModel
+import org.wit.rightcard.persistence.interfaces.Callback
+import org.wit.rightcard.persistence.stores.UserCardStore
 
+/**
+ * Handles the view for the users owned/added cards.
+ * The cards can be deleted and the nickname can be changed.
+ */
 class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelectedListener {
 
     val adapter = GroupAdapter<ViewHolder>()
-    val arrayList = ArrayList<Any>()
+    val section = Section()
+    val listItems = mutableListOf<UserCardItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +37,36 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.title = getString(R.string.toolbar_my_credit_cards)
 
-        recycleview_my_cards.adapter = adapter
         retrieveCards()
+        recycleview_my_cards.adapter = adapter
 
+        //adds section that contains listItems to adapter.
+        adapter.add(section)
+
+        // delete card when user double-taps on card and then presses the delete button.
+        adapter.setOnItemClickListener { item, view ->
+            val userCardItem = item as UserCardItem
+            view.findViewById<Button>(R.id.deleteCreditCard)?.visibility = View.VISIBLE
+            view.findViewById<Button>(R.id.deleteCreditCard)?.setOnClickListener {
+                val id = userCardItem.userCreditcard.id
+                if (id != null) {
+                    deleteCard(id)
+                }
+                //remove item for list and update section with the updated list
+                listItems.remove(item)
+                if (listItems.isEmpty()){
+                    findViewById<TextView>(R.id.no_user_cards)?.visibility = View.VISIBLE
+                    recycleview_my_cards.visibility = View.GONE
+                }
+                section.update(listItems)
+            }
+        }
     }
 
+    /**
+     * Retrieves all cards and adds them to the listItems-MutableList.
+     * Then adds listItems to a section. If no card is found a TextView will be shown instead.
+     */
     private fun retrieveCards() {
         val userCreditcard = UserCardStore()
         userCreditcard.get(object : Callback<UserCardModel> {
@@ -44,13 +75,13 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
                     for (card in list) {
                         findViewById<TextView>(R.id.no_user_cards)?.visibility = View.GONE
                         recycleview_my_cards.visibility = View.VISIBLE
-                        adapter.add(UserCardItem(card))
-                        arrayList.add(card)
+                        listItems.add(UserCardItem(card))
                     }
                 } else {
                     findViewById<TextView>(R.id.no_user_cards)?.visibility = View.VISIBLE
                     recycleview_my_cards.visibility = View.GONE
                 }
+                section.addAll(listItems)
             }
         })
     }
@@ -84,6 +115,15 @@ class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSele
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
         TODO("Not yet implemented")
     }
+
+    /**
+     * Deletes owned credit card from Database.
+     */
+    private fun deleteCard(creditCardId : String) {
+            val userCardStore = UserCardStore()
+            userCardStore.delete(creditCardId)
+    }
+
 
 
 }

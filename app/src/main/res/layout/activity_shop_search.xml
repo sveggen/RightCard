@@ -34,21 +34,36 @@
                     android:id="@+id/autoTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="25dp"
+                    android:layout_margin="15dp"
+                    android:singleLine="true"
                     android:hint="@string/hint" />
 
                 <Button
                     android:id="@+id/shop_search_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="15sp"
                     android:layout_gravity="center"
                     android:background="@color/colorAccent"
-                    android:paddingBottom="8dp"
+                    android:padding="15sp"
                     android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
                     android:text="@string/search_shop"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_shop_search_result"
+                    android:layout_width="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/no_benefits"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:text="@string/no_benefits"
+                    android:textSize="20sp"/>
 
             </LinearLayout>
         </ScrollView>

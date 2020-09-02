@@ -1,17 +1,24 @@
-package org.wit.rightcard.models.stores
+package org.wit.rightcard.persistence.stores
 
 import com.google.firebase.firestore.FirebaseFirestore
 import org.jetbrains.anko.AnkoLogger
 import org.wit.rightcard.helpers.randomId
-import org.wit.rightcard.models.ShopModel
-import org.wit.rightcard.models.interfaces.Callback
-import org.wit.rightcard.models.interfaces.SingleCallback
-import org.wit.rightcard.models.interfaces.Store
+import org.wit.rightcard.persistence.models.ShopModel
+import org.wit.rightcard.persistence.interfaces.Callback
+import org.wit.rightcard.persistence.interfaces.SingleCallback
+import org.wit.rightcard.persistence.interfaces.Store
 
+/**
+ * Handles all database calls for ShopModel.
+ */
 class ShopStore : Store<ShopModel>, AnkoLogger {
+
     private val firestore = FirebaseFirestore.getInstance()
     private val documentdata = firestore.collection("shops")
 
+    /**
+     * Retrieves all shops.
+     */
     override fun get(myCallback : Callback<ShopModel>) {
         documentdata.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -25,6 +32,9 @@ class ShopStore : Store<ShopModel>, AnkoLogger {
         }
     }
 
+    /**
+     * Retrieves the shop that matches the String provided.
+     */
     fun query(shop : String, mySingleCallback: SingleCallback<ShopModel>) {
         firestore.collection("shops")
             .whereIn("name", listOf(shop))
