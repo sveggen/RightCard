@@ -21,7 +21,6 @@ class CardItem(val creditcard: CardModel): Item<ViewHolder>(){
         auth = FirebaseAuth.getInstance()
 
         viewHolder.itemView.creditcard_new_creditcard.text=creditcard.name
-        //viewHolder.itemView.card_image.setImageResource(R.drawable.ic_credit_card_black_24dp)
         viewHolder.itemView.addCreditCard.setOnClickListener { addCard(viewHolder) }
 
         val uri = creditcard.image

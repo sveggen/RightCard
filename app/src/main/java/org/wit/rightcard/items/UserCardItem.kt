@@ -13,11 +13,13 @@ import org.wit.rightcard.persistence.stores.UserCardStore
 class UserCardItem(val userCreditcard: UserCardModel): Item<ViewHolder>(){
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.my_creditcard.text=userCreditcard.creditcardname
+        if (!userCreditcard.nickname.isNullOrEmpty()) {
+            viewHolder.itemView.creditcard_nickname.hint = userCreditcard.nickname
+        }
         viewHolder.itemView.creditcard_nickname.setOnClickListener { editNickname(viewHolder) }
         viewHolder.itemView.editNickname.setOnClickListener { saveNickname(viewHolder) }
         //viewHolder.itemView.deleteCreditCard.setOnClickListener { deleteCard(viewHolder) }
-        viewHolder.itemView.creditcard_nickname.hint = userCreditcard.nickname
+        viewHolder.itemView.my_creditcard.text = userCreditcard.creditcardname
 
         val uri = userCreditcard.image
         val target = viewHolder.itemView.card_image

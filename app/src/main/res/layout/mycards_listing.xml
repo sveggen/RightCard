@@ -33,7 +33,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/card_image"
         android:singleLine="true"
-        android:textSize="22sp"
+        android:hint="No nickname"
+        android:textSize="15sp"
         />
 
 
