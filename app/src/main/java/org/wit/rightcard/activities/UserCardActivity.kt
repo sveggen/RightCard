@@ -14,7 +14,6 @@ import com.xwray.groupie.Section
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_user_card.*
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 import org.wit.rightcard.items.UserCardItem
@@ -22,6 +21,10 @@ import org.wit.rightcard.persistence.models.UserCardModel
 import org.wit.rightcard.persistence.interfaces.Callback
 import org.wit.rightcard.persistence.stores.UserCardStore
 
+/**
+ * TODO
+ *
+ */
 class UserCardActivity : AppCompatActivity(), AnkoLogger, AdapterView.OnItemSelectedListener {
 
     val adapter = GroupAdapter<ViewHolder>()

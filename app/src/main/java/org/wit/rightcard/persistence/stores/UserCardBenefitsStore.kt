@@ -1,28 +1,23 @@
 package org.wit.rightcard.persistence.stores
 
-import com.google.firebase.firestore.FirebaseFirestore
 import org.jetbrains.anko.AnkoLogger
 import org.wit.rightcard.persistence.interfaces.Callback
 import org.wit.rightcard.persistence.interfaces.SingleCallback
 import org.wit.rightcard.persistence.interfaces.Store
 import org.wit.rightcard.persistence.models.*
 
-class UserCardBenefitsStore : Store<CardBenefitsModel>, AnkoLogger {
+class UserCardBenefitsStore : Store<UserCardBenefitsModel>, AnkoLogger {
 
-    private val firestore = FirebaseFirestore.getInstance()
-    private val documentdata = firestore.collection("cardbenefits")
 
-    override fun get(myCallback: Callback<CardBenefitsModel>) {
+    override fun get(myCallback: Callback<UserCardBenefitsModel>) {
         TODO("Not yet implemented")
     }
 
-    override fun create(arg: CardBenefitsModel) {
-        documentdata
-            .document(arg.id.toString())
-            .set(arg)
+    override fun create(arg: UserCardBenefitsModel) {
+        TODO("Not yet implemented")
     }
 
-    override fun update(arg: CardBenefitsModel) {
+    override fun update(arg: UserCardBenefitsModel) {
         TODO("Not yet implemented")
     }
 
@@ -30,6 +25,10 @@ class UserCardBenefitsStore : Store<CardBenefitsModel>, AnkoLogger {
         TODO("Not yet implemented")
     }
 
+    /**
+     * Query that retrieves the benefit that each of his cards provide for a single shop,
+     * that is provided as a String.
+     */
     fun getAll(enteredText: String, myCallback: Callback<UserCardBenefitsModel>){
         val userBenefits = ArrayList<UserCardBenefitsModel>()
         val creditCardId = ArrayList<String>()
@@ -64,7 +63,6 @@ class UserCardBenefitsStore : Store<CardBenefitsModel>, AnkoLogger {
                                             }
                                     }
                             }
-
                             val benefitIdList = ArrayList<String>()
                             for (userBenefit in userBenefits) {
                                 benefitIdList.add(userBenefit.cardbenefit.benefitid.toString())
@@ -89,6 +87,7 @@ class UserCardBenefitsStore : Store<CardBenefitsModel>, AnkoLogger {
 
                 }
             })
+            //return empty list
             if (userBenefits.isEmpty()) {
                 myCallback.onCallback(userBenefits)
             }

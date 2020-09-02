@@ -12,6 +12,9 @@ class ShopStore : Store<ShopModel>, AnkoLogger {
     private val firestore = FirebaseFirestore.getInstance()
     private val documentdata = firestore.collection("shops")
 
+    /**
+     * Retrieves all shops.
+     */
     override fun get(myCallback : Callback<ShopModel>) {
         documentdata.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -25,6 +28,9 @@ class ShopStore : Store<ShopModel>, AnkoLogger {
         }
     }
 
+    /**
+     * Retrieves the shop that matches the String provided.
+     */
     fun query(shop : String, mySingleCallback: SingleCallback<ShopModel>) {
         firestore.collection("shops")
             .whereIn("name", listOf(shop))

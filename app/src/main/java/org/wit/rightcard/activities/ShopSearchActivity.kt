@@ -24,7 +24,9 @@ import org.wit.rightcard.persistence.models.ShopModel
 import org.wit.rightcard.persistence.models.UserCardBenefitsModel
 import org.wit.rightcard.persistence.stores.*
 
-
+/**
+ *  Handles the view for searching and returning benefits/discounts.
+ */
 class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
 
     private val resultAdapter = GroupAdapter<ViewHolder>()
@@ -38,15 +40,12 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
         supportActionBar?.title = getString(R.string.toolbar_shop_search)
         findViewById<Button>(searchButton)?.visibility = View.INVISIBLE
 
-        //adds all the shops to the resultAdapter
+        //populates shops-array with shop-names
         retrieveShops()
 
-        //adds array populated with retrieveShops() to adapter
+        //adds shops-array to adapter
         val autotextView = findViewById<AutoCompleteTextView>(R.id.autoTextView)
-        val adapter = ArrayAdapter(
-            this,
-            android.R.layout.simple_list_item_1, shops
-        )
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, shops)
         autotextView.setAdapter(adapter)
 
          // Hides and displays search button based on input in EditText-field.
@@ -77,6 +76,7 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
             recyclerview_shop_search_result.adapter = resultAdapter
             if (enteredText != null) {
                 supportActionBar?.title = getString(R.string.toolbar_shop_result) +" '" + enteredText + "'"
+                findViewById<Button>(searchButton)?.visibility = View.INVISIBLE
                 resultAdapter.clear()
                 retrieveBenefits(enteredText)
                 //hides the keyboard
@@ -145,6 +145,7 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
 
     /**
      * Retrieves all the benefits of owned cards for a specific shop based on the input String.
+     * And adds them to the resultAdapter. If list is empty a TextView will be shown instead.
      * @param enteredText shopname
      */
     private fun retrieveBenefits(enteredText: String){
@@ -168,6 +169,4 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
             }
         })
     }
-
-
 }

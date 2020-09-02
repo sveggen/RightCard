@@ -12,10 +12,6 @@ class CardBenefitsStore : Store<CardBenefitsModel>, AnkoLogger {
     private val firestore = FirebaseFirestore.getInstance()
     private val documentdata = firestore.collection("cardbenefits")
 
-    override fun get(myCallback: Callback<CardBenefitsModel>) {
-        TODO("Not yet implemented")
-    }
-
     fun query(usercardids : ArrayList<String>, myCallback: Callback<CardBenefitsModel>) {
         if (usercardids.isNotEmpty()) {
             //get all the cards benefits
@@ -41,11 +37,17 @@ class CardBenefitsStore : Store<CardBenefitsModel>, AnkoLogger {
                 .set(arg)
         }
 
-    override fun update(arg: CardBenefitsModel) {
+    override fun delete(documentPath: String) {
+        documentdata
+            .document(documentPath)
+            .delete()
+    }
+
+    override fun get(myCallback: Callback<CardBenefitsModel>) {
         TODO("Not yet implemented")
     }
 
-    override fun delete(documentPath: String) {
+    override fun update(arg: CardBenefitsModel) {
         TODO("Not yet implemented")
     }
 }

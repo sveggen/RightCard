@@ -13,6 +13,9 @@ class UserCardStore : Store<UserCardModel>, AnkoLogger {
     private lateinit var auth: FirebaseAuth
     private val documentdata = firestore.collection("ownedcreditcards")
 
+    /**
+     * Returns all cards that the user belong.
+     */
     override fun get(myCallback: Callback<UserCardModel>) {
         auth = FirebaseAuth.getInstance()
         documentdata.whereIn("userid", listOf(auth.uid))

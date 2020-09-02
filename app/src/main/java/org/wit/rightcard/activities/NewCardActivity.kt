@@ -5,12 +5,10 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
 
 import com.google.firebase.auth.FirebaseAuth
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.Section
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_new_card.*
 import org.jetbrains.anko.AnkoLogger
@@ -22,7 +20,9 @@ import org.wit.rightcard.persistence.models.CardModel
 import org.wit.rightcard.persistence.interfaces.Callback
 import org.wit.rightcard.persistence.stores.CardStore
 
-
+/**
+ * Handles the view for adding new cards,
+ */
 class NewCardActivity : AppCompatActivity(), AnkoLogger {
 
     val adapter = GroupAdapter<ViewHolder>()
@@ -41,6 +41,10 @@ class NewCardActivity : AppCompatActivity(), AnkoLogger {
         retrieveCards()
      }
 
+    /**
+     * Returns all new cards and adds them to the adapter.
+     * If no new cards are found a TextView will be shown instead.
+     */
     private fun retrieveCards(){
         val creditCard = CardStore()
         creditCard.getAllNewCards(object: Callback<CardModel> {
@@ -59,8 +63,6 @@ class NewCardActivity : AppCompatActivity(), AnkoLogger {
             }
         })
     }
-
-
 
             override fun onCreateOptionsMenu(menu: Menu?): Boolean {
                 menuInflater.inflate(R.menu.menu_main, menu)

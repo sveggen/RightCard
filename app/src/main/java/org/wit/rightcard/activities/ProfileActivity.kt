@@ -14,7 +14,10 @@ import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 
-
+/**
+ * Handles the profile page and displays logged-in users email,
+ * and handles the deletion of account as well as logging out.
+ */
 class ProfileActivity : AppCompatActivity(), AnkoLogger {
 
     private lateinit var auth: FirebaseAuth
@@ -62,6 +65,9 @@ class ProfileActivity : AppCompatActivity(), AnkoLogger {
         return super.onOptionsItemSelected(item)
     }
 
+    /**
+     * Signs user out and sends user to Login-view.
+     */
     private fun signOut() {
         auth.signOut()
         info("user signed out")
@@ -69,8 +75,11 @@ class ProfileActivity : AppCompatActivity(), AnkoLogger {
         finish()
     }
 
+    /**
+     * Deletes user from Firebase Authentication,
+     * user is then logged out and sent to SignUp-view.
+     */
     private fun deleteUser(){
-        //delete user in auth
         val user = FirebaseAuth.getInstance().currentUser
         user?.delete()
             ?.addOnCompleteListener { task ->

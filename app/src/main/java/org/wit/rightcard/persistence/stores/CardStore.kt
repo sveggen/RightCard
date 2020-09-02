@@ -16,6 +16,9 @@ class CardStore : Store<CardModel>, AnkoLogger {
     private lateinit var auth: FirebaseAuth
     private val documentdata = firestore.collection("creditcards")
 
+    /**
+     * Retrieves all cards and orders them alphabetically.
+     */
     override fun get(myCallback: Callback<CardModel>) {
         documentdata.orderBy("name").get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -54,6 +57,9 @@ class CardStore : Store<CardModel>, AnkoLogger {
             .delete()
     }
 
+    /**
+     * Retrieves all cards that the user does not own.
+     */
     fun getAllNewCards(myCallback: Callback<CardModel>){
         auth = FirebaseAuth.getInstance()
         firestore.collection("ownedcreditcards").whereIn("userid", listOf(auth.uid))

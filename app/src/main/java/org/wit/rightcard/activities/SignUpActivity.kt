@@ -13,7 +13,9 @@ import org.jetbrains.anko.AnkoLogger
 import org.wit.rightcard.R
 import org.wit.rightcard.persistence.models.UserModel
 
-
+/**
+ * Handles the sign up page, and handles the creation of a new user.
+ */
 class SignUpActivity : AppCompatActivity(), AnkoLogger {
 
     private lateinit var auth: FirebaseAuth
@@ -52,9 +54,11 @@ class SignUpActivity : AppCompatActivity(), AnkoLogger {
                 signuppassword.requestFocus()
                 return
             }
+            // checks if password contains: One uppercase + one lowercase letter
+            // + one number and is between 6 and 16 characters long
             if (!"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}".toRegex().matches(signuppassword.text.toString())){
                 signuppassword.error = "Please enter a password that has:\nOne uppercase and " +
-                        "lowercase letter, and one number and is at least 6 digits long. "
+                        "lowercase letter, and one number and is at least 6 characters long. "
                 signuppassword.requestFocus()
                 return
             }
