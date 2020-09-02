@@ -13,8 +13,9 @@ import org.wit.rightcard.persistence.stores.ShopStore
  * Contains functions to generate data that is not generated in other ways in the app.
  */
 
+
 fun createBenefit(){
-    val benefitModel = BenefitModel("", "10% off on all groceries", "Grocery", "10%")
+    val benefitModel = BenefitModel("", "5% Trumf-bonus on mondays", "Grocery", "5%")
     BenefitStore().create(benefitModel)
 }
 
@@ -27,7 +28,7 @@ fun createCardBenefit(){
 }
 
 fun createStore(){
-    val shopModel = ShopModel("", "SAS")
+    val shopModel = ShopModel("", "")
     ShopStore().create(shopModel)
 }
 

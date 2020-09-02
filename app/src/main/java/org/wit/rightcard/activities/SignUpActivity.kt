@@ -58,7 +58,7 @@ class SignUpActivity : AppCompatActivity(), AnkoLogger {
             // + one number and is between 6 and 16 characters long
             if (!"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}".toRegex().matches(signuppassword.text.toString())){
                 signuppassword.error = "Please enter a password that has:\nOne uppercase and " +
-                        "lowercase letter, and one number and is at least 6 characters long. "
+                        "lowercase letter, one number and is at least 6 characters long. "
                 signuppassword.requestFocus()
                 return
             }
