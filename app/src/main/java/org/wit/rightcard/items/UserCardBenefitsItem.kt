@@ -11,7 +11,7 @@ import org.wit.rightcard.persistence.models.UserCardBenefitsModel
 /**
  * Item-class for UserCardBenefitsModel. Used to populate RecyclerView.
  */
-class UserCardBenefitsItem(val userCardBenefitsModel: UserCardBenefitsModel): Item<ViewHolder>(){
+class UserCardBenefitsItem(private val userCardBenefitsModel: UserCardBenefitsModel): Item<ViewHolder>(){
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.creditcard_benefit.text=userCardBenefitsModel.usercard?.creditcardname

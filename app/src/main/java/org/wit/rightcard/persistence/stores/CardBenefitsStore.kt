@@ -15,6 +15,10 @@ class CardBenefitsStore : Store<CardBenefitsModel>, AnkoLogger {
     private val firestore = FirebaseFirestore.getInstance()
     private val documentdata = firestore.collection("cardbenefits")
 
+    /**
+     * Returns all the user cards if they match any of the lists provided in the query.
+     *
+     */
     fun query(usercardids : ArrayList<String>, myCallback: Callback<CardBenefitsModel>) {
         if (usercardids.isNotEmpty()) {
             //get all the cards benefits

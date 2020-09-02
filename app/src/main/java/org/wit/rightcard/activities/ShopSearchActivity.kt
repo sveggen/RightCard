@@ -18,8 +18,6 @@ import org.jetbrains.anko.startActivityForResult
 import org.wit.rightcard.R
 import org.wit.rightcard.items.UserCardBenefitsItem
 import org.wit.rightcard.persistence.interfaces.Callback
-import org.wit.rightcard.persistence.models.BenefitModel
-import org.wit.rightcard.persistence.models.CardBenefitsModel
 import org.wit.rightcard.persistence.models.ShopModel
 import org.wit.rightcard.persistence.models.UserCardBenefitsModel
 import org.wit.rightcard.persistence.stores.*
@@ -74,17 +72,15 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
         findViewById<Button>(searchButton)?.setOnClickListener {
             val enteredText = autotextView.text.toString()
             recyclerview_shop_search_result.adapter = resultAdapter
-            if (enteredText != null) {
-                supportActionBar?.title = getString(R.string.toolbar_shop_result) +" '" + enteredText + "'"
-                findViewById<Button>(searchButton)?.visibility = View.INVISIBLE
-                resultAdapter.clear()
-                retrieveBenefits(enteredText)
-                //hides the keyboard
-                val view = this.currentFocus
-                view?.let { v ->
-                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-                    imm?.hideSoftInputFromWindow(v.windowToken, 0)
-                }
+            supportActionBar?.title = getString(R.string.toolbar_shop_result) +" '" + enteredText + "'"
+            findViewById<Button>(searchButton)?.visibility = View.INVISIBLE
+            resultAdapter.clear()
+            retrieveBenefits(enteredText)
+            //hides the keyboard
+            val view = this.currentFocus
+            view?.let { v ->
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                imm?.hideSoftInputFromWindow(v.windowToken, 0)
             }
         }
     }
@@ -108,24 +104,6 @@ class ShopSearchActivity : AppCompatActivity(), AnkoLogger{
             R.id.actionNewCard -> startActivityForResult<NewCardActivity>(0)
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    fun createBenefit(){
-        val benefitModel = BenefitModel("", "10% off on all groceries", "Grocery", "10%")
-        BenefitStore().create(benefitModel)
-    }
-
-    fun createCardBenefit(){
-        val shopid = "51672797-153b-4cea-be57-5bb7431c538a"
-        val benefitid = "40708937-0c2a-408a-8003-8f7fa9dec039"
-        val creditcardid = "720f3839-fd89-416c-9537-83a28e5899d1"
-        val cardBenefitModel = CardBenefitsModel(shopid + benefitid + creditcardid, shopid, benefitid, creditcardid)
-        CardBenefitsStore().create(cardBenefitModel)
-    }
-
-    fun createStore(){
-        val shopModel = ShopModel("", "SAS")
-        ShopStore().create(shopModel)
     }
 
     /**

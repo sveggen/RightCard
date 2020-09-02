@@ -36,7 +36,7 @@ class CardItem(val creditcard: CardModel): Item<ViewHolder>(){
     }
 
     /**
-     * Adds card to Database on button-click.
+     * Adds credit card to Database on button-click.
      *
      */
     private fun addCard(viewHolder: ViewHolder){

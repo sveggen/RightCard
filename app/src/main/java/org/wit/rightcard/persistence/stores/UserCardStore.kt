@@ -66,4 +66,3 @@ class UserCardStore : Store<UserCardModel>, AnkoLogger {
             .update("nickname", arg.nickname)
     }
 }
-

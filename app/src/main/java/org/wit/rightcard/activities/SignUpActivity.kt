@@ -81,5 +81,4 @@ class SignUpActivity : AppCompatActivity(), AnkoLogger {
                 menuInflater.inflate(R.menu.signed_out_menu, menu)
                 return super.onCreateOptionsMenu(menu)
             }
-
         }

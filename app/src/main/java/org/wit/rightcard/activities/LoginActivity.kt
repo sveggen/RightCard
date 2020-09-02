@@ -47,6 +47,9 @@ class LoginActivity : AppCompatActivity(), AnkoLogger {
         updateUI(currentUser)
     }
 
+    /**
+     * Logs user in if they provide the correct username and password.
+     */
     private fun login() {
         if (loginusername.text.toString().isEmpty()) {
             loginusername.error = "Please enter an email address"

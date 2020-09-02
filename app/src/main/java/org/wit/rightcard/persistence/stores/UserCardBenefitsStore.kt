@@ -13,23 +13,6 @@ import org.wit.rightcard.persistence.models.*
  */
 class UserCardBenefitsStore : Store<UserCardBenefitsModel>, AnkoLogger {
 
-
-    override fun get(myCallback: Callback<UserCardBenefitsModel>) {
-        TODO("Not yet implemented")
-    }
-
-    override fun create(arg: UserCardBenefitsModel) {
-        TODO("Not yet implemented")
-    }
-
-    override fun update(arg: UserCardBenefitsModel) {
-        TODO("Not yet implemented")
-    }
-
-    override fun delete(documentPath: String) {
-        TODO("Not yet implemented")
-    }
-
     /**
      * Query that retrieves the benefit that each of the users cards provide for a single shop,
      * that is provided as a String.
@@ -99,6 +82,23 @@ class UserCardBenefitsStore : Store<UserCardBenefitsModel>, AnkoLogger {
         }
         })
     }
+
+    override fun get(myCallback: Callback<UserCardBenefitsModel>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun create(arg: UserCardBenefitsModel) {
+        TODO("Not yet implemented")
+    }
+
+    override fun update(arg: UserCardBenefitsModel) {
+        TODO("Not yet implemented")
+    }
+
+    override fun delete(documentPath: String) {
+        TODO("Not yet implemented")
+    }
+
 }
 
 
