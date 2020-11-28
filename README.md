@@ -1,5 +1,5 @@
 ## RightCard 
-RightCard is an android app developed to make it easier to keep track of all the benefits your credit cards offer. RightCard provides you with a search option where you can search for a shop and find out which credit card to use in which shop, to receive a discount or credits. 
+RightCard is an Android app developed to make it easier to keep track of all the benefits your credit cards offer. RightCard provides you with a search option where you can search for a shop and find out which credit card to use in which shop, to receive a discount or credits. 
 
 	
 ## Technologies
